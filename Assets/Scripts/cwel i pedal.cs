@@ -6,7 +6,11 @@ public class cwelipedal : MonoBehaviour
     void Start()
     {
         Debug.Log("Bartek to cwel i pedał");
+                Debug.Log("Bartek to cwel i pedał");
+
         Debug.Log("Szczurek");
+        Debug.Log("Szczurek");
+
     }
 
     // Update is called once per frame
