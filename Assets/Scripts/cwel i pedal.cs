@@ -17,5 +17,6 @@ public class cwelipedal : MonoBehaviour
     void Update()
     {
         int cos = 5;
+        cos *= 3;
     }
 }
