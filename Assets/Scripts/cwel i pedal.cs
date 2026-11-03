@@ -11,6 +11,6 @@ public class cwelipedal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        int cos = 5;
     }
 }
