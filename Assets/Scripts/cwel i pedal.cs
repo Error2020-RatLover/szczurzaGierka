@@ -10,6 +10,8 @@ public class cwelipedal : MonoBehaviour
 
         Debug.Log("Szczurek");
         Debug.Log("Szczurek");
+                Debug.Log("Szczurek lubi pomidorki");
+
 
     }
 
