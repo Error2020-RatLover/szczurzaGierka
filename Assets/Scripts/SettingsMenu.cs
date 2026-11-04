@@ -5,14 +5,18 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEngine.Localization.Settings;
 
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public TMP_Dropdown graphicsDropdown;
     public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown languageDropdown;
 
     Resolution[] resolutions;
+
+    // pobranie rozdzielczosci komputera i dodanie ich do opcji dropdownu
     void Start()
     {
         resolutions = Screen.resolutions;
@@ -60,11 +64,13 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
+    // ustawienie jakosci grafiki
     public void SetGraphics()
     {
         QualitySettings.SetQualityLevel(graphicsDropdown.value);
     }
 
+    // ustawienie glosnosci: muzyki, sfx, master(ogólne)
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("Music", Mathf.Log10(Mathf.Max(volume, 0.0001f)) * 20);
@@ -80,15 +86,84 @@ public class SettingsMenu : MonoBehaviour
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Max(volume, 0.0001f)) * 20);
     }
 
+    // Ustawienie pelnego ekranu
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
         // Debug.Log("fsc " + isFullscreen);
     }
+    // Ustawienie rozdzielczosci
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+    // ustawienie jezykow
+
+    public void SetLanguage(int languageIndex)
+    {
+        StartCoroutine(ChangeLanguage(languageIndex));
+    }
+
+    private IEnumerator ChangeLanguage(int languageIndex)
+    {
+        yield return LocalizationSettings.InitializationOperation;
+
+        switch (languageIndex)
+        {
+            case 0: // polski
+                LocalizationSettings.SelectedLocale =
+                    LocalizationSettings.AvailableLocales.GetLocale("pl");
+                Debug.Log("polski");
+
+                UpdateDropdownLanguage(0);
+
+                break;
+
+            case 1: // angielski
+                LocalizationSettings.SelectedLocale =
+                    LocalizationSettings.AvailableLocales.GetLocale("en");
+                Debug.Log("angielski");
+
+                UpdateDropdownLanguage(1);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    // aktualizacja jezyku w dropdownach
+    // trza by tu dodac zeby sie jeszcze zmienial label bo sie troche psuje ale nie chce mi sie jutro zrobia(moze)
+    public void UpdateDropdownLanguage(int languageIndex)
+    {
+        if (languageIndex == 0)
+        {
+            graphicsDropdown.options[0].text = "Ultra";
+            graphicsDropdown.options[1].text = "Bardzo wysoka";
+            graphicsDropdown.options[2].text = "Wysoka";
+            graphicsDropdown.options[3].text = "Średnia";
+            graphicsDropdown.options[4].text = "Niska";
+            graphicsDropdown.options[5].text = "Ziemniak";
+
+            languageDropdown.options[0].text = "polski";
+            languageDropdown.options[1].text = "angielski";
+        }
+        else if (languageIndex == 1)
+        {
+            graphicsDropdown.options[0].text = "Ultra";
+            graphicsDropdown.options[1].text = "Very High";
+            graphicsDropdown.options[2].text = "High";
+            graphicsDropdown.options[3].text = "Medium";
+            graphicsDropdown.options[4].text = "Low";
+            graphicsDropdown.options[5].text = "Very Low";
+
+            languageDropdown.options[0].text = "Polish";
+            languageDropdown.options[1].text = "English";
+        }
+
+        graphicsDropdown.RefreshShownValue();
+        languageDropdown.RefreshShownValue();
     }
 
 }
