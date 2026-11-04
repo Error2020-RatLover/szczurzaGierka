@@ -81,9 +81,9 @@ Dodatkowe elementy
 Projekt będzie rozwijany etapami, zgodnie z priorytetami poszczególnych funkcjonalności,
 
 | Priorytet | Zakres |
-| Wysoki | Poruszanie się po planszy, system tur i akcji, statystyki, walka, AI, generowanie map, ekwipunek, umiejętności, sklepy i rozwój postaci |
-| Średni | Interakcje ze środowiskiem, stany postaci, zapisy gry, baza danych, optymalizacja, animacje, różne typy bohaterów i losowe elementy map |
-| Niski | Minigry hazardowe, muzyka, efekty dźwiękowe i wizualne, NPC oraz personalizacja |
+- | Wysoki | Poruszanie się po planszy, system tur i akcji, statystyki, walka, AI, generowanie map, ekwipunek, umiejętności, sklepy i rozwój postaci |
+- | Średni | Interakcje ze środowiskiem, stany postaci, zapisy gry, baza danych, optymalizacja, animacje, różne typy bohaterów i losowe elementy map |
+- | Niski | Minigry hazardowe, muzyka, efekty dźwiękowe i wizualne, NPC oraz personalizacja |
 
  Założenia techniczne
 
