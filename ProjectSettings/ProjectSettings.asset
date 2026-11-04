@@ -667,7 +667,13 @@ PlayerSettings:
   XboxOneXTitleMemory: 8
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -690,11 +696,11 @@ PlayerSettings:
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-  cloudProjectId: 39962dd1-9a19-48cf-8c84-a69df3d86189
+  cloudProjectId: 4f47f35c-3f2b-43c2-83ee-81a7d1f712a6
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: HeroseLikeGame
-  organizationId: bartoszwiak8
+  projectName: SZCZUR
+  organizationId: unity_0da5b92d0c9bcac90c95
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

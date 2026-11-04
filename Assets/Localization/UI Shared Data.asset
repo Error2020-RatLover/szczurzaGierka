@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: 81fd4a438a611764fb423b837a106a3d
+  m_Entries:
+  - m_Id: 54768857088
+    m_Key: StartKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188273553408
+    m_Key: SettingsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 491035193344
+    m_Key: TitleKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437739937792
+    m_Key: ExitKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6175160168448
+    m_Key: BackKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305783377920
+    m_Key: MasterVolumeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6406174044160
+    m_Key: MusicKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6607068622848
+    m_Key: SFXKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6680049512448
+    m_Key: FullscKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6765919498240
+    m_Key: LanguageKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6847855226880
+    m_Key: QualityKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7328052703232
+    m_Key: ResolutionKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16073923129344
+    m_Key: QualityLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16585804378112
+    m_Key: LanguageLabelKey
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1788175447057760549
+  references:
+    version: 2
+    RefIds:
+    - rid: 1788175447057760549
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1793804441076
