@@ -1,14 +1,14 @@
-# Gra strategiczna RPG
+## Gra strategiczna RPG
 
 > Turowa gra strategiczna RPG, w której taktyka, rozwój bohaterów i odpowiednie przygotowanie drużyny decydują o zwycięstwie.
 
-  O projekcie
+#  O projekcie
 
 Projekt zakłada stworzenie turowej gry strategicznej RPG.
 Gracz będzie dowodził drużyną bohaterów, która zmierzy się z kolejnymi falami przeciwników na planszach zbudowanych z pól heksagonalnych. Kluczowym elementem rozgrywki będzie odpowiednie planowanie ruchów, zarządzanie dostępnymi akcjami oraz wykorzystywanie umiejętności i wyposażenia postaci.
 Gra będzie oferować system rozwoju bohaterów, ekwipunek, sklepy, ulepszanie przedmiotów oraz interakcje z otoczeniem. Przeciwnicy będą posiadać zróżnicowane statystyki, umiejętności i zachowania, wymagające od gracza dostosowywania strategii do aktualnej sytuacji.
 
-  Główne założenia rozgrywki
+#  Główne założenia rozgrywki
 
 - Turowy system walki – planowanie działań i wykorzystywanie ograniczonej liczby akcji podczas tury,
 - Plansza heksagonalna – taktyczne przemieszczanie się po mapie z uwzględnieniem pozycji bohaterów i przeciwników,
@@ -19,7 +19,7 @@ Gra będzie oferować system rozwoju bohaterów, ekwipunek, sklepy, ulepszanie p
 - AI przeciwników – przeciwnicy podejmujący decyzje na podstawie sytuacji na planszy,
 - Eksploracja – generowane mapy, interakcje z otoczeniem i kolejne poziomy trudności
 
-  Planowane funkcjonalności:
+#  Planowane funkcjonalności:
 
 System walki
 - Turowy system walki,
@@ -76,18 +76,18 @@ Dodatkowe elementy
 - Muzyka i efekty dźwiękowe,
 - Opcje personalizacji
 
- Priorytety realizacji
+# Priorytety realizacji
 
-Projekt będzie rozwijany etapami, zgodnie z priorytetami poszczególnych funkcjonalności,
+> Projekt będzie rozwijany etapami, zgodnie z priorytetami poszczególnych funkcjonalności,
 
 | Priorytet | Zakres |
 - | Wysoki | Poruszanie się po planszy, system tur i akcji, statystyki, walka, AI, generowanie map, ekwipunek, umiejętności, sklepy i rozwój postaci |
 - | Średni | Interakcje ze środowiskiem, stany postaci, zapisy gry, baza danych, optymalizacja, animacje, różne typy bohaterów i losowe elementy map |
 - | Niski | Minigry hazardowe, muzyka, efekty dźwiękowe i wizualne, NPC oraz personalizacja |
 
- Założenia techniczne
+#  Założenia techniczne
 
-Projekt będzie rozwijany z uwzględnieniem następujących założeń:
+>Projekt będzie rozwijany z uwzględnieniem następujących założeń:
 
 - Modularna architektura – podział kodu na logiczne i możliwie niezależne systemy,
 - Rozszerzalność – możliwość dodawania nowych bohaterów, przeciwników, przedmiotów i umiejętności,
@@ -96,13 +96,13 @@ Projekt będzie rozwijany z uwzględnieniem następujących założeń:
 - Bezpieczeństwo – ochrona danych użytkowników przed dostępem innych graczy,
 - Trwałość danych – przechowywanie zapisów w bazie danych i możliwość odtworzenia stanu rozgrywki
 
-Szczegółowa dokumentacja techniczna będzie uzupełniana w trakcie implementacji.
+>Szczegółowa dokumentacja techniczna będzie uzupełniana w trakcie implementacji.
 
-Dokumentacja będzie rozwijana równolegle z kodem i aktualizowana wraz ze zmianami w poszczególnych modułach.
+>Dokumentacja będzie rozwijana równolegle z kodem i aktualizowana wraz ze zmianami w poszczególnych modułach.
 
-  Status projektu
+#  Status projektu
 
-Projekt w trakcie tworzenia – poniższa lista przedstawia docelowy zakres prac.
+>Projekt w trakcie tworzenia – poniższa lista przedstawia docelowy zakres prac.
 
 -  System planszy heksagonalnej,`
 -  Poruszanie postaci,
@@ -123,7 +123,7 @@ Projekt w trakcie tworzenia – poniższa lista przedstawia docelowy zakres prac
 -  Kolejne poziomy trudności,
 -  Dodatkowe aktywności i minigry
 
-  Kierunek rozwoju
+#  Kierunek rozwoju
 
 Docelowo gra ma łączyć taktyczną walkę na planszy heksagonalnej z mechanikami RPG, takimi jak rozwój postaci, zarządzanie ekwipunkiem i zdobywanie coraz lepszego wyposażenia.
 
