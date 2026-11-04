@@ -12,7 +12,7 @@ Gra będzie oferować system rozwoju bohaterów, ekwipunek, sklepy, ulepszanie p
 
 - Turowy system walki – planowanie działań i wykorzystywanie ograniczonej liczby akcji podczas tury,
 - Plansza heksagonalna – taktyczne przemieszczanie się po mapie z uwzględnieniem pozycji bohaterów i przeciwników,
-- System inicjatywy – ustalanie kolejności wykonywania tur na podstawie statystyk postaci, w szczególności `Speed`,
+- System inicjatywy – ustalanie kolejności wykonywania tur na podstawie statystyk postaci, w szczególności `speed`,
 - Rozwój bohaterów – zwiększanie statystyk i zdobywanie nowych możliwości,
 - Ekwipunek – zdobywanie, wymienianie i ulepszanie wyposażenia,
 - Umiejętności – wykorzystywanie indywidualnych zdolności postaci,
@@ -104,7 +104,7 @@ Dodatkowe elementy
 
 >Projekt w trakcie tworzenia – poniższa lista przedstawia docelowy zakres prac.
 
--  System planszy heksagonalnej,`
+-  System planszy heksagonalnej,
 -  Poruszanie postaci,
 -  System tur i inicjatywy,
 -  System akcji,
