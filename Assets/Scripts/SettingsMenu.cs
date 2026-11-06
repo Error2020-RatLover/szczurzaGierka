@@ -16,6 +16,7 @@ public class SettingsMenu : MonoBehaviour
 
     Resolution[] resolutions;
 
+
     // pobranie rozdzielczosci komputera i dodanie ich do opcji dropdownu
     void Start()
     {
@@ -62,6 +63,17 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(resOptions);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        
+        // Pobranie języka systemowego komputera
+        int defaultLanguage = Application.systemLanguage == SystemLanguage.Polish ? 0 : 1;
+
+        // Ustawienie języka w dropdownie i lokalizacji gry
+        languageDropdown.value = defaultLanguage;
+        UpdateDropdownLanguage(defaultLanguage);
+        StartCoroutine(ChangeLanguage(defaultLanguage));
+        // mozliwe ze trzeba bedzie to zmieniac zas XD
+
     }
 
     // ustawienie jakosci grafiki
@@ -134,7 +146,6 @@ public class SettingsMenu : MonoBehaviour
     }
 
     // aktualizacja jezyku w dropdownach
-    // trza by tu dodac zeby sie jeszcze zmienial label bo sie troche psuje ale nie chce mi sie jutro zrobia(moze)
     public void UpdateDropdownLanguage(int languageIndex)
     {
         if (languageIndex == 0)
