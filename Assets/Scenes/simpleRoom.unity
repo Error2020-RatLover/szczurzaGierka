@@ -275,7 +275,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1001 &1780431708
+--- !u!1001 &1555949008
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -283,53 +283,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1263002065600678446, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_ClearFlags
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1263002065600678446, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: field of view
-      value: 147.31447
-      objectReference: {fileID: 0}
-    - target: {fileID: 1263002065600678446, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_FOVAxisMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1263002065600678446, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_FocalLength
-      value: 20.78461
-      objectReference: {fileID: 0}
-    - target: {fileID: 1263002065600678446, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: far clip plane
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1263002065600678446, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2197351158021005326, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3288985969666494354, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_CameraType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.41
+      value: -1.75777
       objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.06
+      value: 1.18093
       objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -360,8 +324,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5164882535495594007, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
-      propertyPath: m_BodyType
-      value: 1
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363788387242192039, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_Name
@@ -424,7 +388,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4799299944878504846, guid: 031980409e246bc48a6df84f567dd22d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -487,7 +452,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4799299944878504846, guid: 031980409e246bc48a6df84f567dd22d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -496,7 +462,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1780431708}
   - {fileID: 1809625556}
   - {fileID: 1955764362}
   - {fileID: 154477325}
+  - {fileID: 1555949008}
