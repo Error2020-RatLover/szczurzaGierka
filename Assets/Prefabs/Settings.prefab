@@ -155,7 +155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2458378901788852586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -283,12 +283,12 @@ GameObject:
   - component: {fileID: 1437162283880072047}
   - component: {fileID: 6152739387873010263}
   m_Layer: 5
-  m_Name: Settings(in game)
+  m_Name: Settings
   m_TagString: SettingsInGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6682575643892079951
 RectTransform:
   m_ObjectHideFlags: 0
