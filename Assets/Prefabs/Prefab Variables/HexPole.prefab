@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HexPole
       objectReference: {fileID: 0}
+    - target: {fileID: 4799299944878504846, guid: 8697e9270e0bf0c4098c14c6a8dcda60, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8702130825916534267, guid: 8697e9270e0bf0c4098c14c6a8dcda60, type: 3}
       propertyPath: m_LocalScale.x
       value: 200
@@ -152,7 +156,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4799299944878504846, guid: 8697e9270e0bf0c4098c14c6a8dcda60, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8702130825916534267, guid: 8697e9270e0bf0c4098c14c6a8dcda60, type: 3}
