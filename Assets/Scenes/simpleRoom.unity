@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2197351158021005326, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
+      propertyPath: maxZoom
+      value: -2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -220,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348193ce60fc0b94eb2ca6cac06d0905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  x_size: 0
-  y_size: 0
+  x_size: 10
+  y_size: 7
   hexpole: {fileID: 330355416199240168, guid: 031980409e246bc48a6df84f567dd22d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

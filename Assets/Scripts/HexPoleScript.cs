@@ -8,14 +8,14 @@ public class HexPoleScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private Vector2 coordinates;
+    public Vector2 coordinates;
     public bool isAvaliable;
 
-    void Start()
-    {
-        coordinates = new Vector2(transform.position.x, transform.position.y);
+    //void Start()
+    //{
+    //    coordinates = new Vector2(transform.position.x, transform.position.y);
 
-    }
+    //}
 
     public void DisplayCords()
     {
