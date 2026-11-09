@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5164882535495594007}
   - component: {fileID: 5147460078950035368}
   - component: {fileID: 2197351158021005326}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: playersView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 2
+  far clip plane: 30
   field of view: 110
   orthographic: 0
   orthographic size: 5
