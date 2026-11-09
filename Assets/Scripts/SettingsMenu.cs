@@ -168,8 +168,8 @@ public class SettingsMenu : MonoBehaviour
             graphicsDropdown.options[4].text = "Low";
             graphicsDropdown.options[5].text = "Very Low";
 
-            languageDropdown.options[0].text = "Polish";
-            languageDropdown.options[1].text = "English";
+            // languageDropdown.options[0].text = "Polish";
+            // languageDropdown.options[1].text = "English";
         }
 
         graphicsDropdown.RefreshShownValue();
