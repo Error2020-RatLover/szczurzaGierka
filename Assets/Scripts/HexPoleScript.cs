@@ -46,7 +46,7 @@ public class HexPoleScript : MonoBehaviour
         generator.takeAction(coordinates);
     }
 
-    public void unable()
+    public void disable()
     {
         sprite.enabled = true;
         button.enabled = true;
@@ -67,7 +67,7 @@ public class HexPoleScript : MonoBehaviour
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
-            pole.unable();
+            pole.disable();
            
             if (signalStrength > 0)
             {
