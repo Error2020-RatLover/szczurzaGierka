@@ -21,7 +21,11 @@ public class roomGenerator : MonoBehaviour
     public GameObject championPrefab;
     public GameObject currentChampion;
 
+<<<<<<< Updated upstream
 
+=======
+    public string actionState = "Move";
+>>>>>>> Stashed changes
 
     void Start()
     {
