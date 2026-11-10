@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311fd93f02e4ebd47979d6c7002bcbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  coordinates: {x: 0, y: 0}
   isAvaliable: 0
 --- !u!60 &7027679748264722605
 PolygonCollider2D:

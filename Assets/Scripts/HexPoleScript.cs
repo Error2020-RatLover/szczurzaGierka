@@ -8,7 +8,7 @@ public class HexPoleScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public Vector2 coordinates;
+    public Vector2Int coordinates;
     public bool isAvaliable;
 
     //void Start()

@@ -1,6 +1,7 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 using System;
+
 public class roomGenerator : MonoBehaviour
 {
 
@@ -9,19 +10,27 @@ public class roomGenerator : MonoBehaviour
 
     public GameObject hexpole;
 
+    public BoxCollider2D rightWall;
+    public BoxCollider2D leftWall;
+    public BoxCollider2D topWall;
+    public BoxCollider2D bottomWall;
+
+    public Dictionary<Vector2Int, GameObject> pola = new();
 
     void Start()
     {
+        // to jest potrzebne żeby się nie popsuło, można potem poszukać lepszego rozwiązania
         float rozmiar = x_size/2;
         x_size = Mathf.CeilToInt(rozmiar);
 
-
+        // 2 pętle generujące mape
         for (int i = 0; i < x_size; i++)
         {
            
            
             for (int j = 0; j < y_size; j++)
             {
+                // posFixed sprawdza czy należy zmodyfikować pozycje
                 float posFixed = 0;
                 if (j % 2 == 1)
                 {
@@ -33,17 +42,37 @@ public class roomGenerator : MonoBehaviour
 
                 HexPoleScript pole = x.GetComponent<HexPoleScript>();
 
-                pole.coordinates = new Vector2(i*2, j);
+                pole.coordinates = new Vector2Int(i*2, j);
                 if (j % 2 == 1)
                 {
                     pole.coordinates.x += 1;
                     
                 }
+
+                pola.Add(new Vector2Int(pole.coordinates.x,pole.coordinates.y), x);
             }
         }
-     
 
+        // ROZMIARY ŚCIAN
 
+        rightWall.size = new Vector2(1.0f, y_size+8);
+        leftWall.size = new Vector2(1.0f, y_size+8);
+
+        topWall.size = new Vector2(x_size*2f + 8, 1.0f);
+        bottomWall.size = new Vector2(x_size*2f + 8, 1.0f);
+
+        //POZYCJE ŚCIAN
+
+        rightWall.offset = new Vector2(-2.0f, 0.0f);
+        leftWall.offset = new Vector2((rozmiar-1) *2.2f + 2,0.0f);
+
+        bottomWall.offset = new Vector2((rozmiar * 2.2f)/2, -2f);
+        topWall.offset = new Vector2((rozmiar * 2.2f)/2,((y_size-1) * 0.6f)+2f);
+
+        foreach(KeyValuePair<Vector2Int, GameObject> x in pola)
+        {
+            Debug.Log($"{x.Key}: {x.Value}");
+        }
     }
 
    
