@@ -6,18 +6,23 @@ public class ChampionScript : MonoBehaviour
     public Vector2Int pozycja = new Vector2Int(0, 0);
 
     public roomGenerator generator;
+
+    ItemManager itemManager;
+
+
     // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
   
     void Start()
     {
-        
+        itemManager = FindFirstObjectByType<ItemManager>();
+
     }
 
     void Update()
     {
-        
+
     }
 
     public void actionToTake(Vector2Int toCordinates)
@@ -33,12 +38,14 @@ public class ChampionScript : MonoBehaviour
             transform.position = generator.pola[pozycja].transform.position;
         }
     }
+
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
     public void Move(Vector2Int cords) {
         generator.resetBoard();
         przeniesNaPozycje(cords);
         pozycja = cords;
         generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(2);
+        itemManager.SprawdzKolizje(cords);
     }
 }
 
