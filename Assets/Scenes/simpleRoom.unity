@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2197351158021005326, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: maxZoom
-      value: -2.5
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +237,7 @@ MonoBehaviour:
   bottomWall: {fileID: 1960451575}
   championPrefab: {fileID: 3622237457588165500, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
   currentChampion: {fileID: 0}
+  actionState: Move
 --- !u!61 &1960451575
 BoxCollider2D:
   m_ObjectHideFlags: 0

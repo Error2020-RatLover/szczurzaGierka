@@ -38,7 +38,7 @@ public class ChampionScript : MonoBehaviour
         generator.resetBoard();
         przeniesNaPozycje(cords);
         pozycja = cords;
-        generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(1);
+        generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(2);
     }
 }
 

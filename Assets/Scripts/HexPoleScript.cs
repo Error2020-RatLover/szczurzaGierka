@@ -47,8 +47,9 @@ public class HexPoleScript : MonoBehaviour
         
         //DisplayCords();
         //setActiveHex();
-        enable();
+        
         generator.takeAction(coordinates);
+        enable();
     }
 
     public void disable()
@@ -68,7 +69,7 @@ public class HexPoleScript : MonoBehaviour
         button.enabled = false;
     }
 
-    public void setActiveHex(int signalStrength = 1)
+    public void setActiveHex(int signalStrength = 2)
     {
         
         signalStrength--;
@@ -76,12 +77,13 @@ public class HexPoleScript : MonoBehaviour
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
+
             pole.disable();
-           
             if (signalStrength > 0)
             {
                 pole.setActiveHex(signalStrength);
             }
+            
         }
 
         

@@ -134,7 +134,7 @@ public class roomGenerator : MonoBehaviour
 
     public void resetBoard()
     {
-        Debug.Log("RESET< RESET");
+        
         foreach (KeyValuePair<Vector2Int, GameObject> x in pola)
         {
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
