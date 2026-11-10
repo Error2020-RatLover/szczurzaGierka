@@ -69,9 +69,31 @@ public class roomGenerator : MonoBehaviour
         bottomWall.offset = new Vector2((rozmiar * 2.2f)/2, -2f);
         topWall.offset = new Vector2((rozmiar * 2.2f)/2,((y_size-1) * 0.6f)+2f);
 
+
+        //przypisanie sąsiadów do każdego pola (wydaje mi się że się przyda)
         foreach(KeyValuePair<Vector2Int, GameObject> x in pola)
         {
             Debug.Log($"{x.Key}: {x.Value}");
+            List<GameObject> neighbors = new();
+            List<Vector2Int> kordynaty = new();
+            kordynaty.Add(new Vector2Int(-1, -1));
+            kordynaty.Add(new Vector2Int(0, -2));
+            kordynaty.Add(new Vector2Int(1, -1));
+            kordynaty.Add(new Vector2Int(-1, 1));
+            kordynaty.Add(new Vector2Int(0, 2));
+            kordynaty.Add(new Vector2Int(1, 1));
+                
+            foreach(Vector2Int pos in kordynaty)
+            {
+                if(pola.ContainsKey(x.Key + pos))
+                {
+                    neighbors.Add(pola[x.Key + pos]);
+                }
+                
+            }
+            
+            HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
+            pole.neighbors = neighbors;
         }
     }
 

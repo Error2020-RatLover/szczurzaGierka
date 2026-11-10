@@ -22,7 +22,14 @@ public class HexPoleScript : MonoBehaviour
 
     public void DisplayCords()
     {
-        Debug.Log(coordinates.x + ", " + coordinates.y);
+        //Debug.Log(coordinates.x + ", " + coordinates.y);
+        foreach(GameObject x in neighbors)
+        {
+            Debug.Log(x);
+            
+        }
+            
+            
 
     }
     private void OnMouseDown()
