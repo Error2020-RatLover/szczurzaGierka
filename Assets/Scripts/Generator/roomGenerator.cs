@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System;
 // using System.Diagnostics;
 
+
+
 public class roomGenerator : MonoBehaviour
 {
+
 
     public int x_size;
     public int y_size;
@@ -26,7 +29,7 @@ public class roomGenerator : MonoBehaviour
     public GameObject currentChampion;
 
 
-
+    public List<Pole> prefabsOverwrite = new List<Pole>();
 
     public string actionState = "Move";
 
