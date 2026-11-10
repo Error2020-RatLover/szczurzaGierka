@@ -27,6 +27,10 @@ public class roomGenerator : MonoBehaviour
 
 
 
+
+    public string actionState = "Move";
+
+
     void Start()
     {
         // to jest potrzebne żeby się nie popsuło, można potem poszukać lepszego rozwiązania
@@ -125,6 +129,12 @@ public class roomGenerator : MonoBehaviour
 
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
+            pole.dostepneAkcje.Add("Move", true);
+            if (x.Key.x == 3)
+            {
+                pole.dostepneAkcje["Move"]= false;
+            }
+            
         }
         resetBoard();
         Vector2Int drzwiCord = new Vector2Int(0, 0);
@@ -144,7 +154,7 @@ public class roomGenerator : MonoBehaviour
 
     public void resetBoard()
     {
-        Debug.Log("RESET< RESET");
+        
         foreach (KeyValuePair<Vector2Int, GameObject> x in pola)
         {
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();

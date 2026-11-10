@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class HexPoleScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
 
     public Vector2Int coordinates;
     public bool isAvaliable;
@@ -20,20 +20,25 @@ public class HexPoleScript : MonoBehaviour
 
     public roomGenerator generator;
 
+    public Dictionary<string, bool> dostepneAkcje = new();
+
+
     void Start()
     {
+        
         //coordinates = new Vector2(transform.position.x, transform.position.y);
-
+        
     }
+
 
     public void DisplayCords()
     {
         //Debug.Log(coordinates.x + ", " + coordinates.y);
-        foreach(GameObject x in neighbors)
-        {
-            Debug.Log(x);
+        //foreach(GameObject x in neighbors)
+        //{
+        //    Debug.Log(x);
 
-        }
+        //}
             
     }
 
@@ -42,15 +47,20 @@ public class HexPoleScript : MonoBehaviour
         
         //DisplayCords();
         //setActiveHex();
-        enable();
+        
         generator.takeAction(coordinates);
+        enable();
     }
 
     public void disable()
     {
-        sprite.enabled = true;
-        button.enabled = true;
-        Debug.Log(coordinates);
+        if (dostepneAkcje[generator.actionState])
+        {
+            sprite.enabled = true;
+            button.enabled = true;
+        }
+  
+        //Debug.Log(coordinates);
     }
 
     public void enable()
@@ -59,7 +69,7 @@ public class HexPoleScript : MonoBehaviour
         button.enabled = false;
     }
 
-    public void setActiveHex(int signalStrength = 1)
+    public void setActiveHex(int signalStrength = 2)
     {
         
         signalStrength--;
@@ -67,12 +77,13 @@ public class HexPoleScript : MonoBehaviour
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
+
             pole.disable();
-           
             if (signalStrength > 0)
             {
                 pole.setActiveHex(signalStrength);
             }
+            
         }
 
         
