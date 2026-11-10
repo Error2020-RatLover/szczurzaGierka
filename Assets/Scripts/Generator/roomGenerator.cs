@@ -20,6 +20,7 @@ public class roomGenerator : MonoBehaviour
     void Start()
     {
         // to jest potrzebne żeby się nie popsuło, można potem poszukać lepszego rozwiązania
+
         float rozmiar = x_size/2;
         x_size = Mathf.CeilToInt(rozmiar);
 
@@ -37,8 +38,8 @@ public class roomGenerator : MonoBehaviour
                     posFixed = 1.1f;
                 }
                 Vector3 position = new Vector3((i) * 2.2f + posFixed, (j) * 0.6f, 0);
-                Quaternion rotation = Quaternion.Euler(0, 0, 0);
-                GameObject x = Instantiate(hexpole, position, rotation);
+                // Quaternion rotation = Quaternion.Euler(0, 0, 0);  //usuwam tą zmienną bo jest niepotrzebna
+                GameObject x = Instantiate(hexpole, position, Quaternion.Euler(0, 0, 0)); 
 
                 HexPoleScript pole = x.GetComponent<HexPoleScript>();
 
