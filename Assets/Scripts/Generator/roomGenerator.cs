@@ -48,7 +48,7 @@ public class roomGenerator : MonoBehaviour
                     pole.coordinates.x += 1;
                     
                 }
-
+                pole.generator = this;
                 pola.Add(new Vector2Int(pole.coordinates.x,pole.coordinates.y), x);
             }
         }
@@ -73,7 +73,7 @@ public class roomGenerator : MonoBehaviour
         //przypisanie sąsiadów do każdego pola (wydaje mi się że się przyda)
         foreach(KeyValuePair<Vector2Int, GameObject> x in pola)
         {
-            Debug.Log($"{x.Key}: {x.Value}");
+            //Debug.Log($"{x.Key}: {x.Value}");
             List<GameObject> neighbors = new();
             List<Vector2Int> kordynaty = new();
             kordynaty.Add(new Vector2Int(-1, -1));
@@ -95,11 +95,24 @@ public class roomGenerator : MonoBehaviour
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
         }
+        resetBoard();
+        HexPoleScript drzwi = pola[new Vector2Int(0,0)].GetComponent<HexPoleScript>();
+        drzwi.setActiveHex();
     }
 
    
     void Update()
     {
         
+    }
+
+    public void resetBoard()
+    {
+        Debug.Log("RESET< RESET");
+        foreach (KeyValuePair<Vector2Int, GameObject> x in pola)
+        {
+            HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
+            pole.enable();
+        }
     }
 }

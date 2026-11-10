@@ -14,11 +14,17 @@ public class HexPoleScript : MonoBehaviour
 
     public List<GameObject> neighbors = new();
 
-    //void Start()
-    //{
-    //    coordinates = new Vector2(transform.position.x, transform.position.y);
+    public CapsuleCollider2D button;
 
-    //}
+    public SpriteRenderer sprite;
+
+    public roomGenerator generator;
+
+    void Start()
+    {
+        //coordinates = new Vector2(transform.position.x, transform.position.y);
+
+    }
 
     public void DisplayCords()
     {
@@ -29,12 +35,46 @@ public class HexPoleScript : MonoBehaviour
             
         }
             
-            
-
     }
+
     private void OnMouseDown()
     {
-        DisplayCords();
+        generator.resetBoard();
+        //DisplayCords();
+        setActiveHex();
+        enable();
+    }
+
+    public void anable()
+    {
+        sprite.enabled = true;
+        button.enabled = true;
+        Debug.Log(coordinates);
+    }
+
+    public void enable()
+    {
+        sprite.enabled = false;
+        button.enabled = false;
+    }
+
+    public void setActiveHex(int signalStrenght = 1)
+    {
+        
+        signalStrenght--;
+        
+        foreach (GameObject x in neighbors)
+        {
+            HexPoleScript pole = x.GetComponent<HexPoleScript>();
+            pole.anable();
+           
+            if (signalStrenght > 0)
+            {
+                pole.setActiveHex(signalStrenght);
+            }
+        }
+
+        
     }
 
 }
