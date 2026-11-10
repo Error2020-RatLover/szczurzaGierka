@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class HexPoleScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
 
     public Vector2Int coordinates;
     public bool isAvaliable;
@@ -29,11 +29,11 @@ public class HexPoleScript : MonoBehaviour
     public void DisplayCords()
     {
         //Debug.Log(coordinates.x + ", " + coordinates.y);
-        foreach(GameObject x in neighbors)
-        {
-            Debug.Log(x);
+        //foreach(GameObject x in neighbors)
+        //{
+        //    Debug.Log(x);
 
-        }
+        //}
             
     }
 
@@ -50,7 +50,7 @@ public class HexPoleScript : MonoBehaviour
     {
         sprite.enabled = true;
         button.enabled = true;
-        Debug.Log(coordinates);
+        //Debug.Log(coordinates);
     }
 
     public void enable()
