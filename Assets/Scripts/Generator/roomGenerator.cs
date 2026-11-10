@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+// using System.Diagnostics;
 
 public class roomGenerator : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class roomGenerator : MonoBehaviour
     public BoxCollider2D bottomWall;
 
     public Dictionary<Vector2Int, GameObject> pola = new();
+
+    // itemy
+    public GameObject hat;
 
 
     public GameObject championPrefab;
@@ -56,11 +60,27 @@ public class roomGenerator : MonoBehaviour
                 }
                 pole.generator = this;
                 pola.Add(new Vector2Int(pole.coordinates.x, pole.coordinates.y), x);
+                Debug.Log(pole.coordinates.y);
+
+                // spawn itemu(narazie 10%) z wyjątkiem pola startowego(0,0), bedzie trzeba zmienić jak będziemy chcieli dać inne miejsca do spawnowania się gracza
+                Vector3 startPosition = new Vector3(0,0,0);
+                if (position != startPosition)
+                {
+                    if (DrawAtRandom(0.1f))
+                    {
+
+                        GameObject item = Instantiate(hat, position, Quaternion.Euler(0, 0, 0));
+
+                        ItemScript itemScript = item.GetComponent<ItemScript>();
+                        itemScript.itemCords = pole.coordinates;//przekazanie koordynatów polu
+
+                    }
+                }
+
 
 
             }
 
-            // wybieranie pola z itemem
 
         }
 

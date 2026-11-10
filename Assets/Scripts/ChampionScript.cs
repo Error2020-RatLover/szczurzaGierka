@@ -7,18 +7,22 @@ public class ChampionScript : MonoBehaviour
 
     public roomGenerator generator;
 
+    ItemManager itemManager;
+
+
     public string action = "Move";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        itemManager = FindFirstObjectByType<ItemManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void actionToTake(Vector2Int toCordinates)
@@ -34,10 +38,12 @@ public class ChampionScript : MonoBehaviour
         }
     }
 
-    public void Move(Vector2Int cords) {
+    public void Move(Vector2Int cords)
+    {
         generator.resetBoard();
         przeniesNaPozycje(cords);
         pozycja = cords;
         generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(1);
+        itemManager.SprawdzKolizje(cords);
     }
 }
