@@ -41,3 +41,4 @@ public class ChampionScript : MonoBehaviour
         generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(1);
     }
 }
+
