@@ -21,20 +21,19 @@ public class roomGenerator : MonoBehaviour
     public GameObject championPrefab;
     public GameObject currentChampion;
 
-   
+
 
     void Start()
     {
         // to jest potrzebne żeby się nie popsuło, można potem poszukać lepszego rozwiązania
 
-        float rozmiar = x_size/2;
+        float rozmiar = x_size / 2;
         x_size = Mathf.CeilToInt(rozmiar);
 
         // 2 pętle generujące mape
         for (int i = 0; i < x_size; i++)
         {
-           
-           
+
             for (int j = 0; j < y_size; j++)
             {
                 // posFixed sprawdza czy należy zmodyfikować pozycje
@@ -45,40 +44,45 @@ public class roomGenerator : MonoBehaviour
                 }
                 Vector3 position = new Vector3((i) * 2.2f + posFixed, (j) * 0.6f, 0);
                 // Quaternion rotation = Quaternion.Euler(0, 0, 0);  //usuwam tą zmienną bo jest niepotrzebna
-                GameObject x = Instantiate(hexpole, position, Quaternion.Euler(0, 0, 0)); 
+                GameObject x = Instantiate(hexpole, position, Quaternion.Euler(0, 0, 0));
 
                 HexPoleScript pole = x.GetComponent<HexPoleScript>();
 
-                pole.coordinates = new Vector2Int(i*2, j);
+                pole.coordinates = new Vector2Int(i * 2, j);
                 if (j % 2 == 1)
                 {
                     pole.coordinates.x += 1;
-                    
+
                 }
                 pole.generator = this;
-                pola.Add(new Vector2Int(pole.coordinates.x,pole.coordinates.y), x);
+                pola.Add(new Vector2Int(pole.coordinates.x, pole.coordinates.y), x);
+
+
             }
+
+            // wybieranie pola z itemem
+
         }
 
         // ROZMIARY ŚCIAN
 
-        rightWall.size = new Vector2(1.0f, y_size+8);
-        leftWall.size = new Vector2(1.0f, y_size+8);
+        rightWall.size = new Vector2(1.0f, y_size + 8);
+        leftWall.size = new Vector2(1.0f, y_size + 8);
 
-        topWall.size = new Vector2(x_size*2f + 8, 1.0f);
-        bottomWall.size = new Vector2(x_size*2f + 8, 1.0f);
+        topWall.size = new Vector2(x_size * 2f + 8, 1.0f);
+        bottomWall.size = new Vector2(x_size * 2f + 8, 1.0f);
 
         //POZYCJE ŚCIAN
 
         rightWall.offset = new Vector2(-2.0f, 0.0f);
-        leftWall.offset = new Vector2((rozmiar-1) *2.2f + 2,0.0f);
+        leftWall.offset = new Vector2((rozmiar - 1) * 2.2f + 2, 0.0f);
 
-        bottomWall.offset = new Vector2((rozmiar * 2.2f)/2, -2f);
-        topWall.offset = new Vector2((rozmiar * 2.2f)/2,((y_size-1) * 0.6f)+2f);
+        bottomWall.offset = new Vector2((rozmiar * 2.2f) / 2, -2f);
+        topWall.offset = new Vector2((rozmiar * 2.2f) / 2, ((y_size - 1) * 0.6f) + 2f);
 
 
         //przypisanie sąsiadów do każdego pola (wydaje mi się że się przyda)
-        foreach(KeyValuePair<Vector2Int, GameObject> x in pola)
+        foreach (KeyValuePair<Vector2Int, GameObject> x in pola)
         {
             //Debug.Log($"{x.Key}: {x.Value}");
             List<GameObject> neighbors = new();
@@ -89,31 +93,32 @@ public class roomGenerator : MonoBehaviour
             kordynaty.Add(new Vector2Int(-1, 1));
             kordynaty.Add(new Vector2Int(0, 2));
             kordynaty.Add(new Vector2Int(1, 1));
-                
-            foreach(Vector2Int pos in kordynaty)
+
+            foreach (Vector2Int pos in kordynaty)
             {
-                if(pola.ContainsKey(x.Key + pos))
+                if (pola.ContainsKey(x.Key + pos))
                 {
                     neighbors.Add(pola[x.Key + pos]);
                 }
-                
+
             }
-            
+
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
         }
         resetBoard();
-        HexPoleScript drzwi = pola[new Vector2Int(0,0)].GetComponent<HexPoleScript>();
+        HexPoleScript drzwi = pola[new Vector2Int(0, 0)].GetComponent<HexPoleScript>();
         drzwi.setActiveHex();
         currentChampion = Instantiate(championPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 0));
         currentChampion.GetComponent<ChampionScript>().generator = this;
     }
 
-   
-    void Update()
+    // Losowanie szansa = 0.9f -> 90%, szansa = 0.02 -> 2%
+    bool DrawAtRandom(float szansa)
     {
-        
+        return UnityEngine.Random.value < szansa;
     }
+
 
     public void resetBoard()
     {
