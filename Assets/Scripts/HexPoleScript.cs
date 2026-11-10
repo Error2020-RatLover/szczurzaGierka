@@ -3,6 +3,7 @@
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class HexPoleScript : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class HexPoleScript : MonoBehaviour
 
     public Vector2Int coordinates;
     public bool isAvaliable;
+
+    public List<GameObject> neighbors = new();
 
     //void Start()
     //{
