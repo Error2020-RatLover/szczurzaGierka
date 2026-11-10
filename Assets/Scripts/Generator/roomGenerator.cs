@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using System;
 public class roomGenerator : MonoBehaviour
 {
 
@@ -11,6 +12,9 @@ public class roomGenerator : MonoBehaviour
 
     void Start()
     {
+        float rozmiar = x_size/2;
+        x_size = Mathf.CeilToInt(rozmiar);
+
 
         for (int i = 0; i < x_size; i++)
         {
@@ -29,7 +33,12 @@ public class roomGenerator : MonoBehaviour
 
                 HexPoleScript pole = x.GetComponent<HexPoleScript>();
 
-                pole.coordinates = new Vector2(i, j);
+                pole.coordinates = new Vector2(i*2, j);
+                if (j % 2 == 1)
+                {
+                    pole.coordinates.x += 1;
+                    
+                }
             }
         }
      
