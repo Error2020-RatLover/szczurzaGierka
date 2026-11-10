@@ -39,10 +39,11 @@ public class HexPoleScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        generator.resetBoard();
+        
         //DisplayCords();
-        setActiveHex();
+        //setActiveHex();
         enable();
+        generator.takeAction(coordinates);
     }
 
     public void unable()

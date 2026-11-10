@@ -103,7 +103,7 @@ public class roomGenerator : MonoBehaviour
             pole.neighbors = neighbors;
         }
         resetBoard();
-        HexPoleScript drzwi = pola[new Vector2Int(1,1)].GetComponent<HexPoleScript>();
+        HexPoleScript drzwi = pola[new Vector2Int(0,0)].GetComponent<HexPoleScript>();
         drzwi.setActiveHex();
         currentChampion = Instantiate(championPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 0));
         currentChampion.GetComponent<ChampionScript>().generator = this;
@@ -123,5 +123,10 @@ public class roomGenerator : MonoBehaviour
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.enable();
         }
+    }
+
+    public void takeAction(Vector2Int cords)
+    {
+        currentChampion.GetComponent<ChampionScript>().actionToTake(cords);
     }
 }

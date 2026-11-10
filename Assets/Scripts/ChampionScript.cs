@@ -23,7 +23,7 @@ public class ChampionScript : MonoBehaviour
 
     public void actionToTake(Vector2Int toCordinates)
     {
-       
+        SendMessage(action, toCordinates);
     }
 
     public void przeniesNaPozycje(Vector2Int pozycja)
@@ -32,5 +32,12 @@ public class ChampionScript : MonoBehaviour
         {
             transform.position = generator.pola[pozycja].transform.position;
         }
+    }
+
+    public void Move(Vector2Int cords) {
+        generator.resetBoard();
+        przeniesNaPozycje(cords);
+        pozycja = cords;
+        generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(1);
     }
 }
