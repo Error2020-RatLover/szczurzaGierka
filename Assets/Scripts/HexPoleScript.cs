@@ -69,7 +69,7 @@ public class HexPoleScript : MonoBehaviour
         button.enabled = false;
     }
 
-    public void setActiveHex(int signalStrength = 2)
+    public void setActiveHex(int signalStrength = 1)
     {
         
         signalStrength--;

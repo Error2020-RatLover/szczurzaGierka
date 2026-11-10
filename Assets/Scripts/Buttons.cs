@@ -7,7 +7,7 @@ public class Buttons : MonoBehaviour
     public void ChangeScene()
     {
         Debug.Log("start Button clicked!");
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("simpleRoom");
     }
 
     public void QuitGame()
