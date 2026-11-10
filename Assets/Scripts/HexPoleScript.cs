@@ -20,11 +20,16 @@ public class HexPoleScript : MonoBehaviour
 
     public roomGenerator generator;
 
+    public Dictionary<string, bool> dostepneAkcje = new();
+
+
     void Start()
     {
+        
         //coordinates = new Vector2(transform.position.x, transform.position.y);
-
+        
     }
+
 
     public void DisplayCords()
     {
@@ -48,8 +53,12 @@ public class HexPoleScript : MonoBehaviour
 
     public void disable()
     {
-        sprite.enabled = true;
-        button.enabled = true;
+        if (dostepneAkcje[generator.actionState])
+        {
+            sprite.enabled = true;
+            button.enabled = true;
+        }
+  
         //Debug.Log(coordinates);
     }
 

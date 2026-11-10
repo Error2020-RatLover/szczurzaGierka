@@ -21,11 +21,11 @@ public class roomGenerator : MonoBehaviour
     public GameObject championPrefab;
     public GameObject currentChampion;
 
-<<<<<<< Updated upstream
 
-=======
+
+
     public string actionState = "Move";
->>>>>>> Stashed changes
+
 
     void Start()
     {
@@ -109,6 +109,12 @@ public class roomGenerator : MonoBehaviour
 
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
+            pole.dostepneAkcje.Add("Move", true);
+            if (x.Key.x == 3)
+            {
+                pole.dostepneAkcje["Move"]= false;
+            }
+            
         }
         resetBoard();
         Vector2Int drzwiCord = new Vector2Int(0, 0);
