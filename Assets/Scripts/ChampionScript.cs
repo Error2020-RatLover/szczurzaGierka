@@ -10,16 +10,16 @@ public class ChampionScript : MonoBehaviour
     ItemManager itemManager;
 
 
+    // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+  
     void Start()
     {
         itemManager = FindFirstObjectByType<ItemManager>();
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -27,9 +27,10 @@ public class ChampionScript : MonoBehaviour
 
     public void actionToTake(Vector2Int toCordinates)
     {
+        //message odpala funkcję o nazwie akcje i przekazuje argument toCordinates
         SendMessage(action, toCordinates);
     }
-
+    //interpretacja kordunaktow na pozycje, mozna troche zmienic jesli chcecie ale ja nie widze bledow 
     public void przeniesNaPozycje(Vector2Int pozycja)
     {
         if (generator.pola.ContainsKey(pozycja))
@@ -38,8 +39,8 @@ public class ChampionScript : MonoBehaviour
         }
     }
 
-    public void Move(Vector2Int cords)
-    {
+    //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
+    public void Move(Vector2Int cords) {
         generator.resetBoard();
         przeniesNaPozycje(cords);
         pozycja = cords;
@@ -47,3 +48,4 @@ public class ChampionScript : MonoBehaviour
         itemManager.SprawdzKolizje(cords);
     }
 }
+
