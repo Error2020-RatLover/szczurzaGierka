@@ -32,7 +32,7 @@ public class HexPoleScript : MonoBehaviour
         foreach(GameObject x in neighbors)
         {
             Debug.Log(x);
-            
+
         }
             
     }
@@ -45,7 +45,7 @@ public class HexPoleScript : MonoBehaviour
         enable();
     }
 
-    public void anable()
+    public void unable()
     {
         sprite.enabled = true;
         button.enabled = true;
@@ -58,19 +58,19 @@ public class HexPoleScript : MonoBehaviour
         button.enabled = false;
     }
 
-    public void setActiveHex(int signalStrenght = 1)
+    public void setActiveHex(int signalStrength = 1)
     {
         
-        signalStrenght--;
+        signalStrength--;
         
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
-            pole.anable();
+            pole.unable();
            
-            if (signalStrenght > 0)
+            if (signalStrength > 0)
             {
-                pole.setActiveHex(signalStrenght);
+                pole.setActiveHex(signalStrength);
             }
         }
 
