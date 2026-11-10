@@ -130,10 +130,10 @@ public class roomGenerator : MonoBehaviour
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
             pole.dostepneAkcje.Add("Move", true);
-            if (x.Key.x == 3)
-            {
-                pole.dostepneAkcje["Move"]= false;
-            }
+            //if (x.Key.x == 3)
+            //{
+            //    pole.dostepneAkcje["Move"]= false;
+            //}
             
         }
         resetBoard();
