@@ -107,10 +107,12 @@ public class roomGenerator : MonoBehaviour
             pole.neighbors = neighbors;
         }
         resetBoard();
-        HexPoleScript drzwi = pola[new Vector2Int(0, 0)].GetComponent<HexPoleScript>();
+        Vector2Int drzwiCord = new Vector2Int(0, 0);
+        HexPoleScript drzwi = pola[drzwiCord].GetComponent<HexPoleScript>();
         drzwi.setActiveHex();
         currentChampion = Instantiate(championPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 0));
         currentChampion.GetComponent<ChampionScript>().generator = this;
+        currentChampion.GetComponent<ChampionScript>().przeniesNaPozycje(drzwiCord);
     }
 
     // Losowanie szansa = 0.9f -> 90%, szansa = 0.02 -> 2%
