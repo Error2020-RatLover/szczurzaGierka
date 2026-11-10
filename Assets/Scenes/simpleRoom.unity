@@ -235,6 +235,8 @@ MonoBehaviour:
   leftWall: {fileID: 1960451577}
   topWall: {fileID: 1960451576}
   bottomWall: {fileID: 1960451575}
+  championPrefab: {fileID: 3622237457588165500, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
+  currentChampion: {fileID: 0}
 --- !u!61 &1960451575
 BoxCollider2D:
   m_ObjectHideFlags: 0
