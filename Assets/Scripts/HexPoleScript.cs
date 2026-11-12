@@ -10,7 +10,7 @@ public class HexPoleScript : MonoBehaviour
    
 
     public Vector2Int coordinates;
-    public int movmentCost = 1;
+    public int movementCost = 1;
     public List<GameObject> neighbors = new();
 
     public CapsuleCollider2D button;

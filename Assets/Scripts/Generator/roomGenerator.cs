@@ -32,6 +32,8 @@ public class roomGenerator : MonoBehaviour
 
 
     public List<Pole> prefabsOverwrite = new List<Pole>();
+    public List<enemyPoleData> enemysPositions = new List<enemyPoleData>();
+
 
     public string actionState = "Move";
 
@@ -148,6 +150,14 @@ public class roomGenerator : MonoBehaviour
         {
             GameObject prefab = Instantiate(x.prefab);
             inreractiveObject prefabScrypt = prefab.GetComponent<inreractiveObject>();
+            prefabScrypt.generator = this;
+            prefabScrypt.inicialiate(x.koordynaty);
+        }
+
+        foreach(enemyPoleData x in enemysPositions)
+        {
+            GameObject prefab = Instantiate(x.prefab);
+            enemyScript prefabScrypt = prefab.GetComponent<enemyScript>();
             prefabScrypt.generator = this;
             prefabScrypt.inicialiate(x.koordynaty);
         }
