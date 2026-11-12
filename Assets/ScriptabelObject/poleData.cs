@@ -5,4 +5,5 @@ public class Pole
 {
     public Vector2Int koordynaty;
     public GameObject prefab;
+    
 }

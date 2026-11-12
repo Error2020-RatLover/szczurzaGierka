@@ -139,6 +139,15 @@ public class roomGenerator : MonoBehaviour
             //}
             
         }
+
+        foreach(Pole x in prefabsOverwrite)
+        {
+            GameObject prefab = Instantiate(x.prefab);
+            wall prefabScrypt = prefab.GetComponent<wall>();
+            prefabScrypt.generator = this;
+            prefabScrypt.inicialiate(x.koordynaty);
+        }
+
         resetBoard();
         Vector2Int drzwiCord = new Vector2Int(0, 0);
         HexPoleScript drzwi = pola[drzwiCord].GetComponent<HexPoleScript>();
