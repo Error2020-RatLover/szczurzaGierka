@@ -17,7 +17,7 @@ public class enemyScript : turnObject
 
     public int stamina = 0;
 
-    public int maxStamina = 35;
+    public int maxStamina = 5;
 
     public IEnumerator FindPlayerPath()
     {
@@ -88,6 +88,7 @@ public class enemyScript : turnObject
     public override void startYourTurn()
     {
         stamina = maxStamina;
+        Debug.Log("HALO");
         StartCoroutine(FindPlayerPath());
     }
 
