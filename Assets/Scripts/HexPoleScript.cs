@@ -57,6 +57,9 @@ public class HexPoleScript : MonoBehaviour
     {
         if (dostepneAkcje[generator.actionState])
         {
+            if (generator.actionState == "Move" && dostepneAkcje["Occupated"]) {
+                return;
+            }
             sprite.enabled = true;
             button.enabled = true;
         }

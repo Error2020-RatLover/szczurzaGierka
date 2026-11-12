@@ -136,11 +136,12 @@ public class roomGenerator : MonoBehaviour
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
             pole.dostepneAkcje.Add("Move", true);
+            pole.dostepneAkcje.Add("Occupated", false);
             //if (x.Key.x == 3)
             //{
             //    pole.dostepneAkcje["Move"]= false;
             //}
-            
+
         }
 
         foreach(Pole x in prefabsOverwrite)
@@ -158,6 +159,8 @@ public class roomGenerator : MonoBehaviour
         currentChampion = Instantiate(championPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 0));
         currentChampion.GetComponent<ChampionScript>().generator = this;
         currentChampion.GetComponent<ChampionScript>().przeniesNaPozycje(drzwiCord);
+        currentChampion.GetComponent<ChampionScript>().currentPole = drzwi;
+        drzwi.dostepneAkcje["Occupated"]= true;
     }
 
     // Losowanie szansa = 0.9f -> 90%, szansa = 0.02 -> 2%

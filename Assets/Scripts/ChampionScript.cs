@@ -43,13 +43,15 @@ public class ChampionScript : MonoBehaviour
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
     public void Move(Vector2Int cords) {
         generator.resetBoard();
+        currentPole.dostepneAkcje["Occupated"] = false;
         przeniesNaPozycje(cords);
         pozycja = cords;
         //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         currentPole.setActiveHex(1);
         currentPole.ZbierzItem();
-        currentPole.enable();
+        currentPole.dostepneAkcje["Occupated"] = true;
+        //currentPole.enable();
         //itemManager.SprawdzKolizje(cords);
 
     }
