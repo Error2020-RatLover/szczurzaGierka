@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class HexPoleScript : MonoBehaviour
 {
-   
+
 
     public Vector2Int coordinates;
     public int movementCost = 1;
@@ -25,10 +25,10 @@ public class HexPoleScript : MonoBehaviour
 
     void Start()
     {
-        
+
 
         //coordinates = new Vector2(transform.position.x, transform.position.y);
-        
+
     }
 
 
@@ -40,30 +40,31 @@ public class HexPoleScript : MonoBehaviour
         //    Debug.Log(x);
 
         //}
-            
+
     }
 
     private void OnMouseDown()
     {
-        
+
         //DisplayCords();
         //setActiveHex();
-        
+
         generator.takeAction(coordinates);
-        
+
     }
 
     public void disable()
     {
         if (dostepneAkcje[generator.actionState])
         {
-            if (generator.actionState == "Move" && dostepneAkcje["Occupated"]) {
+            if (generator.actionState == "Move" && dostepneAkcje["Occupated"])
+            {
                 return;
             }
             sprite.enabled = true;
             button.enabled = true;
         }
-  
+
         //Debug.Log(coordinates);
     }
 
@@ -75,9 +76,9 @@ public class HexPoleScript : MonoBehaviour
 
     public void setActiveHex(int signalStrength = 1)
     {
-        
+
         signalStrength--;
-        
+
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
@@ -87,10 +88,10 @@ public class HexPoleScript : MonoBehaviour
             {
                 pole.setActiveHex(signalStrength);
             }
-            
+
         }
 
-        
+
     }
 
     public void turnOffHex(int signalStrength) {
@@ -111,12 +112,42 @@ public class HexPoleScript : MonoBehaviour
 
     public void ZbierzItem()
     {
-        if(item != null)
+        // if (item != null)
+        // {
+        //     Destroy(item);
+        //     Debug.Log("Usunięto item");
+
+        //     //Dodać po id do listy z podniesionymi itemami
+        // }
+        if (item != null)
         {
-            Destroy(item);
-            Debug.Log("Usunięto item");
-             
+            ItemScript itemScript = item.GetComponent<ItemScript>();
+
+            InventoryManager inventoryManager =
+                FindFirstObjectByType<InventoryManager>();
+
+
+            // Dodanie przedmiotu do ekwipunku
+            bool added = inventoryManager.AddItem(itemScript.itemID);
+
+            // Usunięcie przedmiotu z mapy tylko jeśli udało się go zebrać
+            if (added)
+            {
+                ItemManager itemManager = FindFirstObjectByType<ItemManager>();
+
+                if (itemManager != null)
+                {
+                    itemManager.items.Remove(itemScript);
+                }
+
+                Destroy(item);
+                item = null;
+
+                Debug.Log("Zebrano przedmiot!");
+            }
+
         }
     }
+
 
 }

@@ -108,3 +108,4 @@ MonoBehaviour:
   pozycja: {x: 0, y: 0}
   generator: {fileID: 0}
   currentPole: {fileID: 0}
+  targetTile: {fileID: 0}
