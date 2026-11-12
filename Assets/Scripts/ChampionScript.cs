@@ -11,8 +11,8 @@ public class ChampionScript : MonoBehaviour
     public HexPoleScript currentPole;
     ItemManager itemManager;
 
-    public int maxStamina = 5;
-    public int stamina = 0;
+    public int maxStamina = 35;
+    public int stamina = 30;
 
     // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
@@ -56,6 +56,7 @@ public class ChampionScript : MonoBehaviour
         currentPole.dostepneAkcje["Occupated"] = true;
         //currentPole.enable();
         //itemManager.SprawdzKolizje(cords);
+        Debug.Log(maxStamina);
         stamina--;
         if (stamina <= 0) {
             endYourTurn();
