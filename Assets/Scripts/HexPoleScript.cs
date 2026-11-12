@@ -92,6 +92,23 @@ public class HexPoleScript : MonoBehaviour
 
         
     }
+
+    public void turnOffHex(int signalStrength) {
+        signalStrength--;
+
+        foreach (GameObject x in neighbors)
+        {
+            HexPoleScript pole = x.GetComponent<HexPoleScript>();
+
+            pole.enable();
+            if (signalStrength > 0)
+            {
+                pole.setActiveHex(signalStrength);
+            }
+
+        }
+    }
+
     public void ZbierzItem()
     {
         if(item != null)

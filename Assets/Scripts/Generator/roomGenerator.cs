@@ -166,7 +166,7 @@ public class roomGenerator : MonoBehaviour
         currentChampion.GetComponent<ChampionScript>().currentPole = drzwi;
         player = currentChampion.GetComponent<ChampionScript>();
         drzwi.dostepneAkcje["Occupated"]= true;
-
+        player.startYourTurn();
         foreach (enemyPoleData x in enemysPositions)
         {
             GameObject prefab = Instantiate(x.prefab);

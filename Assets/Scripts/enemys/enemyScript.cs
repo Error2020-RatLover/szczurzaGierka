@@ -15,7 +15,7 @@ public class enemyScript : MonoBehaviour
 
     private List<HexPoleScript> currentPath;
 
-
+    public int stamina = 5;
 
     public IEnumerator FindPlayerPath()
     {
@@ -73,6 +73,7 @@ public class enemyScript : MonoBehaviour
         transform.position = generator.pola[cords].transform.position;
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.enable();
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 

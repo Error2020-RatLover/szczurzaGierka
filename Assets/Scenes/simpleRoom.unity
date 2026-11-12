@@ -303,8 +303,6 @@ MonoBehaviour:
   enemysPositions:
   - koordynaty: {x: 10, y: 10}
     prefab: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
-  - koordynaty: {x: 6, y: 14}
-    prefab: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
   actionState: Move
 --- !u!61 &1960451575
 BoxCollider2D:
