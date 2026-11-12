@@ -143,7 +143,7 @@ public class roomGenerator : MonoBehaviour
         foreach(Pole x in prefabsOverwrite)
         {
             GameObject prefab = Instantiate(x.prefab);
-            wall prefabScrypt = prefab.GetComponent<wall>();
+            inreractiveObject prefabScrypt = prefab.GetComponent<inreractiveObject>();
             prefabScrypt.generator = this;
             prefabScrypt.inicialiate(x.koordynaty);
         }
