@@ -286,6 +286,10 @@ MonoBehaviour:
   prefabsOverwrite:
   - koordynaty: {x: 2, y: 2}
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 4, y: 2}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 6, y: 2}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   actionState: Move
 --- !u!61 &1960451575
 BoxCollider2D:
