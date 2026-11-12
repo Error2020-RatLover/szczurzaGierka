@@ -48,7 +48,7 @@ public static class Pathfinding
             {
                 HexPoleScript neighbor = x.GetComponent<HexPoleScript>();
                 // Pomijamy pola niedostępne
-                if (!neighbor.dostepneAkcje["Move"])
+                if (!neighbor.dostepneAkcje["Move"] || (neighbor.dostepneAkcje["Occupated"] && neighbor.coordinates != target.coordinates))
                     continue;
 
                 // Pomijamy już sprawdzone pola

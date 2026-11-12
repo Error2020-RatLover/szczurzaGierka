@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class enemyScript : MonoBehaviour
 {
     public Vector2Int pozycja = new Vector2Int(0, 0);
+
 
     public roomGenerator generator;
 
@@ -13,19 +15,35 @@ public class enemyScript : MonoBehaviour
 
     private List<HexPoleScript> currentPath;
 
-    public void FindPlayerPath()
+
+
+    public IEnumerator FindPlayerPath()
     {
+        yield return new WaitForSeconds(2f);
         currentPath = Pathfinding.FindPath(
             currentPole,
             targetTile
         );
-        foreach(HexPoleScript x in currentPath)
-        {
 
-            Debug.Log(x.coordinates);
+        if(currentPath != null && currentPath.Count >= 2)
+        {
+            
+            changePosition(currentPath[0].coordinates);
+            
+        }
+        else
+        {
+            Debug.Log("Stoję przy celu");
+           
         }
         
+            
+        
+        
     }
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,13 +59,24 @@ public class enemyScript : MonoBehaviour
     public void inicialiate(Vector2Int cords)
     {
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        transform.position = generator.pola[cords].transform.position;
-        pozycja = cords;
+        
         currentPole.dostepneAkcje["Occupated"] = true;
         targetTile = generator.pola[new Vector2Int(0,10)].GetComponent<HexPoleScript>();
-        FindPlayerPath();
+        changePosition(cords);
+
 
     }
 
+    public void changePosition(Vector2Int cords)
+    {
+        currentPole.dostepneAkcje["Occupated"] = false;
+        transform.position = generator.pola[cords].transform.position;
+        currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
+        currentPole.dostepneAkcje["Occupated"] = true;
+        StartCoroutine(FindPlayerPath());
+        targetTile = generator.player.currentPole;
+
+    }
+    
 
 }

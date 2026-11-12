@@ -29,7 +29,7 @@ public class roomGenerator : MonoBehaviour
 
     public GameObject championPrefab;
     public GameObject currentChampion;
-
+    public ChampionScript player;
 
     public List<Pole> prefabsOverwrite = new List<Pole>();
     public List<enemyPoleData> enemysPositions = new List<enemyPoleData>();
@@ -154,13 +154,7 @@ public class roomGenerator : MonoBehaviour
             prefabScrypt.inicialiate(x.koordynaty);
         }
 
-        foreach(enemyPoleData x in enemysPositions)
-        {
-            GameObject prefab = Instantiate(x.prefab);
-            enemyScript prefabScrypt = prefab.GetComponent<enemyScript>();
-            prefabScrypt.generator = this;
-            prefabScrypt.inicialiate(x.koordynaty);
-        }
+        
 
         resetBoard();
         Vector2Int drzwiCord = new Vector2Int(0, 0);
@@ -170,7 +164,17 @@ public class roomGenerator : MonoBehaviour
         currentChampion.GetComponent<ChampionScript>().generator = this;
         currentChampion.GetComponent<ChampionScript>().przeniesNaPozycje(drzwiCord);
         currentChampion.GetComponent<ChampionScript>().currentPole = drzwi;
+        player = currentChampion.GetComponent<ChampionScript>();
         drzwi.dostepneAkcje["Occupated"]= true;
+
+        foreach (enemyPoleData x in enemysPositions)
+        {
+            GameObject prefab = Instantiate(x.prefab);
+            enemyScript prefabScrypt = prefab.GetComponent<enemyScript>();
+            prefabScrypt.generator = this;
+            prefabScrypt.inicialiate(x.koordynaty);
+        }
+
     }
 
     // Losowanie szansa = 0.9f -> 90%, szansa = 0.02 -> 2%
