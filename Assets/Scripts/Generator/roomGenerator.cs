@@ -79,6 +79,7 @@ public class roomGenerator : MonoBehaviour
                     {
 
                         GameObject item = Instantiate(hat, position, Quaternion.Euler(0, 0, 0));
+                        //dodaje do hexpola item
                         pole.item = item;
                         ItemScript itemScript = item.GetComponent<ItemScript>();
                         itemScript.itemCords = pole.coordinates;//przekazanie koordynatów polu

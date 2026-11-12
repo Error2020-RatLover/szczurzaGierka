@@ -10,8 +10,7 @@ public class HexPoleScript : MonoBehaviour
    
 
     public Vector2Int coordinates;
-    public bool isAvaliable;
-
+    public int movmentCost = 1;
     public List<GameObject> neighbors = new();
 
     public CapsuleCollider2D button;
@@ -51,7 +50,7 @@ public class HexPoleScript : MonoBehaviour
         //setActiveHex();
         
         generator.takeAction(coordinates);
-        enable();
+        
     }
 
     public void disable()
@@ -89,6 +88,15 @@ public class HexPoleScript : MonoBehaviour
         }
 
         
+    }
+    public void ZbierzItem()
+    {
+        if(item != null)
+        {
+            Destroy(item);
+            Debug.Log("Usunięto item");
+             
+        }
     }
 
 }

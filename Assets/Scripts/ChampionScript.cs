@@ -7,6 +7,7 @@ public class ChampionScript : MonoBehaviour
 
     public roomGenerator generator;
 
+    public HexPoleScript currentPole;
     ItemManager itemManager;
 
 
@@ -44,8 +45,13 @@ public class ChampionScript : MonoBehaviour
         generator.resetBoard();
         przeniesNaPozycje(cords);
         pozycja = cords;
-        generator.pola[cords].GetComponent<HexPoleScript>().setActiveHex(1);
-        itemManager.SprawdzKolizje(cords);
+        //po poruszeniu się gracza wykonują się funkcje na polu
+        currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
+        currentPole.setActiveHex(1);
+        currentPole.ZbierzItem();
+        currentPole.enable();
+        //itemManager.SprawdzKolizje(cords);
+
     }
 }
 
