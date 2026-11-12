@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class enemyScript : MonoBehaviour
+public class enemyScript : turnObject
 {
     public Vector2Int pozycja = new Vector2Int(0, 0);
 
@@ -29,14 +29,18 @@ public class enemyScript : MonoBehaviour
 
         if(currentPath != null && currentPath.Count >= 2)
         {
-            
+            stamina -= 1;
             changePosition(currentPath[0].coordinates);
+            if(stamina <= 0)
+            {
+                endYourTurn();
+            }
             
         }
         else
         {
             Debug.Log("Stoję przy celu");
-           
+            endYourTurn();
         }
         
             
@@ -81,16 +85,16 @@ public class enemyScript : MonoBehaviour
 
     }
 
-    public void startYourTurn()
+    public override void startYourTurn()
     {
         stamina = maxStamina;
         StartCoroutine(FindPlayerPath());
     }
 
     
-    public void endYourTurn()
+    public override void endYourTurn()
     {
-        //currentPole.turnOffHex(1);
+        generator.changeNextTurn();
     }
 
 }

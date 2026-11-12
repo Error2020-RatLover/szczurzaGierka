@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ChampionScript : MonoBehaviour
+public class ChampionScript : turnObject
 {
 
     public Vector2Int pozycja = new Vector2Int(0, 0);
@@ -11,8 +11,8 @@ public class ChampionScript : MonoBehaviour
     public HexPoleScript currentPole;
     ItemManager itemManager;
 
-    public int maxStamina = 35;
-    public int stamina = 30;
+    public int maxStamina = 5;
+    public int stamina = 0;
 
     // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
@@ -64,7 +64,7 @@ public class ChampionScript : MonoBehaviour
 
     }
 
-    public void startYourTurn()
+    public override void startYourTurn()
     {
         stamina = maxStamina;
         currentPole.setActiveHex(1);
@@ -72,9 +72,10 @@ public class ChampionScript : MonoBehaviour
     }
         
 
-    public void endYourTurn()
+    public override void endYourTurn()
     {
         currentPole.turnOffHex(1);
+        generator.changeNextTurn();
     }
 }
 

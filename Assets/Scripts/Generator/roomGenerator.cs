@@ -37,6 +37,8 @@ public class roomGenerator : MonoBehaviour
 
     public string actionState = "Move";
 
+    public List<GameObject> moveOrder = new();
+    public int currentMoveId = -1;
 
     void Start()
     {
@@ -167,13 +169,18 @@ public class roomGenerator : MonoBehaviour
         player = currentChampion.GetComponent<ChampionScript>();
         drzwi.dostepneAkcje["Occupated"]= true;
         player.startYourTurn();
+        moveOrder.Add(currentChampion);
         foreach (enemyPoleData x in enemysPositions)
         {
             GameObject prefab = Instantiate(x.prefab);
             enemyScript prefabScrypt = prefab.GetComponent<enemyScript>();
             prefabScrypt.generator = this;
             prefabScrypt.inicialiate(x.koordynaty);
+            moveOrder.Add(prefab);
         }
+        changeNextTurn();
+
+
 
     }
 
@@ -197,5 +204,15 @@ public class roomGenerator : MonoBehaviour
     public void takeAction(Vector2Int cords)
     {
         currentChampion.GetComponent<ChampionScript>().actionToTake(cords);
+    }
+
+    public void changeNextTurn()
+    {
+        currentMoveId++;
+        if (currentMoveId >= moveOrder.Count-1) 
+        { 
+            currentMoveId = 0;
+        }
+        moveOrder[currentMoveId].GetComponent<turnObject>();
     }
 }
