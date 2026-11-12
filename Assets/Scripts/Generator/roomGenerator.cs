@@ -67,7 +67,7 @@ public class roomGenerator : MonoBehaviour
                 }
                 pole.generator = this;
                 pola.Add(new Vector2Int(pole.coordinates.x, pole.coordinates.y), x);
-                Debug.Log(pole.coordinates.y);
+                
 
                 // spawn itemu(narazie 10%) z wyjątkiem pola startowego(0,0), bedzie trzeba zmienić jak będziemy chcieli dać inne miejsca do spawnowania się gracza
                 Vector3 startPosition = new Vector3(0,0,0);
@@ -77,7 +77,7 @@ public class roomGenerator : MonoBehaviour
                     {
 
                         GameObject item = Instantiate(hat, position, Quaternion.Euler(0, 0, 0));
-
+                        pole.item = item;
                         ItemScript itemScript = item.GetComponent<ItemScript>();
                         itemScript.itemCords = pole.coordinates;//przekazanie koordynatów polu
 

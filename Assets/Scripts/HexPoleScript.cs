@@ -22,10 +22,12 @@ public class HexPoleScript : MonoBehaviour
 
     public Dictionary<string, bool> dostepneAkcje = new();
 
+    public GameObject item;
 
     void Start()
     {
         
+
         //coordinates = new Vector2(transform.position.x, transform.position.y);
         
     }
