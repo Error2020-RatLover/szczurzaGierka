@@ -19,6 +19,8 @@ public class roomGenerator : MonoBehaviour
     public BoxCollider2D topWall;
     public BoxCollider2D bottomWall;
 
+    public GameObject enemyPrefab;
+
     public Dictionary<Vector2Int, GameObject> pola = new();
 
     // itemy

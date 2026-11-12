@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//ogólna klasa obiektu na planszy, zawiera podstawowe infomracje ktore będą potrzebne wszystkim obiektom
 public abstract class inreractiveObject : MonoBehaviour
 {
     public roomGenerator generator;
