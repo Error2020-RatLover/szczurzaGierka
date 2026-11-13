@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class ChampionScript : turnObject
 {
@@ -17,6 +18,8 @@ public class ChampionScript : turnObject
     // action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
+
+  
     /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
     zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
     Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
@@ -29,8 +32,22 @@ public class ChampionScript : turnObject
     }
 
     void Update()
-    {
-
+    {   //na razie klikając z na klawiaturze zmieniamy stan. Potem trzeba by zrobić do tego przycisk    
+        if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame && generator.moveOrder[generator.currentMoveId] == this)
+        {
+            if (action == "Move")
+            {
+                action = "Attack";
+            }
+            else
+            {
+                action = "Move";
+            }
+            generator.actionState = action;
+            //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
+            currentPole.turnOffHex(1);
+            currentPole.setActiveHex(1);
+        }
     }
 
     public void actionToTake(Vector2Int toCordinates)
@@ -51,11 +68,13 @@ public class ChampionScript : turnObject
     public void Move(Vector2Int cords) {
         generator.resetBoard();
         currentPole.dostepneAkcje["Occupated"] = false;
+        currentPole.currentStanding = null;
         przeniesNaPozycje(cords);
         pozycja = cords;
         //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         currentPole.setActiveHex(1);
+        currentPole.currentStanding = gameObject;
         currentPole.ZbierzItem();
         currentPole.dostepneAkcje["Occupated"] = true;
         //currentPole.enable();
@@ -66,6 +85,40 @@ public class ChampionScript : turnObject
         }
 
     }
+
+    public void Attack(Vector2Int cords)
+    {
+        stamina--;
+        Debug.Log(stamina);
+        GameObject target = generator.pola[cords].GetComponent<HexPoleScript>().currentStanding;
+        if (target == null) {
+            if (stamina <= 0)
+            {
+                endYourTurn();
+            }
+            return;
+        }
+        if(target.GetComponent<enemyScript>() != null)
+        {
+            enemyScript enemy = target.GetComponent<enemyScript>();
+            enemy.takeDamage(8);
+        }
+        else if(target.GetComponent<ChampionScript>() != null)
+        {
+            ChampionScript playerScript = target.GetComponent<ChampionScript>();
+            playerScript.takeDamage(8);
+        }
+        else if (target.GetComponent<inreractiveObject>())
+        {
+            Debug.Log("Inny obiekt");
+        }
+        if (stamina <= 0)
+        {
+            endYourTurn();
+        }
+
+        //Debug.Log(target);
+    }
     //akcje na zaczęciu tury
     public override void startYourTurn()
     {
@@ -73,12 +126,23 @@ public class ChampionScript : turnObject
         currentPole.setActiveHex(1);
         action = "Move";
     }
-        
+
+    public void takeDamage(int damage)
+    {
+        stats.hp -= damage;
+        if (stats.hp < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     //akcje na zakończenie tury
     public override void endYourTurn()
     {
         currentPole.turnOffHex(1);
         generator.changeNextTurn();
     }
+    
+
 }
 

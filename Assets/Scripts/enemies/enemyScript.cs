@@ -33,19 +33,19 @@ public class enemyScript : turnObject
             targetTile
         );
         //jeśli droga istnieje to idziemy
-        if(currentPath != null && currentPath.Count >= 2)
+        if (currentPath != null && currentPath.Count >= 2)
         {
             if (stamina <= 0)
             {
                 //koniec tury
-                endYourTurn();  
+                endYourTurn();
             }
             else
             {
                 stamina -= 1;
                 changePosition(currentPath[0].coordinates);
             }
-            
+
         }
         else
         {
@@ -53,12 +53,25 @@ public class enemyScript : turnObject
             Debug.Log("Stoję przy celu");
             endYourTurn();
         }
-        
-            
-        
-        
+
+
+
+
     }
 
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     //inicjakizacja ważnych danych przez generator
     public void inicialiate(Vector2Int cords)
@@ -66,20 +79,36 @@ public class enemyScript : turnObject
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         transform.position = generator.pola[cords].transform.position;
         currentPole.dostepneAkcje["Occupated"] = true;
-        targetTile = generator.pola[new Vector2Int(0,10)].GetComponent<HexPoleScript>();
-        
+        targetTile = generator.pola[new Vector2Int(0, 10)].GetComponent<HexPoleScript>();
+
+
+
     }
     //zmiana pozycji
     public void changePosition(Vector2Int cords)
     {
+        currentPole.currentStanding = null;
         currentPole.dostepneAkcje["Occupated"] = false;
         transform.position = generator.pola[cords].transform.position;
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
+        currentPole.currentStanding = gameObject;
         currentPole.dostepneAkcje["Occupated"] = true;
         currentPole.enable();
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 
+    }
+
+    public void takeDamage(int damage)
+    {
+        stats.hp -= damage;
+        if (stats.hp < 0)
+        {
+            currentPole.currentStanding = null;
+            currentPole.dostepneAkcje["Occupated"] = false;
+            generator.moveOrder.Remove(this);
+            Destroy(gameObject);
+        }
     }
     //początek tury
     public override void startYourTurn()

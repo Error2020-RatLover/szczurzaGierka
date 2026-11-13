@@ -142,6 +142,7 @@ public class roomGenerator : MonoBehaviour
             pole.neighbors = neighbors;
             pole.dostepneAkcje.Add("Move", true);
             pole.dostepneAkcje.Add("Occupated", false);
+            pole.dostepneAkcje.Add("Attack", true); 
             //if (x.Key.x == 3)
             //{
             //    pole.dostepneAkcje["Move"]= false;
@@ -225,4 +226,6 @@ public class roomGenerator : MonoBehaviour
     {
         moveOrder.Sort((x, y) => y.GetComponent<turnObject>().stats.speed.CompareTo(x.GetComponent<turnObject>().stats.speed));
     }
+
+
 }

@@ -23,6 +23,8 @@ public class HexPoleScript : MonoBehaviour
 
     public GameObject item;
 
+    public GameObject currentStanding;
+
     void Start()
     {
 

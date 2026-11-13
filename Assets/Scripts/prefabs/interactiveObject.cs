@@ -12,6 +12,7 @@ public abstract class inreractiveObject : MonoBehaviour
         pole = generator.pola[cord].GetComponent<HexPoleScript>();
         transform.position = generator.pola[cord].transform.position;
         cords = cord;
+        pole.currentStanding = gameObject;
         OnPlaced();
 
 
