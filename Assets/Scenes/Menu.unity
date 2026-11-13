@@ -2269,8 +2269,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ustawienia
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b59ec79ede9d3de44ae2ae484fdceb01, type: 2}
-  m_sharedMaterial: {fileID: -7403252270859299576, guid: b59ec79ede9d3de44ae2ae484fdceb01, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3239,8 +3239,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Tytu\u0142 gry"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0e93b027f8e926b41a07130c824af12a, type: 2}
-  m_sharedMaterial: {fileID: 5396456945084626623, guid: 0e93b027f8e926b41a07130c824af12a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7721,8 +7721,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b59ec79ede9d3de44ae2ae484fdceb01, type: 2}
-  m_sharedMaterial: {fileID: -7403252270859299576, guid: b59ec79ede9d3de44ae2ae484fdceb01, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8197,8 +8197,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "wyjd\u017A"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b59ec79ede9d3de44ae2ae484fdceb01, type: 2}
-  m_sharedMaterial: {fileID: -7403252270859299576, guid: b59ec79ede9d3de44ae2ae484fdceb01, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
