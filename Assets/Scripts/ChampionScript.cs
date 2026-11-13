@@ -11,13 +11,13 @@ public class ChampionScript : turnObject
     public HexPoleScript currentPole;
     ItemManager itemManager;
 
-    public int maxStamina = 5;
+    
     public int stamina = 0;
 
     // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
-  
+
     void Start()
     {
         itemManager = FindFirstObjectByType<ItemManager>();
@@ -65,7 +65,7 @@ public class ChampionScript : turnObject
 
     public override void startYourTurn()
     {
-        stamina = maxStamina;
+        stamina = stats.stamina;
         currentPole.setActiveHex(1);
         action = "Move";
     }

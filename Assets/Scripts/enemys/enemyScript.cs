@@ -17,7 +17,7 @@ public class enemyScript : turnObject
 
     public int stamina = 0;
 
-    public int maxStamina = 5;
+    
 
     public IEnumerator FindPlayerPath()
     {
@@ -94,7 +94,7 @@ public class enemyScript : turnObject
 
     public override void startYourTurn()
     {
-        stamina = maxStamina;
+        stamina = stats.stamina;
         targetTile = generator.player.currentPole;
         StartCoroutine(FindPlayerPath());
     }
