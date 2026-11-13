@@ -27,6 +27,7 @@ public class ChampionScript : turnObject
 
     void Start()
     {
+        stats = Instantiate(stats);
         itemManager = FindFirstObjectByType<ItemManager>();
 
     }
@@ -89,7 +90,7 @@ public class ChampionScript : turnObject
     public void Attack(Vector2Int cords)
     {
         stamina--;
-        Debug.Log(stamina);
+       
         GameObject target = generator.pola[cords].GetComponent<HexPoleScript>().currentStanding;
         if (target == null) {
             if (stamina <= 0)
@@ -130,10 +131,15 @@ public class ChampionScript : turnObject
     public void takeDamage(int damage)
     {
         stats.hp -= damage;
-        if (stats.hp < 0)
-        {
-            Destroy(gameObject);
-        }
+        Debug.Log($"Zostałem uderzony: {stats.hp}hp");
+        //if (stats.hp < 0)
+        //{
+        //    Destroy(gameObject);
+        //    currentPole.currentStanding = null;
+        //    currentPole.dostepneAkcje["Occupated"] = false;
+        //    generator.moveOrder.Remove(this);
+        //    Destroy(gameObject);
+        //}
     }
 
     //akcje na zakończenie tury

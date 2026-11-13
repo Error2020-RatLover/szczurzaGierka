@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: zombieStats
   m_EditorClassIdentifier: Assembly-CSharp::championStats
   maxHp: 15
-  hp: 15
+  hp: 16
   strenght: 12
   magic: 5
   armor: 8

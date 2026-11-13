@@ -33,27 +33,28 @@ public class enemyScript : turnObject
             currentPole,
             targetTile
         );
-        //jeśli droga istnieje to idziemy
-        if (currentPath != null && currentPath.Count >= 2)
-        {
-            if (stamina <= 0)
+        if (stamina <= 0)
             {
                 //koniec tury
                 endYourTurn();
             }
-            else
+        //jeśli droga istnieje to idziemy
+        else
+        {
+            if (currentPath != null && currentPath.Count >= 2)
             {
                 stamina -= 1;
                 changePosition(currentPath[0].coordinates);
-            }
 
+            }
+            else
+            {
+                //stoje przy celu, koniec na razie, potem zmienimy
+                Debug.Log("Stoję przy celu");
+                Attack(targetTile.coordinates);
+            }
         }
-        else
-        {
-            //stoje przy celu, koniec na razie, potem zmienimy
-            Debug.Log("Stoję przy celu");
-            endYourTurn();
-        }
+        
 
 
 
@@ -65,7 +66,7 @@ public class enemyScript : turnObject
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        stats = Instantiate(stats);
     }
 
     // Update is called once per frame
@@ -88,6 +89,7 @@ public class enemyScript : turnObject
     //zmiana pozycji
     public void changePosition(Vector2Int cords)
     {
+
         currentPole.currentStanding = null;
         currentPole.dostepneAkcje["Occupated"] = false;
         transform.position = generator.pola[cords].transform.position;
@@ -100,6 +102,39 @@ public class enemyScript : turnObject
 
     }
 
+
+    public void Attack(Vector2Int cords)
+    {
+        stamina--;
+
+        GameObject target = generator.pola[cords].GetComponent<HexPoleScript>().currentStanding;
+        if (target == null)
+        {
+            if (stamina <= 0)
+            {
+                endYourTurn();
+            }
+            return;
+        }
+        if (target.GetComponent<enemyScript>() != null)
+        {
+            enemyScript enemy = target.GetComponent<enemyScript>();
+            enemy.takeDamage(8);
+        }
+        else if (target.GetComponent<ChampionScript>() != null)
+        {
+            ChampionScript playerScript = target.GetComponent<ChampionScript>();
+            playerScript.takeDamage(8);
+        }
+        else if (target.GetComponent<inreractiveObject>())
+        {
+            Debug.Log("Inny obiekt");
+        }
+  
+        StartCoroutine(FindPlayerPath());
+        targetTile = generator.player.currentPole;
+
+    }
     public void takeDamage(int damage)
     {
         stats.hp -= damage;
@@ -124,5 +159,7 @@ public class enemyScript : turnObject
     {
         generator.changeNextTurn();
     }
+
+
 
 }
