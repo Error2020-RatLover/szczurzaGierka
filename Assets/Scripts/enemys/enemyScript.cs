@@ -29,12 +29,19 @@ public class enemyScript : turnObject
 
         if(currentPath != null && currentPath.Count >= 2)
         {
-            stamina -= 1;
-            changePosition(currentPath[0].coordinates);
-            if(stamina <= 0)
+            if (stamina <= 0)
             {
+             
                 endYourTurn();
+               
             }
+            else
+            {
+                stamina -= 1;
+                changePosition(currentPath[0].coordinates);
+            }
+            
+            
             
         }
         else
@@ -88,7 +95,7 @@ public class enemyScript : turnObject
     public override void startYourTurn()
     {
         stamina = maxStamina;
-        Debug.Log("HALO");
+        targetTile = generator.player.currentPole;
         StartCoroutine(FindPlayerPath());
     }
 

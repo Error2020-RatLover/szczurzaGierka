@@ -56,7 +56,6 @@ public class ChampionScript : turnObject
         currentPole.dostepneAkcje["Occupated"] = true;
         //currentPole.enable();
         //itemManager.SprawdzKolizje(cords);
-        Debug.Log(maxStamina);
         stamina--;
         if (stamina <= 0) {
             endYourTurn();
