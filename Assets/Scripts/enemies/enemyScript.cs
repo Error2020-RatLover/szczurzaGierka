@@ -60,19 +60,6 @@ public class enemyScript : turnObject
     }
 
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //inicjakizacja ważnych danych przez generator
     public void inicialiate(Vector2Int cords)
     {
@@ -81,8 +68,6 @@ public class enemyScript : turnObject
         currentPole.dostepneAkcje["Occupated"] = true;
         targetTile = generator.pola[new Vector2Int(0,10)].GetComponent<HexPoleScript>();
         
-
-
     }
     //zmiana pozycji
     public void changePosition(Vector2Int cords)
