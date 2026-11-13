@@ -4,8 +4,8 @@ using UnityEngine;
 public class interactiveObjectStats : ScriptableObject
 {
     public int hp = 0;
-    public bool Movable = false;
-    public bool Ocupaited = false;
-    public bool Attackable = true;
-    public bool interactive = false;
+    public bool Move = false;
+    public bool Occupated = false;
+    public bool Attack = true;
+    public bool Interact = false;
 }

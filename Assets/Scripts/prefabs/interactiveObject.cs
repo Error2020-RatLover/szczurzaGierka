@@ -15,6 +15,11 @@ public abstract class inreractiveObject : MonoBehaviour
         transform.position = generator.pola[cord].transform.position;
         cords = cord;
         pole.currentStanding = gameObject;
+        pole.dostepneAkcje["Move"] = stats.Move;
+        pole.dostepneAkcje["Occupated"] = stats.Occupated;
+        //pole.dostepneAkcje["Atack"] = stats.Attack;
+       
+
         OnPlaced();
     }
 
