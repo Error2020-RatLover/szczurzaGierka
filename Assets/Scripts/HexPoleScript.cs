@@ -104,7 +104,7 @@ public class HexPoleScript : MonoBehaviour
             pole.enable();
             if (signalStrength > 0)
             {
-                pole.setActiveHex(signalStrength);
+                pole.turnOffHex(signalStrength);
             }
 
         }

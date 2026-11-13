@@ -94,6 +94,7 @@ public class enemyScript : turnObject
 
     public override void startYourTurn()
     {
+        Debug.Log("ZACZYNAMY");
         stamina = stats.stamina;
         targetTile = generator.player.currentPole;
         StartCoroutine(FindPlayerPath());
