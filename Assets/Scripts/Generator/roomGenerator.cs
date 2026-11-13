@@ -148,7 +148,7 @@ public class roomGenerator : MonoBehaviour
             //}
 
         }
-
+        //inicjalizacja każdego specificznego pola
         foreach (Pole x in prefabsOverwrite)
         {
             GameObject prefab = Instantiate(x.prefab);

@@ -14,9 +14,13 @@ public class ChampionScript : turnObject
     
     public int stamina = 0;
 
-    // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
+    // action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
+    /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
+    zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
+    Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
+    */
 
     void Start()
     {
@@ -62,7 +66,7 @@ public class ChampionScript : turnObject
         }
 
     }
-
+    //akcje na zaczęciu tury
     public override void startYourTurn()
     {
         stamina = stats.stamina;
@@ -70,7 +74,7 @@ public class ChampionScript : turnObject
         action = "Move";
     }
         
-
+    //akcje na zakończenie tury
     public override void endYourTurn()
     {
         currentPole.turnOffHex(1);
