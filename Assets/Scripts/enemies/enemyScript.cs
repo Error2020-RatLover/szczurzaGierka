@@ -55,10 +55,6 @@ public class enemyScript : turnObject
             }
         }
         
-
-
-
-
     }
 
 
@@ -128,7 +124,8 @@ public class enemyScript : turnObject
         }
         else if (target.GetComponent<inreractiveObject>())
         {
-            Debug.Log("Inny obiekt");
+            inreractiveObject interactive = target.GetComponent<inreractiveObject>();
+            interactive.takeDamage(8);
         }
   
         StartCoroutine(FindPlayerPath());

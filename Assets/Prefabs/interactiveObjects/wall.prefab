@@ -105,3 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2422c01ccac5db419ed5a1a1ad6ee27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  generator: {fileID: 0}
+  cords: {x: 0, y: 0}
+  pole: {fileID: 0}
+  stats: {fileID: 11400000, guid: e7ed9161633cddd42b3af266849f5198, type: 2}

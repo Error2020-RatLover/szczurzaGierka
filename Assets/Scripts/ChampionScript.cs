@@ -111,7 +111,8 @@ public class ChampionScript : turnObject
         }
         else if (target.GetComponent<inreractiveObject>())
         {
-            Debug.Log("Inny obiekt");
+            inreractiveObject interactive = target.GetComponent<inreractiveObject>();
+            interactive.takeDamage(8);
         }
         if (stamina <= 0)
         {
@@ -125,7 +126,7 @@ public class ChampionScript : turnObject
     {
         stamina = stats.stamina;
         currentPole.setActiveHex(1);
-        action = "Move";
+        
     }
 
     public void takeDamage(int damage)

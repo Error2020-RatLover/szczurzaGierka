@@ -6,16 +6,29 @@ public abstract class inreractiveObject : MonoBehaviour
     public Vector2Int cords;
     public HexPoleScript pole;
 
+    public interactiveObjectStats stats;
 
     public void inicialiate(Vector2Int cord)
     {
+        stats = Instantiate(stats);
         pole = generator.pola[cord].GetComponent<HexPoleScript>();
         transform.position = generator.pola[cord].transform.position;
         cords = cord;
         pole.currentStanding = gameObject;
         OnPlaced();
-
-
     }
+
+    public void takeDamage(int damage)
+    {
+        stats.hp -= damage;
+        if (stats.hp < 0)
+        {
+            pole.currentStanding = null;
+            pole.dostepneAkcje["Occupated"] = false;
+            pole.dostepneAkcje["Move"] = true;
+            Destroy(gameObject);
+        }
+    }
+
     protected abstract void OnPlaced();
 }
