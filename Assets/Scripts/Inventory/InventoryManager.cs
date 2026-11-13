@@ -11,7 +11,9 @@ public class InventoryManager : MonoBehaviour
 
     public int selectedSlot = 0; // Aktualnie wybrany slot
 
-    
+    public InventoryUI inventoryUI;
+
+
 
     void Awake()
     {
@@ -52,7 +54,7 @@ public class InventoryManager : MonoBehaviour
         if (Keyboard.current.fKey.wasPressedThisFrame)
             UseItem();
 
-        // Wyświetlanie ekwipunku (debug)
+        // Wyświetlanie ekwipunku (debug) do wywalenia później
         if (Keyboard.current.eKey.wasPressedThisFrame)
             DisplayInventory();
     }
@@ -64,6 +66,7 @@ public class InventoryManager : MonoBehaviour
             return;
 
         selectedSlot = slotID;
+        RefreshInventoryUI();
 
         InventorySlot slot = inventory[selectedSlot];
 
@@ -74,7 +77,6 @@ public class InventoryManager : MonoBehaviour
     public void UseItem()
     {
         InventorySlot slot = inventory[selectedSlot];
-
         // Sprawdzenie, czy slot jest pusty
         if (slot.quantity <= 0 || string.IsNullOrEmpty(slot.itemID))
         {
@@ -98,6 +100,8 @@ public class InventoryManager : MonoBehaviour
 
             Debug.Log("Slot " + slot.slotID + " jest teraz pusty.");
         }
+
+        RefreshInventoryUI();
     }
 
     // Dodawanie przedmiotu
@@ -117,7 +121,7 @@ public class InventoryManager : MonoBehaviour
                 slot.quantity++;
 
                 Debug.Log("Dodano " + itemID + " do slotu " + slot.slotID + ". Ilość: " + slot.quantity);
-
+                RefreshInventoryUI();
                 return true;
             }
         }
@@ -130,8 +134,8 @@ public class InventoryManager : MonoBehaviour
                 slot.itemID = itemID;
                 slot.quantity = 1;
 
-                Debug.Log("Dodano " + itemID +
-                          " do nowego slotu " + slot.slotID);
+                Debug.Log("Dodano " + itemID + " do nowego slotu " + slot.slotID);
+                RefreshInventoryUI();
 
                 return true;
             }
@@ -155,7 +159,14 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log("=========================");
     }
-}//halo
+    void RefreshInventoryUI()
+    {
+        if (inventoryUI != null)
+        {
+            inventoryUI.RefreshUI();
+        }
+    }
+}
 
 [System.Serializable]
 public class InventorySlot
