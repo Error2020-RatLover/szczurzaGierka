@@ -75,22 +75,22 @@ public class roomGenerator : MonoBehaviour
 
                 // spawn itemu(narazie 10%) z wyjątkiem pola startowego(0,0), bedzie trzeba zmienić jak będziemy chcieli dać inne miejsca do spawnowania się gracza
                 Vector3 startPosition = new Vector3(0,0,0);
-                //if (position != startPosition)
-                //{  
-                //    if (DrawAtRandom(0.1f))
-                //    {
-                //        ItemManager itemManager = FindFirstObjectByType<ItemManager>();
-                //        GameObject itemID = itemManager.returnGameObject();//otrzymanie losowego itemu z itemmanager
+                if (position != startPosition)
+                {
+                    if (DrawAtRandom(0.1f))
+                    {
+                        ItemManager itemManager = FindFirstObjectByType<ItemManager>();
+                        GameObject itemID = itemManager.returnGameObject();//otrzymanie losowego itemu z itemmanager
 
-                //        GameObject item = Instantiate(itemID, position, Quaternion.Euler(0, 0, 0));
-                //        //dodaje do hexpola item
-                //        pole.item = item;
-                //        ItemScript itemScript = item.GetComponent<ItemScript>();
-                //        itemScript.itemCords = pole.coordinates;//przekazanie koordynatów polu
-                //        itemScript.itemID = itemID.name;// przypisanie nazwy obiektu jako id
+                        GameObject item = Instantiate(itemID, position, Quaternion.Euler(0, 0, 0));
+                        //dodaje do hexpola item
+                        pole.item = item;
+                        ItemScript itemScript = item.GetComponent<ItemScript>();
+                        itemScript.itemCords = pole.coordinates;//przekazanie koordynatów polu
+                        itemScript.itemID = itemID.name;// przypisanie nazwy obiektu jako id
 
-                //    }
-                //}
+                    }
+                }
 
 
 

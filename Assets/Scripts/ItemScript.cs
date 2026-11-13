@@ -6,10 +6,10 @@ public class ItemScript : MonoBehaviour
     public string itemID;
     void Start()
     {
-        //ItemManager manager = FindFirstObjectByType<ItemManager>();
+        ItemManager manager = FindFirstObjectByType<ItemManager>();
 
-        //manager.items.Add(this);
-        // Debug.Log("ID obiektu: " + itemID + " dodany na pozycji " + itemCords);
+        manager.items.Add(this);
+        Debug.Log("ID obiektu: " + itemID + " dodany na pozycji " + itemCords);
     }
 
 }
