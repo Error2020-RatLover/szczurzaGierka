@@ -8,8 +8,6 @@ using System.Runtime.CompilerServices;
 
 public class roomGenerator : MonoBehaviour
 {
-
-
     public int x_size;
     public int y_size;
 
