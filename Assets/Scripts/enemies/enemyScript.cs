@@ -17,28 +17,39 @@ public class enemyScript : turnObject
 
     public int stamina = 0;
 
-    public int maxStamina = 5;
+    /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
+    zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
+    Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
+    */
+
+
 
     public IEnumerator FindPlayerPath()
     {
-        yield return new WaitForSeconds(1f);
+        //argument w WaitForSeconds, może nie dasz wiary, ale to liczba sekund ile czeka przed kontunuowaniem pracy
+        yield return new WaitForSeconds(0.6f);
         currentPath = Pathfinding.FindPath(
             currentPole,
             targetTile
         );
-
+        //jeśli droga istnieje to idziemy
         if(currentPath != null && currentPath.Count >= 2)
         {
-            stamina -= 1;
-            changePosition(currentPath[0].coordinates);
-            if(stamina <= 0)
+            if (stamina <= 0)
             {
-                endYourTurn();
+                //koniec tury
+                endYourTurn();  
+            }
+            else
+            {
+                stamina -= 1;
+                changePosition(currentPath[0].coordinates);
             }
             
         }
         else
         {
+            //stoje przy celu, koniec na razie, potem zmienimy
             Debug.Log("Stoję przy celu");
             endYourTurn();
         }
@@ -48,6 +59,8 @@ public class enemyScript : turnObject
         
     }
 
+
+    //inicjakizacja ważnych danych przez generator
     public void inicialiate(Vector2Int cords)
     {
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
@@ -56,7 +69,7 @@ public class enemyScript : turnObject
         targetTile = generator.pola[new Vector2Int(0,10)].GetComponent<HexPoleScript>();
         
     }
-
+    //zmiana pozycji
     public void changePosition(Vector2Int cords)
     {
         currentPole.dostepneAkcje["Occupated"] = false;
@@ -68,15 +81,15 @@ public class enemyScript : turnObject
         targetTile = generator.player.currentPole;
 
     }
-
+    //początek tury
     public override void startYourTurn()
     {
-        stamina = maxStamina;
-        Debug.Log("HALO");
+        stamina = stats.stamina;
+        targetTile = generator.player.currentPole;
         StartCoroutine(FindPlayerPath());
     }
 
-    
+    //koniec tury
     public override void endYourTurn()
     {
         generator.changeNextTurn();

@@ -106,3 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pozycja: {x: 0, y: 0}
+  generator: {fileID: 0}
+  currentPole: {fileID: 0}
+  maxStamina: 5
+  stamina: 0
+  action: Move

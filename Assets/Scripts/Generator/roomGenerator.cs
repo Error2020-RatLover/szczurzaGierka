@@ -35,7 +35,7 @@ public class roomGenerator : MonoBehaviour
 
     public string actionState = "Move";
 
-    public List<GameObject> moveOrder = new();
+    public List<turnObject> moveOrder = new();
     public int currentMoveId = -1;
 
     void Start()
@@ -71,12 +71,12 @@ public class roomGenerator : MonoBehaviour
                 }
                 pole.generator = this;
                 pola.Add(new Vector2Int(pole.coordinates.x, pole.coordinates.y), x);
-                
+
 
                 // spawn itemu(narazie 10%) z wyjątkiem pola startowego(0,0), bedzie trzeba zmienić jak będziemy chcieli dać inne miejsca do spawnowania się gracza
-                Vector3 startPosition = new Vector3(0,0,0);
+                Vector3 startPosition = new Vector3(0, 0, 0);
                 if (position != startPosition)
-                {  
+                {
                     if (DrawAtRandom(0.1f))
                     {
                         ItemManager itemManager = FindFirstObjectByType<ItemManager>();
@@ -148,8 +148,8 @@ public class roomGenerator : MonoBehaviour
             //}
 
         }
-
-        foreach(Pole x in prefabsOverwrite)
+        //inicjalizacja każdego specificznego pola
+        foreach (Pole x in prefabsOverwrite)
         {
             GameObject prefab = Instantiate(x.prefab);
             inreractiveObject prefabScrypt = prefab.GetComponent<inreractiveObject>();
@@ -157,9 +157,9 @@ public class roomGenerator : MonoBehaviour
             prefabScrypt.inicialiate(x.koordynaty);
         }
 
-        
 
-        resetBoard();
+
+        
         Vector2Int drzwiCord = new Vector2Int(0, 0);
         HexPoleScript drzwi = pola[drzwiCord].GetComponent<HexPoleScript>();
         drzwi.setActiveHex();
@@ -168,18 +168,20 @@ public class roomGenerator : MonoBehaviour
         currentChampion.GetComponent<ChampionScript>().przeniesNaPozycje(drzwiCord);
         currentChampion.GetComponent<ChampionScript>().currentPole = drzwi;
         player = currentChampion.GetComponent<ChampionScript>();
-        drzwi.dostepneAkcje["Occupated"]= true;
-        player.startYourTurn();
-        moveOrder.Add(currentChampion);
+        drzwi.dostepneAkcje["Occupated"] = true;
+        moveOrder.Add(player);
         foreach (enemyPoleData x in enemysPositions)
         {
             GameObject prefab = Instantiate(x.prefab);
             enemyScript prefabScrypt = prefab.GetComponent<enemyScript>();
             prefabScrypt.generator = this;
             prefabScrypt.inicialiate(x.koordynaty);
-            moveOrder.Add(prefab);
+            moveOrder.Add(prefabScrypt);
         }
+        //selectMoveOrder();
+        resetBoard();
         changeNextTurn();
+       
 
 
 
@@ -194,7 +196,7 @@ public class roomGenerator : MonoBehaviour
 
     public void resetBoard()
     {
-        
+
         foreach (KeyValuePair<Vector2Int, GameObject> x in pola)
         {
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
@@ -210,10 +212,17 @@ public class roomGenerator : MonoBehaviour
     public void changeNextTurn()
     {
         currentMoveId++;
-        if (currentMoveId >= moveOrder.Count-1) 
-        { 
+        if (currentMoveId >= moveOrder.Count)
+        {
             currentMoveId = 0;
         }
-        moveOrder[currentMoveId].GetComponent<turnObject>();
+        selectMoveOrder();
+        moveOrder[currentMoveId].GetComponent<turnObject>().startYourTurn();
+        
+    }
+
+    public void selectMoveOrder()
+    {
+        moveOrder.Sort((x, y) => y.GetComponent<turnObject>().stats.speed.CompareTo(x.GetComponent<turnObject>().stats.speed));
     }
 }

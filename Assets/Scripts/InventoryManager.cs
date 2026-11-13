@@ -2,21 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-[System.Serializable]
-public class InventorySlot
-{
-    public int slotID;
-    public string itemID;
-    public int quantity;
-
-
-    public InventorySlot(int id)
-    {
-        slotID = id;
-        itemID = "";
-        quantity = 0;
-    }
-}
 
 public class InventoryManager : MonoBehaviour
 {
@@ -26,6 +11,7 @@ public class InventoryManager : MonoBehaviour
 
     public int selectedSlot = 0; // Aktualnie wybrany slot
 
+    
 
     void Awake()
     {
@@ -168,5 +154,21 @@ public class InventoryManager : MonoBehaviour
         }
 
         Debug.Log("=========================");
+    }
+}//halo
+
+[System.Serializable]
+public class InventorySlot
+{
+    public int slotID;
+    public string itemID;
+    public int quantity;
+
+
+    public InventorySlot(int id)
+    {
+        slotID = id;
+        itemID = "";
+        quantity = 0;
     }
 }

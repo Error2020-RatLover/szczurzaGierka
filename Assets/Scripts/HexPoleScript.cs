@@ -104,7 +104,7 @@ public class HexPoleScript : MonoBehaviour
             pole.enable();
             if (signalStrength > 0)
             {
-                pole.setActiveHex(signalStrength);
+                pole.turnOffHex(signalStrength);
             }
 
         }
@@ -112,13 +112,13 @@ public class HexPoleScript : MonoBehaviour
 
     public void ZbierzItem()
     {
-        // if (item != null)
-        // {
-        //     Destroy(item);
-        //     Debug.Log("Usunięto item");
+        if (item != null)
+        {
+            Destroy(item);
+            Debug.Log("Usunięto item");
 
-        //     //Dodać po id do listy z podniesionymi itemami
-        // }
+            //Dodać po id do listy z podniesionymi itemami
+        }
         if (item != null)
         {
             ItemScript itemScript = item.GetComponent<ItemScript>();

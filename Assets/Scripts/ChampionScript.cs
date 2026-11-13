@@ -11,13 +11,17 @@ public class ChampionScript : turnObject
     public HexPoleScript currentPole;
     ItemManager itemManager;
 
-    public int maxStamina = 50;
+    
     public int stamina = 0;
 
-    // kochani moi, action będzie przechowywał akcję jaką wykonuję champion.
+    // action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
-  
+    /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
+    zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
+    Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
+    */
+
     void Start()
     {
         itemManager = FindFirstObjectByType<ItemManager>();
@@ -56,22 +60,21 @@ public class ChampionScript : turnObject
         currentPole.dostepneAkcje["Occupated"] = true;
         //currentPole.enable();
         //itemManager.SprawdzKolizje(cords);
-        Debug.Log(maxStamina);
         stamina--;
         if (stamina <= 0) {
             endYourTurn();
         }
 
     }
-
+    //akcje na zaczęciu tury
     public override void startYourTurn()
     {
-        stamina = maxStamina;
+        stamina = stats.stamina;
         currentPole.setActiveHex(1);
         action = "Move";
     }
         
-
+    //akcje na zakończenie tury
     public override void endYourTurn()
     {
         currentPole.turnOffHex(1);
