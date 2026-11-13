@@ -218,14 +218,11 @@ public class roomGenerator : MonoBehaviour
         }
         selectMoveOrder();
         moveOrder[currentMoveId].GetComponent<turnObject>().startYourTurn();
-        Debug.Log(moveOrder[currentMoveId]);
+        
     }
 
     public void selectMoveOrder()
     {
-
         moveOrder.Sort((x, y) => y.GetComponent<turnObject>().stats.speed.CompareTo(x.GetComponent<turnObject>().stats.speed));
-
-
     }
 }
