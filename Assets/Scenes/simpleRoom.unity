@@ -381,8 +381,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2197351158021005326, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197351158021005326, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: maxZoom
-      value: -4.5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4345964947377890801, guid: 348d6b5e7eb168244a95ed6cf799e8bb, type: 3}
       propertyPath: m_LocalPosition.x
