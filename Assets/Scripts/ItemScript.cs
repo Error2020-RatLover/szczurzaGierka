@@ -9,7 +9,7 @@ public class ItemScript : MonoBehaviour
         ItemManager manager = FindFirstObjectByType<ItemManager>();
 
         manager.items.Add(this);
-        Debug.Log("ID obiektu: " + itemID + " dodany na pozycji " + itemCords);
+        //Debug.Log("ID obiektu: " + itemID + " dodany na pozycji " + itemCords);
     }
 
 }

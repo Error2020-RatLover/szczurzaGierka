@@ -214,7 +214,6 @@ public class roomGenerator : MonoBehaviour
         { 
             currentMoveId = 0;
         }
-        Debug.Log(currentMoveId);
         moveOrder[currentMoveId].GetComponent<turnObject>().startYourTurn();
     }
 }

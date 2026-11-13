@@ -21,7 +21,7 @@ public class enemyScript : turnObject
 
     public IEnumerator FindPlayerPath()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
         currentPath = Pathfinding.FindPath(
             currentPole,
             targetTile

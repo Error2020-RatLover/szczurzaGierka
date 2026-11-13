@@ -112,41 +112,41 @@ public class HexPoleScript : MonoBehaviour
 
     public void ZbierzItem()
     {
-        // if (item != null)
-        // {
-        //     Destroy(item);
-        //     Debug.Log("Usunięto item");
+        if (item != null)
+        {
+            Destroy(item);
+            Debug.Log("Usunięto item");
 
-        //     //Dodać po id do listy z podniesionymi itemami
-        // }
-        //if (item != null)
-        //{
-        //    ItemScript itemScript = item.GetComponent<ItemScript>();
+            //Dodać po id do listy z podniesionymi itemami
+        }
+        if (item != null)
+        {
+            ItemScript itemScript = item.GetComponent<ItemScript>();
 
-        //    InventoryManager inventoryManager =
-        //        FindFirstObjectByType<InventoryManager>();
+            InventoryManager inventoryManager =
+                FindFirstObjectByType<InventoryManager>();
 
 
-        //    // Dodanie przedmiotu do ekwipunku
-        //    bool added = inventoryManager.AddItem(itemScript.itemID);
+            // Dodanie przedmiotu do ekwipunku
+            bool added = inventoryManager.AddItem(itemScript.itemID);
 
-        //    // Usunięcie przedmiotu z mapy tylko jeśli udało się go zebrać
-        //    if (added)
-        //    {
-        //        ItemManager itemManager = FindFirstObjectByType<ItemManager>();
+            // Usunięcie przedmiotu z mapy tylko jeśli udało się go zebrać
+            if (added)
+            {
+                ItemManager itemManager = FindFirstObjectByType<ItemManager>();
 
-        //        if (itemManager != null)
-        //        {
-        //            itemManager.items.Remove(itemScript);
-        //        }
+                if (itemManager != null)
+                {
+                    itemManager.items.Remove(itemScript);
+                }
 
-        //        Destroy(item);
-        //        item = null;
+                Destroy(item);
+                item = null;
 
-        //        Debug.Log("Zebrano przedmiot!");
-        //    }
+                Debug.Log("Zebrano przedmiot!");
+            }
 
-        //}
+        }
     }
 
 
