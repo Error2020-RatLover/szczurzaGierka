@@ -148,8 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58b5ef8d3bbdee4e8bc10f21934a396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  maxSlots: 5
-  inventory: []
 --- !u!4 &1283689035
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +348,11 @@ MonoBehaviour:
   enemysPositions:
   - koordynaty: {x: 10, y: 10}
     prefab: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
+  - koordynaty: {x: 18, y: 6}
+    prefab: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
   actionState: Move
+  moveOrder: []
+  currentMoveId: -1
 --- !u!61 &1960451575
 BoxCollider2D:
   m_ObjectHideFlags: 0
