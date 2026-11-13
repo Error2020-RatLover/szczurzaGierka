@@ -21,6 +21,7 @@ public class enemyScript : turnObject
     zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
     Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
     */
+    //szczerze? mega mocne
 
 
 
