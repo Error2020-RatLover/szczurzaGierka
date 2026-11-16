@@ -7,7 +7,7 @@ public class InventoryUI : MonoBehaviour
 {
     public InventoryManager inventoryManager;
 
-    [Header("UI")]
+    // UI
     public GameObject inventoryPanel;
 
     public GameObject hotbar;
@@ -15,7 +15,7 @@ public class InventoryUI : MonoBehaviour
     public Transform hotbarContainer;
     public Transform inventoryContainer;
 
-    [Header("Slot Prefab")]
+    //    prefab slotow
     public GameObject slotPrefab;
 
     private List<InventorySlotView> hotbarSlots = new();
@@ -51,10 +51,7 @@ public class InventoryUI : MonoBehaviour
         {
             hotbar.SetActive(!hotbar.activeSelf);
         }
-
-
     }
-
     void CreateSlots()
     {
         // Pierwsze 5 slotów - hotbar
@@ -62,8 +59,7 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject obj = Instantiate(slotPrefab, hotbarContainer);
 
-            InventorySlotView view =
-                obj.GetComponent<InventorySlotView>();
+            InventorySlotView view = obj.GetComponent<InventorySlotView>();
 
             hotbarSlots.Add(view);
         }
@@ -73,8 +69,7 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject obj = Instantiate(slotPrefab, inventoryContainer);
 
-            InventorySlotView view =
-                obj.GetComponent<InventorySlotView>();
+            InventorySlotView view = obj.GetComponent<InventorySlotView>();
 
             inventorySlots.Add(view);
         }
