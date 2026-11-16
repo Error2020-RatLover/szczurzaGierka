@@ -21,14 +21,18 @@ public class InventoryManager : MonoBehaviour
         for (int i = inventory.Count; i < maxSlots; i++)
         {
             inventory.Add(new InventorySlot(i));
+
         }
+            Debug.Log("Utworzono sloty ekwipunku: " + inventory.Count);
 
         // Ustawienie id slotów
         for (int i = 0; i < inventory.Count; i++)
         {
             inventory[i].slotID = i;
         }
+
     }
+
     //E pokazuje ekwipunek w konsoli, 1-5 wybiera slot(można dać potem więcej)(domyślnie slot 0), F używa przedmiot
     void Update()
     {
@@ -58,7 +62,7 @@ public class InventoryManager : MonoBehaviour
         if (Keyboard.current.eKey.wasPressedThisFrame)
             DisplayInventory();
 
-        
+
     }
 
     // Wybieranie slotu
@@ -176,7 +180,6 @@ public class InventorySlot
     public int slotID;
     public string itemID;
     public int quantity;
-
 
     public InventorySlot(int id)
     {

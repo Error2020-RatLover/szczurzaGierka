@@ -17,6 +17,7 @@ public class InventorySlotView : MonoBehaviour
     public void UpdateSlot(InventorySlot slot, bool selected)
     {
         slotNumber.text = (slot.slotID + 1).ToString();
+        
 
         if (slot.quantity > 0)
         {
