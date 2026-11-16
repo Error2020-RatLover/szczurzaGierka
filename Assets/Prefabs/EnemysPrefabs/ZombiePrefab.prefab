@@ -56,8 +56,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombiePrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2033834556644189232, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -706673488403620110}
   m_SourcePrefab: {fileID: 100100000, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
+--- !u!1 &6325809774463473387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
+  m_PrefabInstance: {fileID: 3373410708677560589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-706673488403620110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6325809774463473387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b2a9a2926505c43bdf888e25c6a323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Zombie
+  stats: {fileID: 11400000, guid: 2d85fc60b52722948aa17e5a0fbd4e02, type: 2}
+  pozycja: {x: 0, y: 0}
+  generator: {fileID: 0}
+  currentPole: {fileID: 0}
+  targetTile: {fileID: 0}
+  stamina: 0
