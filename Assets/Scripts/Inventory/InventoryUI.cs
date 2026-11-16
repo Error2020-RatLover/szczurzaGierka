@@ -10,6 +10,8 @@ public class InventoryUI : MonoBehaviour
     [Header("UI")]
     public GameObject inventoryPanel;
 
+    public GameObject hotbar;
+
     public Transform hotbarContainer;
     public Transform inventoryContainer;
 
@@ -44,6 +46,13 @@ public class InventoryUI : MonoBehaviour
         {
             ToggleInventory();
         }
+        if (Keyboard.current != null &&
+          Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            hotbar.SetActive(!hotbar.activeSelf);
+        }
+
+
     }
 
     void CreateSlots()

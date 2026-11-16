@@ -57,6 +57,8 @@ public class InventoryManager : MonoBehaviour
         // Wyświetlanie ekwipunku (debug) do wywalenia później
         if (Keyboard.current.eKey.wasPressedThisFrame)
             DisplayInventory();
+
+        
     }
 
     // Wybieranie slotu

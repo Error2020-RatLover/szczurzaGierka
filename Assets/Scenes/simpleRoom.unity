@@ -813,6 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
   inventoryManager: {fileID: 1283689034}
   inventoryPanel: {fileID: 1387336692}
+  hotbar: {fileID: 163050702}
   hotbarContainer: {fileID: 163050703}
   inventoryContainer: {fileID: 1387336693}
   slotPrefab: {fileID: 1693772683}
