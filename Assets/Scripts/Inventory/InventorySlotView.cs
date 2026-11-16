@@ -32,5 +32,10 @@ public class InventorySlotView : MonoBehaviour
 
         background.color = selected ? selectedColor : normalColor;
     }
+
+    public void ButtonTest()
+    {
+        Debug.Log("Kliknieto w slot");
+    }
 }
     
