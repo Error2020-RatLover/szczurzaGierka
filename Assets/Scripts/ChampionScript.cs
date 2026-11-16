@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class ChampionScript : turnObject
 {
@@ -40,6 +41,10 @@ public class ChampionScript : turnObject
             {
                 action = "Attack";
             }
+            else if (action == "Attack")
+            {
+                action = "Interact";
+            }
             else
             {
                 action = "Move";
@@ -69,13 +74,13 @@ public class ChampionScript : turnObject
     public void Move(Vector2Int cords) {
         generator.resetBoard();
         currentPole.dostepneAkcje["Occupated"] = false;
-        currentPole.currentStanding = null;
+        currentPole.currentStanding.Remove(gameObject);
         przeniesNaPozycje(cords);
         pozycja = cords;
         //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         currentPole.setActiveHex(1);
-        currentPole.currentStanding = gameObject;
+        currentPole.currentStanding.Add(gameObject);
         currentPole.ZbierzItem();
         currentPole.dostepneAkcje["Occupated"] = true;
         //currentPole.enable();
@@ -89,38 +94,78 @@ public class ChampionScript : turnObject
 
     public void Attack(Vector2Int cords)
     {
+        StartCoroutine(AttackCoroutine(cords));
+    }
+
+
+    private IEnumerator AttackCoroutine(Vector2Int cords)
+    {
         stamina--;
-       
-        GameObject target = generator.pola[cords].GetComponent<HexPoleScript>().currentStanding;
-        if (target == null) {
+
+        HexPoleScript skrypt = generator.pola[cords]
+            .GetComponent<HexPoleScript>();
+
+        yield return StartCoroutine(skrypt.askForId());
+
+        GameObject target = null;
+
+        if (skrypt.gameObjectId >= 0)
+        {
+            target = skrypt.currentStanding[skrypt.gameObjectId];
+        }
+
+        if (target == null)
+        {
             if (stamina <= 0)
             {
                 endYourTurn();
             }
-            return;
+            yield break;
         }
-        if(target.GetComponent<enemyScript>() != null)
+
+        if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(8);
         }
-        else if(target.GetComponent<ChampionScript>() != null)
+        else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
             playerScript.takeDamage(8);
         }
-        else if (target.GetComponent<inreractiveObject>())
+        else if (target.GetComponent<inreractiveObject>() != null)
         {
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.takeDamage(8);
         }
+
         if (stamina <= 0)
         {
             endYourTurn();
         }
-
-        //Debug.Log(target);
     }
+
+    public void Interact(Vector2Int cords)
+    {
+        StartCoroutine(InteractCoroutine(cords));
+    }
+
+    public IEnumerator InteractCoroutine(Vector2Int cords)
+    {
+        HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
+        yield return StartCoroutine(skrypt.askForId());
+        GameObject target = null;
+        if (skrypt.gameObjectId >= 0)
+        {
+            target = skrypt.currentStanding[skrypt.gameObjectId];
+        }
+        if (target.GetComponent<inreractiveObject>())
+        {
+            inreractiveObject interactive = target.GetComponent<inreractiveObject>();
+            interactive.Interact();
+        }
+    }
+
     //akcje na zaczęciu tury
     public override void startYourTurn()
     {

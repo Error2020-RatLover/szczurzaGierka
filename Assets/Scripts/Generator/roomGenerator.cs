@@ -140,7 +140,8 @@ public class roomGenerator : MonoBehaviour
             pole.neighbors = neighbors;
             pole.dostepneAkcje.Add("Move", true);
             pole.dostepneAkcje.Add("Occupated", false);
-            pole.dostepneAkcje.Add("Attack", true); 
+            pole.dostepneAkcje.Add("Attack", true);
+            pole.dostepneAkcje.Add("Interact", false);
             //if (x.Key.x == 3)
             //{
             //    pole.dostepneAkcje["Move"]= false;

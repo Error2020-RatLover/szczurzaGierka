@@ -105,3 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c5077ea65f6834a8c22871b0962cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Doors
+  generator: {fileID: 0}
+  cords: {x: 0, y: 0}
+  pole: {fileID: 0}
+  stats: {fileID: 11400000, guid: 026d3f376014a0f4893f5d4cac740f3f, type: 2}
+  closed: 1
