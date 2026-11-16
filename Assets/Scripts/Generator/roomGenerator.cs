@@ -164,7 +164,7 @@ public class roomGenerator : MonoBehaviour
 
 
         
-        Vector2Int drzwiCord = new Vector2Int(0, 0);
+        Vector2Int drzwiCord = stats.doors;
         HexPoleScript drzwi = pola[drzwiCord].GetComponent<HexPoleScript>();
         drzwi.setActiveHex();
         currentChampion = Instantiate(championPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 0));

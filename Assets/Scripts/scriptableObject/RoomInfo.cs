@@ -10,4 +10,6 @@ public class RoomInfo : ScriptableObject
 
     public List<Pole> prefabsOverwrite = new List<Pole>();
     public List<enemyPoleData> enemysPositions = new List<enemyPoleData>();
+
+    public Vector2Int doors;
 }
