@@ -138,10 +138,7 @@ public class roomGenerator : MonoBehaviour
 
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
-            pole.dostepneAkcje.Add("Move", true);
-            pole.dostepneAkcje.Add("Occupated", false);
-            pole.dostepneAkcje.Add("Attack", true);
-            pole.dostepneAkcje.Add("Interact", false);
+            pole.askForRewriteAllowance();
             //if (x.Key.x == 3)
             //{
             //    pole.dostepneAkcje["Move"]= false;

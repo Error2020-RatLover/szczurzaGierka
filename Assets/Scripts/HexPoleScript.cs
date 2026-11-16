@@ -220,5 +220,14 @@ public class HexPoleScript : MonoBehaviour
         buttonClicked = true;
     }
 
+    public void askForRewriteAllowance()
+    {
+        dostepneAkcje.Add("Move", true);
+        dostepneAkcje.Add("Occupated", false);
+        dostepneAkcje.Add("Attack", true);
+        dostepneAkcje.Add("Interact", false);
+       
+    }
+        
 
 }

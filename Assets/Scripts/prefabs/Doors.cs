@@ -19,7 +19,8 @@ public class Doors : inreractiveObject
         {
             closed = !closed;
             //Debug.Log(closed);
-
+            stats.Move = !closed;
+            stats.Occupated = closed;
             pole.dostepneAkcje["Move"] = !closed;
             pole.dostepneAkcje["Occupated"] = closed;
         }
