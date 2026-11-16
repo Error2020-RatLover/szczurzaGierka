@@ -1043,6 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348193ce60fc0b94eb2ca6cac06d0905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  stats: {fileID: 11400000, guid: f6e6a9e60e0bdd14aa97067fef58db56, type: 2}
   x_size: 30
   y_size: 40
   hexpole: {fileID: 330355416199240168, guid: 031980409e246bc48a6df84f567dd22d, type: 3}

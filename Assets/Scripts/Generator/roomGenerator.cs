@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 
 public class roomGenerator : MonoBehaviour
 {
+    public RoomInfo stats;
+
     public int x_size;
     public int y_size;
 
@@ -36,8 +38,13 @@ public class roomGenerator : MonoBehaviour
     public List<turnObject> moveOrder = new();
     public int currentMoveId = -1;
 
-    void Start()
-    {
+    void Start() { 
+        x_size = stats.x_size;
+        y_size = stats.y_size;
+
+        prefabsOverwrite = stats.prefabsOverwrite;
+        enemysPositions = stats.enemysPositions;
+    
         // to jest potrzebne żeby się nie popsuło, można potem poszukać lepszego rozwiązania
 
         float rozmiar = x_size / 2;
