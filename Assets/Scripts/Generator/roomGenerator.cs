@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 
 public class roomGenerator : MonoBehaviour
 {
+    public RoomInfo stats;
+
     public int x_size;
     public int y_size;
 
@@ -36,8 +38,13 @@ public class roomGenerator : MonoBehaviour
     public List<turnObject> moveOrder = new();
     public int currentMoveId = -1;
 
-    void Start()
-    {
+    void Start() { 
+        x_size = stats.x_size;
+        y_size = stats.y_size;
+
+        prefabsOverwrite = stats.prefabsOverwrite;
+        enemysPositions = stats.enemysPositions;
+    
         // to jest potrzebne żeby się nie popsuło, można potem poszukać lepszego rozwiązania
 
         float rozmiar = x_size / 2;
@@ -138,9 +145,7 @@ public class roomGenerator : MonoBehaviour
 
             HexPoleScript pole = x.Value.GetComponent<HexPoleScript>();
             pole.neighbors = neighbors;
-            pole.dostepneAkcje.Add("Move", true);
-            pole.dostepneAkcje.Add("Occupated", false);
-            pole.dostepneAkcje.Add("Attack", true); 
+            pole.askForRewriteAllowance();
             //if (x.Key.x == 3)
             //{
             //    pole.dostepneAkcje["Move"]= false;
@@ -159,7 +164,7 @@ public class roomGenerator : MonoBehaviour
 
 
         
-        Vector2Int drzwiCord = new Vector2Int(0, 0);
+        Vector2Int drzwiCord = stats.doors;
         HexPoleScript drzwi = pola[drzwiCord].GetComponent<HexPoleScript>();
         drzwi.setActiveHex();
         currentChampion = Instantiate(championPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 0));

@@ -5,6 +5,8 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using System.Collections.Generic;
 
+using System.Collections;
+using System.Collections.Generic;
 public class HexPoleScript : MonoBehaviour
 {
 
@@ -23,7 +25,9 @@ public class HexPoleScript : MonoBehaviour
 
     public GameObject item;
 
-    public GameObject currentStanding;
+    public int gameObjectId = -1;
+
+    public List<GameObject> currentStanding;
 
     void Start()
     {
@@ -151,5 +155,79 @@ public class HexPoleScript : MonoBehaviour
         }
     }
 
+ 
+
+
+    public GameObject buttonPrefab;
+    public Transform buttonParent;
+
+    private bool buttonClicked = false;
+
+
+    public IEnumerator askForId()
+    {
+        // Czyścimy poprzednie przyciski
+        ClearChoicePanel();
+
+        if (currentStanding.Count == 1)
+        {
+            gameObjectId = 0;
+            yield break;
+        }
+        else if (currentStanding.Count == 0)
+        {
+            gameObjectId = -1;
+            yield break;
+        }
+
+        buttonClicked = false;
+
+        // Pokazujemy panel
+        buttonParent.gameObject.SetActive(true);
+
+        for (int i = 0; i < currentStanding.Count; i++)
+        {
+            int id = i;
+
+            GameObject newButton = Instantiate(buttonPrefab, buttonParent);
+
+            chooseButton button = newButton.GetComponent<chooseButton>();
+
+            button.Setup(id, "Obiekt " + id, OnButtonClicked);
+        }
+
+        // Czekamy na kliknięcie
+        yield return new WaitUntil(() => buttonClicked);
+
+        // Usuwamy przyciski i chowamy panel
+        ClearChoicePanel();
+    }
+
+    private void ClearChoicePanel()
+    {
+        for (int i = buttonParent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(buttonParent.GetChild(i).gameObject);
+        }
+
+        buttonParent.gameObject.SetActive(false);
+    }
+
+
+    private void OnButtonClicked(int id)
+    {
+        gameObjectId = id;
+        buttonClicked = true;
+    }
+
+    public void askForRewriteAllowance()
+    {
+        dostepneAkcje.Add("Move", true);
+        dostepneAkcje.Add("Occupated", false);
+        dostepneAkcje.Add("Attack", true);
+        dostepneAkcje.Add("Interact", false);
+       
+    }
+        
 
 }

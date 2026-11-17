@@ -11,4 +11,9 @@ public class wall : inreractiveObject
         }
     }
 
+    public override void Interact()
+    {
+
+    }
+
 }

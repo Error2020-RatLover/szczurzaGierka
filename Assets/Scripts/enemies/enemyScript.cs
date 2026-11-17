@@ -17,6 +17,8 @@ public class enemyScript : turnObject
 
     public int stamina = 0;
 
+
+
     /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
     zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
     Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
@@ -86,11 +88,11 @@ public class enemyScript : turnObject
     public void changePosition(Vector2Int cords)
     {
 
-        currentPole.currentStanding = null;
+        currentPole.currentStanding.Remove(gameObject);
         currentPole.dostepneAkcje["Occupated"] = false;
         transform.position = generator.pola[cords].transform.position;
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        currentPole.currentStanding = gameObject;
+        currentPole.currentStanding.Add(gameObject);
         currentPole.dostepneAkcje["Occupated"] = true;
         currentPole.enable();
         StartCoroutine(FindPlayerPath());
@@ -102,8 +104,14 @@ public class enemyScript : turnObject
     public void Attack(Vector2Int cords)
     {
         stamina--;
-
-        GameObject target = generator.pola[cords].GetComponent<HexPoleScript>().currentStanding;
+        HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
+        //StartCoroutine(AskForId());
+        GameObject target = null;
+        if(skrypt.gameObjectId >= 0)
+        {
+            target = skrypt.currentStanding[0];
+        }
+        
         if (target == null)
         {
             if (stamina <= 0)
@@ -137,7 +145,7 @@ public class enemyScript : turnObject
         stats.hp -= damage;
         if (stats.hp < 0)
         {
-            currentPole.currentStanding = null;
+            currentPole.currentStanding.Remove(gameObject);
             currentPole.dostepneAkcje["Occupated"] = false;
             generator.moveOrder.Remove(this);
             Destroy(gameObject);
