@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 public class HexPoleScript : MonoBehaviour
@@ -29,29 +29,13 @@ public class HexPoleScript : MonoBehaviour
 
     public List<GameObject> currentStanding;
 
-    void Start()
-    {
-
-
-        //coordinates = new Vector2(transform.position.x, transform.position.y);
-
-    }
-
-
-    public void DisplayCords()
-    {
-        //Debug.Log(coordinates.x + ", " + coordinates.y);
-        //foreach(GameObject x in neighbors)
-        //{
-        //    Debug.Log(x);
-
-        //}
-
-    }
-
     private void OnMouseDown()
     {
-
+        // tutaj dodaje zeby sie nie dalo przez ui klikac w pola
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         //DisplayCords();
         //setActiveHex();
 
@@ -100,7 +84,8 @@ public class HexPoleScript : MonoBehaviour
 
     }
 
-    public void turnOffHex(int signalStrength) {
+    public void turnOffHex(int signalStrength)
+    {
         signalStrength--;
 
         foreach (GameObject x in neighbors)
@@ -155,7 +140,7 @@ public class HexPoleScript : MonoBehaviour
         }
     }
 
- 
+
 
 
     public GameObject buttonPrefab;
@@ -226,8 +211,8 @@ public class HexPoleScript : MonoBehaviour
         dostepneAkcje.Add("Occupated", false);
         dostepneAkcje.Add("Attack", true);
         dostepneAkcje.Add("Interact", false);
-       
+
     }
-        
+
 
 }
