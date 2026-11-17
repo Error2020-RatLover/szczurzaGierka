@@ -14,10 +14,27 @@ public class InventorySlotView : MonoBehaviour
     public Color normalColor = Color.gray;
     public Color selectedColor = Color.yellow;
 
-    public void UpdateSlot(InventorySlot slot, bool selected)
+    // public void UpdateSlot(InventorySlot slot, bool selected)
+    // {
+    //     slotNumber.text = (slot.slotID + 1).ToString();
+
+
+    //     if (slot.quantity > 0)
+    //     {
+    //         itemName.text = slot.itemID;
+    //         quantityText.text = slot.quantity.ToString();
+    //     }
+    //     else
+    //     {
+    //         itemName.text = "";
+    //         quantityText.text = "";
+    //     }
+
+    //     background.color = selected ? selectedColor : normalColor;
+    // }
+    public void UpdateSlot(InventorySlot slot, bool selected, int displayNumber)
     {
-        slotNumber.text = (slot.slotID + 1).ToString();
-        
+        slotNumber.text = displayNumber.ToString();
 
         if (slot.quantity > 0)
         {
@@ -32,10 +49,8 @@ public class InventorySlotView : MonoBehaviour
 
         background.color = selected ? selectedColor : normalColor;
     }
-
     public void ButtonTest()
     {
         Debug.Log("Kliknieto w slot");
     }
 }
-    

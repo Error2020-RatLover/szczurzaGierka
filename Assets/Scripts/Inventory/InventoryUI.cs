@@ -52,28 +52,48 @@ public class InventoryUI : MonoBehaviour
             hotbar.SetActive(!hotbar.activeSelf);
         }
     }
+    // void CreateSlots()
+    // {
+    //     // Pierwsze 5 slotów - hotbar
+    //     for (int i = 0; i < 5; i++)
+    //     {
+    //         GameObject obj = Instantiate(slotPrefab, hotbarContainer);
+
+    //         InventorySlotView view = obj.GetComponent<InventorySlotView>();
+
+    //         hotbarSlots.Add(view);
+    //     }
+
+    //     // Pozostałe sloty - główny ekwipunek
+    //     for (int i = 5; i < inventoryManager.inventory.Count; i++)
+    //     {
+    //         GameObject obj = Instantiate(slotPrefab, inventoryContainer);
+
+    //         InventorySlotView view = obj.GetComponent<InventorySlotView>();
+
+    //         inventorySlots.Add(view);
+    //     }
+    // }
     void CreateSlots()
     {
-        // Pierwsze 5 slotów - hotbar
+        // Hotbar: 5 slotów
         for (int i = 0; i < 5; i++)
         {
             GameObject obj = Instantiate(slotPrefab, hotbarContainer);
-
             InventorySlotView view = obj.GetComponent<InventorySlotView>();
-
             hotbarSlots.Add(view);
         }
 
-        // Pozostałe sloty - główny ekwipunek
-        for (int i = 5; i < inventoryManager.inventory.Count; i++)
+        // Inventory: wszystkie 20 slotów
+        for (int i = 0; i < inventoryManager.inventory.Count; i++)
         {
             GameObject obj = Instantiate(slotPrefab, inventoryContainer);
-
             InventorySlotView view = obj.GetComponent<InventorySlotView>();
-
             inventorySlots.Add(view);
         }
     }
+
+
 
     public void ToggleInventory()
     {
@@ -82,28 +102,52 @@ public class InventoryUI : MonoBehaviour
         RefreshUI();
     }
 
+    // public void RefreshUI()
+    // {
+    //     if (inventoryManager == null)
+    //         return;
+
+    //     // Aktualizacja hotbara
+    //     for (int i = 0; i < hotbarSlots.Count; i++)
+    //     {
+    //         hotbarSlots[i].UpdateSlot(
+    //             inventoryManager.inventory[i],
+    //             inventoryManager.selectedSlot == i
+    //         );
+    //     }
+
+    //     // Aktualizacja pozostałych slotów
+    //     for (int i = 0; i < inventorySlots.Count; i++)
+    //     {
+    //         int inventoryIndex = i + 5;
+
+    //         inventorySlots[i].UpdateSlot(
+    //             inventoryManager.inventory[inventoryIndex],
+    //             inventoryManager.selectedSlot == inventoryIndex
+    //         );
+    //     }
+    // }
     public void RefreshUI()
     {
-        if (inventoryManager == null)
-            return;
+        if (inventoryManager == null) return;
 
-        // Aktualizacja hotbara
+        // Hotbar
         for (int i = 0; i < hotbarSlots.Count; i++)
         {
             hotbarSlots[i].UpdateSlot(
                 inventoryManager.inventory[i],
-                inventoryManager.selectedSlot == i
+                inventoryManager.selectedSlot == i,
+                i + 1
             );
         }
 
-        // Aktualizacja pozostałych slotów
+        // Inventory
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            int inventoryIndex = i + 5;
-
             inventorySlots[i].UpdateSlot(
-                inventoryManager.inventory[inventoryIndex],
-                inventoryManager.selectedSlot == inventoryIndex
+                inventoryManager.inventory[i],
+                inventoryManager.selectedSlot == i,
+                i + 6
             );
         }
     }
