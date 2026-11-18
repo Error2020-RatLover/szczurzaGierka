@@ -172,6 +172,10 @@ public class InventoryManager : MonoBehaviour
             inventoryUI.RefreshUI();
         }
     }
+    public void displaySlotID(int id)
+    {
+        Debug.Log(id);
+    }
 }
 
 [System.Serializable]
