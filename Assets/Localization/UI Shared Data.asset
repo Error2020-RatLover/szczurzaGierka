@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: LanguageLabelKey
     m_Metadata:
       m_Items: []
+  - m_Id: 5011654135410688
+    m_Key: UseKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
