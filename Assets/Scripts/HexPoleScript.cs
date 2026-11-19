@@ -101,7 +101,7 @@ public class HexPoleScript : MonoBehaviour
                     {
                         pole.disable();
                     }
-                    Debug.Log($"DOPUSZCZAM {pole.coordinates}");
+                  
                     // Nadal przeszukujemy dalsze pola
                     queue.Enqueue(pole);
                 }
@@ -124,42 +124,48 @@ public class HexPoleScript : MonoBehaviour
             end,
             lineOfSightMask
         );
-        
 
         foreach (RaycastHit2D hit in hits)
         {
-
-             
             turnObject entity = hit.collider.GetComponentInParent<turnObject>();
             inreractiveObject interactive = hit.collider.GetComponentInParent<inreractiveObject>();
-            Vector2Int cords = new Vector2Int(0,0);
-            if(entity != null)
+
+            Vector2Int cords = new Vector2Int(0, 0);
+
+            if (entity != null)
             {
                 cords = entity.pozycja;
-            } 
-            else if (interactive != null) {
+            }
+            else if (interactive != null)
+            {
                 cords = interactive.cords;
             }
-            HexPoleScript pole = generator.pola[cords].GetComponentInParent<HexPoleScript>();
-            //Vector2Int cord = hit.collider.GetComponentInParent<turnObject>().pozycja;
-            //if(cord == null)
-            //{
-            //    cord = hit.collider.GetComponentInParent<inreractiveObject>().cords;
-            //}
-            //pole = generator.pola[cord].GetComponentInParent<HexPoleScript>();
+            else
+            {
+                continue;
+            }
+
+            HexPoleScript pole = generator.pola[cords].GetComponent<HexPoleScript>();
+
+            if (pole == null)
+                continue;
 
             // Ignorujemy pole startowe i docelowe
             if (pole == this || pole == target)
                 continue;
 
-            // Obiekt bez HexPoleScript traktujemy jako przeszkodę
-            if (pole == null)
-                return false;
-
-            // Sprawdzamy, czy napotkane pole blokuje przejście
+            // Sprawdzamy możliwość przejścia
             if (!CanPassThrough(pole))
                 return false;
+
+            // Sprawdzamy możliwość przeprowadzenia ataku przez przeszkodę
+            if (generator.actionState == "Attack" &&
+                !pole.dostepneAkcje["atackThrough"])
+            {
+                return false;
+            }
         }
+
         return true;
     }
 
@@ -313,7 +319,7 @@ public class HexPoleScript : MonoBehaviour
         dostepneAkcje.Add("Occupated", false);
         dostepneAkcje.Add("Attack", true);
         dostepneAkcje.Add("Interact", false);
-
+        dostepneAkcje.Add("atackThrough", true);
     }
 
 

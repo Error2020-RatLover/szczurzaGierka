@@ -23,6 +23,7 @@ public class Doors : inreractiveObject
             stats.Occupated = closed;
             pole.dostepneAkcje["Move"] = !closed;
             pole.dostepneAkcje["Occupated"] = closed;
+            pole.dostepneAkcje["atackThrough"] = !closed;
         }
           
         else
