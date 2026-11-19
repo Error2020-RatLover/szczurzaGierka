@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombiePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8726016009249447910, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2033834556644189232, guid: 0612c6c0ceb92624fbb7b451178c45f7, type: 3}
     m_RemovedGameObjects: []
@@ -87,6 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
   stats: {fileID: 11400000, guid: 2d85fc60b52722948aa17e5a0fbd4e02, type: 2}
   pozycja: {x: 0, y: 0}
+  abilities:
+  - {fileID: 11400000, guid: 71706bbcaeb681e4a881694423e979eb, type: 2}
   generator: {fileID: 0}
   currentPole: {fileID: 0}
   targetTile: {fileID: 0}
@@ -135,5 +141,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5691688, y: 1.64}
+  m_Size: {x: 1.9508815, y: 1.64}
   m_EdgeRadius: 0

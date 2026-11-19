@@ -13,11 +13,11 @@ public class enemyScript : turnObject
 
     public HexPoleScript targetTile;
 
-    private List<HexPoleScript> currentPath;
+    protected List<HexPoleScript> currentPath;
 
     public int stamina = 0;
 
-
+    public bool abillityAproved =false;
 
     /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
     zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
@@ -31,10 +31,7 @@ public class enemyScript : turnObject
     {
         //argument w WaitForSeconds, może nie dasz wiary, ale to liczba sekund ile czeka przed kontunuowaniem pracy
         yield return new WaitForSeconds(0.6f);
-        currentPath = Pathfinding.FindPath(
-            currentPole,
-            targetTile
-        );
+        
         if (stamina <= 0)
             {
                 //koniec tury
@@ -43,18 +40,35 @@ public class enemyScript : turnObject
         //jeśli droga istnieje to idziemy
         else
         {
+            foreach(attackStats attack in abilities)
+            {
+                //Debug.Log(attack.attackName);
+                SendMessage(attack.attackName,attack);
+                if (abillityAproved)
+                {
+                    abillityAproved=false;
+                    yield break;
+                }
+            }
             if (currentPath != null && currentPath.Count >= 2)
             {
+                generator.actionState = "Move";
+                currentPath = Pathfinding.FindPath(
+                    currentPole,
+                    targetTile,
+                    "Move"
+                );
                 stamina -= 1;
                 changePosition(currentPath[0].coordinates);
+                yield break;
 
             }
-            else
-            {
-                //stoje przy celu, koniec na razie, potem zmienimy
-                Debug.Log("Stoję przy celu");
-                Attack(targetTile.coordinates);
-            }
+            //else
+            //{
+            //    //stoje przy celu, koniec na razie, potem zmienimy
+            //    Debug.Log("Stoję przy celu");
+            //    Attack(targetTile.coordinates);
+            //}
         }
         
     }
@@ -80,7 +94,7 @@ public class enemyScript : turnObject
         transform.position = generator.pola[cords].transform.position;
         currentPole.dostepneAkcje["Occupated"] = true;
         targetTile = generator.pola[new Vector2Int(0, 10)].GetComponent<HexPoleScript>();
-
+        pozycja = cords;
 
 
     }
@@ -95,13 +109,14 @@ public class enemyScript : turnObject
         currentPole.currentStanding.Add(gameObject);
         currentPole.dostepneAkcje["Occupated"] = true;
         currentPole.enable();
+        pozycja = cords;
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 
     }
 
 
-    public void Attack(Vector2Int cords)
+    public void Attack(Vector2Int cords, attackStats ability)
     {
         stamina--;
         HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
@@ -123,17 +138,17 @@ public class enemyScript : turnObject
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(8);
+            enemy.takeDamage(ability.dmg);
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(8);
+            playerScript.takeDamage(ability.dmg);
         }
         else if (target.GetComponent<inreractiveObject>())
         {
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
-            interactive.takeDamage(8);
+            interactive.takeDamage(ability.dmg);
         }
   
         StartCoroutine(FindPlayerPath());

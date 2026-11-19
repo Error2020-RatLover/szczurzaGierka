@@ -171,7 +171,7 @@ public class ChampionScript : turnObject
     public override void startYourTurn()
     {
         stamina = stats.stamina;
-        currentPole.setActiveHex(3);
+        //currentPole.setActiveHex(3);
         
     }
 

@@ -114,7 +114,7 @@ public class HexPoleScript : MonoBehaviour
 
     public LayerMask lineOfSightMask;
 
-    private bool HasClearLine(HexPoleScript target)
+    public bool HasClearLine(HexPoleScript target)
     {
         Vector2 start = transform.position;
         Vector2 end = target.transform.position;
@@ -134,6 +134,7 @@ public class HexPoleScript : MonoBehaviour
 
             if (entity != null)
             {
+                
                 cords = entity.pozycja;
             }
             else if (interactive != null)
@@ -146,13 +147,19 @@ public class HexPoleScript : MonoBehaviour
             }
 
             HexPoleScript pole = generator.pola[cords].GetComponent<HexPoleScript>();
-
+            
             if (pole == null)
                 continue;
 
             // Ignorujemy pole startowe i docelowe
             if (pole == this || pole == target)
                 continue;
+
+            if (generator.actionState == "Move" &&
+              pole.dostepneAkcje["Occupated"])
+            {
+                return false;
+            }
 
             // Sprawdzamy możliwość przejścia
             if (!CanPassThrough(pole))
@@ -164,12 +171,15 @@ public class HexPoleScript : MonoBehaviour
             {
                 return false;
             }
+
+          
+
         }
 
         return true;
     }
 
-    private bool CanPassThrough(HexPoleScript pole)
+    public bool CanPassThrough(HexPoleScript pole)
     {
         
 
