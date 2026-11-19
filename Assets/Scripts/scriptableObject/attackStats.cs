@@ -24,7 +24,7 @@ public class attackStats : ScriptableObject
 
     public DmgType damageType;
 
-    public float dmg;
+    public int dmg;
     public int range;
     public List<Vector2Int> area;
 }

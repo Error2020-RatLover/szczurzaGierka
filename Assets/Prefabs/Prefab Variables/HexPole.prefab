@@ -563,6 +563,9 @@ MonoBehaviour:
   item: {fileID: 0}
   gameObjectId: 0
   currentStanding: []
+  lineOfSightMask:
+    serializedVersion: 2
+    m_Bits: 64
   buttonPrefab: {fileID: 1723600070198033043, guid: 1704170b21ba7e84185af434b143ecce, type: 3}
   buttonParent: {fileID: 699728640934351796}
 --- !u!4 &6564040081912838763 stripped
