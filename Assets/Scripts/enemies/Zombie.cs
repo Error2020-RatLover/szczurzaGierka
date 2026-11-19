@@ -16,7 +16,7 @@ public class Zombie : enemyScript
 
     public void ZombieScratch(attackStats attack)
     {
-        Debug.Log("Zombie Drapie");
+        
         int range = attack.range;
         generator.actionState = "Attack";
         currentPath = Pathfinding.FindPath(
@@ -28,7 +28,7 @@ public class Zombie : enemyScript
         if (currentPath.Count <= range && isInCleanLine)
         {
             abillityAproved = true;
-            Attack(targetTile.coordinates, attack);
+            Attack(targetTile.coordinates,attack.dmg,attack.damageType);
             
 
         }

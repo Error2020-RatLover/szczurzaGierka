@@ -116,7 +116,7 @@ public class enemyScript : turnObject
     }
 
 
-    public void Attack(Vector2Int cords, attackStats ability)
+    public void Attack(Vector2Int cords, int dmg, attackStats.DmgType dmgType)
     {
         stamina--;
         HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
@@ -138,25 +138,34 @@ public class enemyScript : turnObject
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(ability.dmg);
+            enemy.takeDamage(dmg, dmgType);
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(ability.dmg);
+            playerScript.takeDamage(dmg, dmgType);
         }
         else if (target.GetComponent<inreractiveObject>())
         {
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
-            interactive.takeDamage(ability.dmg);
+            interactive.takeDamage(dmg);
         }
   
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 
     }
-    public void takeDamage(int damage)
+    public void takeDamage(int damage, attackStats.DmgType dmgType)
     {
+        //if(dmgType == attackStats.DmgType.phisical)
+        //{
+        //    damage /= stats.armor;
+        //}
+        //else if (dmgType == attackStats.DmgType.magical)
+        //{
+        //    damage /= stats.magicArmor;
+        //}
+
         stats.hp -= damage;
         if (stats.hp < 0)
         {

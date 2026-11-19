@@ -16,7 +16,7 @@ MonoBehaviour:
   hp: 16
   strenght: 12
   magic: 5
-  armor: 8
-  magicArmor: 8
+  armor: 5
+  magicArmor: 7
   stamina: 4
   speed: 6

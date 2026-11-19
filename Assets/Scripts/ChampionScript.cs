@@ -127,12 +127,12 @@ public class ChampionScript : turnObject
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(8);
+            enemy.takeDamage(8, attackStats.DmgType.phisical);
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(8);
+            playerScript.takeDamage(8, attackStats.DmgType.phisical);
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
@@ -175,8 +175,17 @@ public class ChampionScript : turnObject
         
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(int damage, attackStats.DmgType dmgType)
     {
+        //if (dmgType == attackStats.DmgType.phisical)
+        //{
+        //    damage /= stats.armor;
+        //}
+        //else if (dmgType == attackStats.DmgType.magical)
+        //{
+        //    damage /= stats.magicArmor;
+        //}
+
         stats.hp -= damage;
         Debug.Log($"Zostałem uderzony: {stats.hp}hp");
         //if (stats.hp < 0)
