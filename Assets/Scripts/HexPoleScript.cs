@@ -101,7 +101,7 @@ public class HexPoleScript : MonoBehaviour
                     {
                         pole.disable();
                     }
-
+                    Debug.Log($"DOPUSZCZAM {pole.coordinates}");
                     // Nadal przeszukujemy dalsze pola
                     queue.Enqueue(pole);
                 }
@@ -128,9 +128,25 @@ public class HexPoleScript : MonoBehaviour
 
         foreach (RaycastHit2D hit in hits)
         {
-            Debug.Log("Linecast wykrył: " + hit.collider.name);
-            HexPoleScript pole =
-                hit.collider.GetComponentInParent<HexPoleScript>();
+
+             
+            turnObject entity = hit.collider.GetComponentInParent<turnObject>();
+            inreractiveObject interactive = hit.collider.GetComponentInParent<inreractiveObject>();
+            Vector2Int cords = new Vector2Int(0,0);
+            if(entity != null)
+            {
+                cords = entity.pozycja;
+            } 
+            else if (interactive != null) {
+                cords = interactive.cords;
+            }
+            HexPoleScript pole = generator.pola[cords].GetComponentInParent<HexPoleScript>();
+            //Vector2Int cord = hit.collider.GetComponentInParent<turnObject>().pozycja;
+            //if(cord == null)
+            //{
+            //    cord = hit.collider.GetComponentInParent<inreractiveObject>().cords;
+            //}
+            //pole = generator.pola[cord].GetComponentInParent<HexPoleScript>();
 
             // Ignorujemy pole startowe i docelowe
             if (pole == this || pole == target)
@@ -149,12 +165,24 @@ public class HexPoleScript : MonoBehaviour
 
     private bool CanPassThrough(HexPoleScript pole)
     {
-        if (!pole.dostepneAkcje[generator.actionState])
+        
+
+            if (!pole.dostepneAkcje[generator.actionState])
+        {
+            //Debug.Log($"============ \nAktualnie złe działanie\n {pole.dostepneAkcje[generator.actionState]}\n{generator.actionState}   ");
+  
             return false;
+        }
+            
 
         if (generator.actionState == "Move" && pole.dostepneAkcje["Occupated"])
+        {
+            
             return false;
+        }
 
+        //Debug.Log("Precueż pozwalam na akcje");
+        
         return true;
     }
 

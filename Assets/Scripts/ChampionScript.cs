@@ -6,7 +6,7 @@ using System.Collections;
 public class ChampionScript : turnObject
 {
 
-    public Vector2Int pozycja = new Vector2Int(0, 0);
+    //public Vector2Int pozycja = new Vector2Int(0, 0);
 
     public roomGenerator generator;
 
