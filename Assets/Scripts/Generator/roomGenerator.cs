@@ -127,8 +127,8 @@ public class roomGenerator : MonoBehaviour
 
         // ROZMIARY ŚCIAN
 
-        rightWall.size = new Vector2(1.2f, y_size + 8);
-        leftWall.size = new Vector2(1.2f, y_size + 8);
+        rightWall.size = new Vector2(1f, y_size + 10);
+        leftWall.size = new Vector2(1f, y_size + 10);
 
         topWall.size = new Vector2(x_size * 2f + 8, 1.2f);
         bottomWall.size = new Vector2(x_size * 2f + 8, 1.2f);
