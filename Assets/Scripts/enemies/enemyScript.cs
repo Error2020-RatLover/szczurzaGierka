@@ -7,7 +7,7 @@ public class enemyScript : turnObject
     //public Vector2Int pozycja = new Vector2Int(0, 0);
 
 
-    public roomGenerator generator;
+    
 
     public HexPoleScript currentPole;
 
@@ -46,6 +46,7 @@ public class enemyScript : turnObject
                 SendMessage(attack.attackName,attack);
                 if (abillityAproved)
                 {
+                  
                     abillityAproved=false;
                     yield break;
                 }

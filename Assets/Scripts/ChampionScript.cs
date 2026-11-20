@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+
 public class ChampionScript : turnObject
 {
 
     //public Vector2Int pozycja = new Vector2Int(0, 0);
 
-    public roomGenerator generator;
+    
 
     public HexPoleScript currentPole;
     ItemManager itemManager;
@@ -54,6 +55,7 @@ public class ChampionScript : turnObject
             currentPole.turnOffHex(3);
             currentPole.setActiveHex(3);
         }
+        
     }
 
     public void actionToTake(Vector2Int toCordinates)
@@ -113,6 +115,7 @@ public class ChampionScript : turnObject
         if (skrypt.gameObjectId >= 0)
         {
             target = skrypt.currentStanding[skrypt.gameObjectId];
+            Debug.Log(target);
         }
 
         if (target == null)
@@ -177,14 +180,14 @@ public class ChampionScript : turnObject
 
     public void takeDamage(int damage, attackStats.DmgType dmgType)
     {
-        //if (dmgType == attackStats.DmgType.phisical)
-        //{
-        //    damage /= stats.armor;
-        //}
-        //else if (dmgType == attackStats.DmgType.magical)
-        //{
-        //    damage /= stats.magicArmor;
-        //}
+        if (dmgType == attackStats.DmgType.phisical)
+        {
+            damage /= stats.armor;
+        }
+        else if (dmgType == attackStats.DmgType.magical)
+        {
+            damage /= stats.magicArmor;
+        }
 
         stats.hp -= damage;
         Debug.Log($"Zostałem uderzony: {stats.hp}hp");

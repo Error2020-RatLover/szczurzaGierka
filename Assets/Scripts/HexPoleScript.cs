@@ -43,6 +43,8 @@ public class HexPoleScript : MonoBehaviour
 
     }
 
+
+
     public void disable()
     {
         if (dostepneAkcje[generator.actionState])

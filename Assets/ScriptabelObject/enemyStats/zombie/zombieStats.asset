@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::championStats
   maxHp: 15
   hp: 16
-  strenght: 12
+  strenght: 11
   magic: 5
   armor: 5
   magicArmor: 7
