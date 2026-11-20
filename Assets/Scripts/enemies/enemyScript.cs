@@ -26,6 +26,17 @@ public class enemyScript : turnObject
     //szczerze? mega mocne
 
 
+    private void OnMouseDown()
+    {
+
+        if (currentPole != null && currentPole.sprite.enabled)
+        {
+            currentPole.hexPoleChoosen();
+        }
+        // Tutaj wywołaj swoją funkcję
+    }
+
+
 
     public IEnumerator FindPlayerPath()
     {
@@ -94,6 +105,7 @@ public class enemyScript : turnObject
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         transform.position = generator.pola[cords].transform.position;
         currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.currentStanding.Add(gameObject);
         targetTile = generator.pola[new Vector2Int(0, 10)].GetComponent<HexPoleScript>();
         pozycja = cords;
 
@@ -166,8 +178,9 @@ public class enemyScript : turnObject
         //{
         //    damage /= stats.magicArmor;
         //}
-
+        
         stats.hp -= damage;
+        Debug.Log($"CO MNIE BIJESZ??   {stats.hp}");
         if (stats.hp < 0)
         {
             currentPole.currentStanding.Remove(gameObject);
