@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: podloga_kwardat_0
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: -1734729200044099389, guid: 387cb4bf1c410694daa2ec172b20652b, type: 3}
+  m_Sprite: {fileID: 4521410235893483703, guid: ebabc99fbd2b30a4bbafe1c81a6201a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
