@@ -31,18 +31,21 @@ public class HexPoleScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // tutaj dodaje zeby sie nie dalo przez ui klikac w pola
+        hexPoleChoosen();
+
+    }
+
+    public void hexPoleChoosen()
+    {
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
+       
         //DisplayCords();
         //setActiveHex();
-
         generator.takeAction(coordinates);
-
     }
-
 
 
     public void disable()
@@ -273,7 +276,7 @@ public class HexPoleScript : MonoBehaviour
     {
         // Czyścimy poprzednie przyciski
         ClearChoicePanel();
-
+        
         if (currentStanding.Count == 1)
         {
             gameObjectId = 0;

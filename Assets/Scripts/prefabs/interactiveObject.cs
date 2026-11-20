@@ -8,6 +8,18 @@ public abstract class inreractiveObject : MonoBehaviour
 
     public interactiveObjectStats stats;
 
+
+
+    private void OnMouseDown()
+    {
+        
+        if (pole != null && pole.sprite.enabled) 
+        { 
+            pole.hexPoleChoosen();
+        }
+        // Tutaj wywołaj swoją funkcję
+    }
+
     public void inicialiate(Vector2Int cord)
     {
         stats = Instantiate(stats);
@@ -27,7 +39,7 @@ public abstract class inreractiveObject : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        Debug.Log("halo");
+        
         stats.hp -= damage;
         if (stats.hp < 0)
         {
@@ -42,4 +54,6 @@ public abstract class inreractiveObject : MonoBehaviour
 
     protected abstract void OnPlaced();
     public abstract void Interact();
+
+    
 }

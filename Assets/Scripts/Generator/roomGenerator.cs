@@ -231,6 +231,7 @@ public class roomGenerator : MonoBehaviour
 
     public void takeAction(Vector2Int cords)
     {
+
         currentChampion.GetComponent<ChampionScript>().actionToTake(cords);
     }
 

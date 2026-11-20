@@ -104,18 +104,19 @@ public class ChampionScript : turnObject
     private IEnumerator AttackCoroutine(Vector2Int cords)
     {
         stamina--;
-
+        
         HexPoleScript skrypt = generator.pola[cords]
             .GetComponent<HexPoleScript>();
 
         yield return StartCoroutine(skrypt.askForId());
 
+        
         GameObject target = null;
 
         if (skrypt.gameObjectId >= 0)
         {
             target = skrypt.currentStanding[skrypt.gameObjectId];
-            Debug.Log(target);
+        
         }
 
         if (target == null)
@@ -131,6 +132,7 @@ public class ChampionScript : turnObject
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(8, attackStats.DmgType.phisical);
+            
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
