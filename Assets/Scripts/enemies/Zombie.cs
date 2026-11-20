@@ -13,4 +13,25 @@ public class Zombie : enemyScript
     //{
         
     //}
+
+    public void ZombieScratch(attackStats attack)
+    {
+        
+        int range = attack.range;
+        generator.actionState = "Attack";
+        currentPath = Pathfinding.FindPath(
+            currentPole,
+            targetTile,
+            "Attack"
+        );
+        bool isInCleanLine = currentPole.HasClearLine(targetTile);
+        if (currentPath.Count <= range && isInCleanLine)
+        {
+            abillityAproved = true;
+            Attack(targetTile.coordinates,attack.dmg,attack.damageType);
+            
+
+        }
+
+    }
 }

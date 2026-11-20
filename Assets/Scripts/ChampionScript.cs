@@ -6,7 +6,7 @@ using System.Collections;
 public class ChampionScript : turnObject
 {
 
-    public Vector2Int pozycja = new Vector2Int(0, 0);
+    //public Vector2Int pozycja = new Vector2Int(0, 0);
 
     public roomGenerator generator;
 
@@ -51,8 +51,8 @@ public class ChampionScript : turnObject
             }
             generator.actionState = action;
             //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
-            currentPole.turnOffHex(1);
-            currentPole.setActiveHex(1);
+            currentPole.turnOffHex(3);
+            currentPole.setActiveHex(3);
         }
     }
 
@@ -79,12 +79,13 @@ public class ChampionScript : turnObject
         pozycja = cords;
         //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        currentPole.setActiveHex(1);
+        currentPole.setActiveHex(3);
         currentPole.currentStanding.Add(gameObject);
         currentPole.ZbierzItem();
         currentPole.dostepneAkcje["Occupated"] = true;
         //currentPole.enable();
         //itemManager.SprawdzKolizje(cords);
+        currentPole.enable();
         stamina--;
         if (stamina <= 0) {
             endYourTurn();
@@ -126,12 +127,12 @@ public class ChampionScript : turnObject
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(8);
+            enemy.takeDamage(8, attackStats.DmgType.phisical);
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(8);
+            playerScript.takeDamage(8, attackStats.DmgType.phisical);
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
@@ -170,12 +171,21 @@ public class ChampionScript : turnObject
     public override void startYourTurn()
     {
         stamina = stats.stamina;
-        currentPole.setActiveHex(1);
+        //currentPole.setActiveHex(3);
         
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(int damage, attackStats.DmgType dmgType)
     {
+        //if (dmgType == attackStats.DmgType.phisical)
+        //{
+        //    damage /= stats.armor;
+        //}
+        //else if (dmgType == attackStats.DmgType.magical)
+        //{
+        //    damage /= stats.magicArmor;
+        //}
+
         stats.hp -= damage;
         Debug.Log($"Zostałem uderzony: {stats.hp}hp");
         //if (stats.hp < 0)
@@ -191,7 +201,7 @@ public class ChampionScript : turnObject
     //akcje na zakończenie tury
     public override void endYourTurn()
     {
-        currentPole.turnOffHex(1);
+        currentPole.turnOffHex(3);
         generator.changeNextTurn();
     }
     

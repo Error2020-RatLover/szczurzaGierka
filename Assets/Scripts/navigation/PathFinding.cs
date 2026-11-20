@@ -5,7 +5,8 @@ public static class Pathfinding
 {
     public static List<HexPoleScript> FindPath(
         HexPoleScript start,
-        HexPoleScript target)
+        HexPoleScript target,
+        string state)
     {
         if (start == null || target == null)
             return null;
@@ -47,10 +48,18 @@ public static class Pathfinding
             foreach (GameObject x  in currentNode.tile.neighbors)
             {
                 HexPoleScript neighbor = x.GetComponent<HexPoleScript>();
-                // Pomijamy pola niedostępne
-                if (!neighbor.dostepneAkcje["Move"] || (neighbor.dostepneAkcje["Occupated"] && neighbor.coordinates != target.coordinates))
+           
+                // Sprawdzamy dostępność akcji przekazanej w argumencie
+                if (!neighbor.dostepneAkcje[state])
                     continue;
 
+                // Dodatkowa blokada zajętości tylko dla ruchu
+                if (state == "Move" &&
+                    neighbor.dostepneAkcje["Occupated"] &&
+                    neighbor.coordinates != target.coordinates)
+                {
+                    continue;
+                }
                 // Pomijamy już sprawdzone pola
                 if (closedSet.Contains(neighbor))
                     continue;

@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2624b2ac294cd244fa59aec685f3ea71, type: 3}
-  m_Name: zombieStats
-  m_EditorClassIdentifier: Assembly-CSharp::championStats
-  maxHp: 15
-  hp: 16
-  strenght: 12
-  magic: 5
-  armor: 8
-  magicArmor: 8
-  stamina: 4
-  speed: 6
+  m_Script: {fileID: 11500000, guid: e0abff57de86fab41951ea783e7417ef, type: 3}
+  m_Name: zombieScratch
+  m_EditorClassIdentifier: Assembly-CSharp::attackStats
+  attackName: ZombieScratch
+  attackType: 0
+  damageType: 0
+  dmg: 8
+  range: 1
+  area:
+  - {x: 0, y: 0}

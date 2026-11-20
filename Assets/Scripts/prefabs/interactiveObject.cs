@@ -18,6 +18,7 @@ public abstract class inreractiveObject : MonoBehaviour
         pole.dostepneAkcje["Move"] = stats.Move;
         pole.dostepneAkcje["Occupated"] = stats.Occupated;
         pole.dostepneAkcje["Interact"] = stats.Interact;
+        pole.dostepneAkcje["atackThrough"] = stats.atackThrough;
         //pole.dostepneAkcje["Atack"] = stats.Attack;
 
 

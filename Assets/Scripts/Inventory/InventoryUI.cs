@@ -81,6 +81,8 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject obj = Instantiate(slotPrefab, hotbarContainer);
             InventorySlotView view = obj.GetComponent<InventorySlotView>();
+            view.Initialize(i);
+
             hotbarSlots.Add(view);
         }
 
@@ -89,6 +91,8 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject obj = Instantiate(slotPrefab, inventoryContainer);
             InventorySlotView view = obj.GetComponent<InventorySlotView>();
+            view.Initialize(i);
+
             inventorySlots.Add(view);
         }
     }
@@ -136,9 +140,7 @@ public class InventoryUI : MonoBehaviour
         {
             hotbarSlots[i].UpdateSlot(
                 inventoryManager.inventory[i],
-                inventoryManager.selectedSlot == i,
-                i + 1
-            );
+                inventoryManager.selectedSlot == i, i + 1);
         }
 
         // Inventory
@@ -147,8 +149,7 @@ public class InventoryUI : MonoBehaviour
             inventorySlots[i].UpdateSlot(
                 inventoryManager.inventory[i],
                 inventoryManager.selectedSlot == i,
-                i + 6
-            );
+                i + 6);
         }
     }
 }

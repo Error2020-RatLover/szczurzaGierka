@@ -8,4 +8,5 @@ public class interactiveObjectStats : ScriptableObject
     public bool Occupated = false;
     public bool Attack = true;
     public bool Interact = false;
+    public bool atackThrough = false;
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Runtime.CompilerServices;
+using UnityEngine.Tilemaps;
 // using System.Diagnostics;
 
 
@@ -35,8 +36,15 @@ public class roomGenerator : MonoBehaviour
 
     public string actionState = "Move";
 
+
+    public Tilemap tilemap;
+    public TileBase[] avalibleTiles; 
+
     public List<turnObject> moveOrder = new();
     public int currentMoveId = -1;
+
+
+
 
     void Start() { 
         x_size = stats.x_size;
@@ -104,13 +112,26 @@ public class roomGenerator : MonoBehaviour
 
         }
 
+
+        for (int i = -6; i < (x_size )+6; i++)
+        {
+            for (int j = -4; j < (y_size/4)+4; j++)
+            {
+                TileBase randomTile = avalibleTiles[UnityEngine.Random.Range(0, avalibleTiles.Length)];
+                tilemap.SetTile(
+                   new Vector3Int(i, j, 0),
+                   randomTile
+               );
+            }
+        }
+
         // ROZMIARY ŚCIAN
 
-        rightWall.size = new Vector2(1.0f, y_size + 8);
-        leftWall.size = new Vector2(1.0f, y_size + 8);
+        rightWall.size = new Vector2(1f, y_size + 10);
+        leftWall.size = new Vector2(1f, y_size + 10);
 
-        topWall.size = new Vector2(x_size * 2f + 8, 1.0f);
-        bottomWall.size = new Vector2(x_size * 2f + 8, 1.0f);
+        topWall.size = new Vector2(x_size * 2f + 8, 1.2f);
+        bottomWall.size = new Vector2(x_size * 2f + 8, 1.2f);
 
         //POZYCJE ŚCIAN
 
