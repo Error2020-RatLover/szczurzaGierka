@@ -13,7 +13,6 @@ public class InventoryManager : MonoBehaviour
 
     public InventoryUI inventoryUI;
 
-
     void Awake()
     {
         // Tworzenie pustych slotów
