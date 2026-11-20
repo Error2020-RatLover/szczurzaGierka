@@ -27,6 +27,7 @@ public abstract class inreractiveObject : MonoBehaviour
 
     public void takeDamage(int damage)
     {
+        Debug.Log("halo");
         stats.hp -= damage;
         if (stats.hp < 0)
         {
@@ -34,6 +35,7 @@ public abstract class inreractiveObject : MonoBehaviour
             pole.dostepneAkcje["Occupated"] = false;
             pole.dostepneAkcje["Move"] = true;
             pole.dostepneAkcje["Interact"] = false;
+            pole.dostepneAkcje["atackThrough"] = true;
             Destroy(gameObject);
         }
     }

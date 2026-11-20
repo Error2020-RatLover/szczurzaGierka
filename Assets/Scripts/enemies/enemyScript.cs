@@ -7,7 +7,7 @@ public class enemyScript : turnObject
     //public Vector2Int pozycja = new Vector2Int(0, 0);
 
 
-    public roomGenerator generator;
+    
 
     public HexPoleScript currentPole;
 

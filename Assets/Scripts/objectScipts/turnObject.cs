@@ -9,4 +9,5 @@ public abstract class turnObject : MonoBehaviour
     public List<attackStats> abilities = new List<attackStats>();
     public abstract void startYourTurn();
     public abstract void endYourTurn();
+    public roomGenerator generator;
 }
