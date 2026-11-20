@@ -46,6 +46,7 @@ public class enemyScript : turnObject
                 SendMessage(attack.attackName,attack);
                 if (abillityAproved)
                 {
+                  
                     abillityAproved=false;
                     yield break;
                 }

@@ -28,7 +28,7 @@ public class Zombie : enemyScript
         if (currentPath.Count <= range && isInCleanLine)
         {
             abillityAproved = true;
-            Attack(targetTile.coordinates,attack.dmg,attack.damageType);
+            Attack(targetTile.coordinates,attack.dmg * stats.strenght,attack.damageType);
             
 
         }

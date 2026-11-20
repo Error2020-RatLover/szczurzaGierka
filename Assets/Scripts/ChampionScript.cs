@@ -177,14 +177,14 @@ public class ChampionScript : turnObject
 
     public void takeDamage(int damage, attackStats.DmgType dmgType)
     {
-        //if (dmgType == attackStats.DmgType.phisical)
-        //{
-        //    damage /= stats.armor;
-        //}
-        //else if (dmgType == attackStats.DmgType.magical)
-        //{
-        //    damage /= stats.magicArmor;
-        //}
+        if (dmgType == attackStats.DmgType.phisical)
+        {
+            damage /= stats.armor;
+        }
+        else if (dmgType == attackStats.DmgType.magical)
+        {
+            damage /= stats.magicArmor;
+        }
 
         stats.hp -= damage;
         Debug.Log($"Zostałem uderzony: {stats.hp}hp");
