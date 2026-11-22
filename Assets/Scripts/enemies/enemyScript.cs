@@ -181,7 +181,7 @@ public class enemyScript : turnObject
         
         stats.hp -= damage;
         Debug.Log($"CO MNIE BIJESZ??   {stats.hp}");
-        if (stats.hp < 0)
+        if (stats.hp <= 0)
         {
             currentPole.currentStanding.Remove(gameObject);
             currentPole.dostepneAkcje["Occupated"] = false;

@@ -9,19 +9,19 @@ public class ChampionScript : turnObject
 
     //public Vector2Int pozycja = new Vector2Int(0, 0);
 
-    
+
 
     public HexPoleScript currentPole;
     ItemManager itemManager;
 
-    
+
     public int stamina = 0;
 
     // action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
 
-  
+
     /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
     zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
     Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
@@ -54,8 +54,9 @@ public class ChampionScript : turnObject
             //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
             currentPole.turnOffHex(3);
             currentPole.setActiveHex(3);
+            Debug.Log(action);
         }
-        
+
     }
 
     public void actionToTake(Vector2Int toCordinates)
@@ -73,7 +74,8 @@ public class ChampionScript : turnObject
     }
 
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
-    public void Move(Vector2Int cords) {
+    public void Move(Vector2Int cords)
+    {
         generator.resetBoard();
         currentPole.dostepneAkcje["Occupated"] = false;
         currentPole.currentStanding.Remove(gameObject);
@@ -89,7 +91,8 @@ public class ChampionScript : turnObject
         //itemManager.SprawdzKolizje(cords);
         currentPole.enable();
         stamina--;
-        if (stamina <= 0) {
+        if (stamina <= 0)
+        {
             endYourTurn();
         }
 
@@ -104,19 +107,19 @@ public class ChampionScript : turnObject
     private IEnumerator AttackCoroutine(Vector2Int cords)
     {
         stamina--;
-        
+
         HexPoleScript skrypt = generator.pola[cords]
             .GetComponent<HexPoleScript>();
 
         yield return StartCoroutine(skrypt.askForId());
 
-        
+
         GameObject target = null;
 
         if (skrypt.gameObjectId >= 0)
         {
             target = skrypt.currentStanding[skrypt.gameObjectId];
-        
+
         }
 
         if (target == null)
@@ -132,7 +135,7 @@ public class ChampionScript : turnObject
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(8, attackStats.DmgType.phisical);
-            
+
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
@@ -177,7 +180,7 @@ public class ChampionScript : turnObject
     {
         stamina = stats.stamina;
         //currentPole.setActiveHex(3);
-        
+
     }
 
     public void takeDamage(int damage, attackStats.DmgType dmgType)
@@ -209,7 +212,7 @@ public class ChampionScript : turnObject
         currentPole.turnOffHex(3);
         generator.changeNextTurn();
     }
-    
+
 
 }
 
