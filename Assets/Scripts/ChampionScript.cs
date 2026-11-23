@@ -9,19 +9,19 @@ public class ChampionScript : turnObject
 
     //public Vector2Int pozycja = new Vector2Int(0, 0);
 
-    
+
 
     public HexPoleScript currentPole;
     ItemManager itemManager;
 
-    
+
     public int stamina = 0;
 
     // action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
-    public  int currentRange = 1;
-  
+    public int currentRange = 1;
+
     private int currentAttackId = 0;
 
     /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
@@ -33,7 +33,7 @@ public class ChampionScript : turnObject
     {
         stats = Instantiate(stats);
         itemManager = FindFirstObjectByType<ItemManager>();
-        for(int i = 0; i < weppons.Count; i++)
+        for (int i = 0; i < weppons.Count; i++)
         {
             weppons[i] = Instantiate(weppons[i]);
             for(int j = 0; j < weppons[i].attackPossible.Count; j++)
@@ -58,30 +58,57 @@ public class ChampionScript : turnObject
 
 
     void Update()
-    {   //na razie klikając z na klawiaturze zmieniamy stan. Potem trzeba by zrobić do tego przycisk    
-        if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame && generator.moveOrder[generator.currentMoveId] == this)
+    {   //leciuteńka zmiana koleżko <3   
+        if (Keyboard.current != null && generator.moveOrder[generator.currentMoveId] == this)
         {
             ClearChoicePanel();
-            if (action == "Move")
+            switch (true)
             {
-                action = "Attack";
-                wepponInfoShow();
+                case true when Keyboard.current.zKey.wasPressedThisFrame:
+                    Debug.Log("atak");
+                    action = "Attack";
+                    wepponInfoShow();
+                    break;
+
+                case true when Keyboard.current.xKey.wasPressedThisFrame:
+
+                    Debug.Log("ruh");
+                    action = "Move";
+                    currentRange = 1;
+                    break;
+
+                case true when Keyboard.current.cKey.wasPressedThisFrame:
+                    Debug.Log("interakcja");
+                    action = "Interact";
+                    break;
+                case true when Keyboard.current.vKey.wasPressedThisFrame:
+                    Debug.Log("Szybkiwybór");
+                    break;
+                case true when Keyboard.current.eKey.wasPressedThisFrame:
+                    Debug.Log("eq");
+                    break;
+
             }
-            else if (action == "Attack")
-            {
-                action = "Interact";
-            }
-            else
-            {
-                action = "Move";
-                currentRange = 1;
-            }
+            
+            // if (action == "Move")
+            // {
+
+            // }
+            // else if (action == "Attack")
+            // {
+            //     
+            // }
+            // else
+            // {
+            //     
+            // }
             generator.actionState = action;
             //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
-            currentPole.turnOffHex(currentRange+1);
+            currentPole.turnOffHex(currentRange + 1);
             currentPole.setActiveHex(currentRange);
+
         }
-        
+
     }
 
     public void actionToTake(Vector2Int toCordinates)
@@ -99,7 +126,8 @@ public class ChampionScript : turnObject
     }
 
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
-    public void Move(Vector2Int cords) {
+    public void Move(Vector2Int cords)
+    {
         //generator.resetBoard();
         currentPole.turnOffHex(currentRange + 1);
         currentPole.dostepneAkcje["Occupated"] = false;
@@ -117,7 +145,8 @@ public class ChampionScript : turnObject
         //itemManager.SprawdzKolizje(cords);
         currentPole.enable();
         stamina--;
-        if (stamina <= 0) {
+        if (stamina <= 0)
+        {
             endYourTurn();
         }
 
@@ -134,19 +163,19 @@ public class ChampionScript : turnObject
     private IEnumerator AttackCoroutine(Vector2Int cords)
     {
         stamina--;
-        
+
         HexPoleScript skrypt = generator.pola[cords]
             .GetComponent<HexPoleScript>();
 
         yield return StartCoroutine(skrypt.askForId());
 
-        
+
         GameObject target = null;
 
         if (skrypt.gameObjectId >= 0)
         {
             target = skrypt.currentStanding[skrypt.gameObjectId];
-        
+
         }
 
         if (target == null)
@@ -158,7 +187,7 @@ public class ChampionScript : turnObject
             yield break;
         }
         int dmg = currenAbility.dmg;
-        if(currenAbility.damageMultipler == attackStats.DmgMultipler    .phisical)
+        if (currenAbility.damageMultipler == attackStats.DmgMultipler.phisical)
         {
             dmg *= stats.strenght;
         }
@@ -170,11 +199,11 @@ public class ChampionScript : turnObject
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(dmg, currenAbility.damageType);
-            foreach(string funcName in currenAbility.additionalEffects)
+            foreach (string funcName in currenAbility.additionalEffects)
             {
                 SendMessage(funcName, enemy);
             }
-            
+
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
@@ -223,7 +252,7 @@ public class ChampionScript : turnObject
     {
         stamina = stats.stamina;
         //currentPole.setActiveHex(3);
-        
+
     }
 
     public void takeDamage(int damage, attackStats.DmgType dmgType)
@@ -256,15 +285,13 @@ public class ChampionScript : turnObject
         currentPole.turnOffHex(currentRange + 2);
         generator.changeNextTurn();
     }
-    
+
     public void wepponInfoShow()
     {
-        
-        Debug.Log("halo proba");
+        // Debug.Log("halo proba");
         currentRange = currenAbility.range;
         currenAbility = currenAbility;
         askForId();
-
 
     }
 
@@ -312,7 +339,7 @@ public class ChampionScript : turnObject
     private void OnButtonClicked(int id)
     {
         currentPole.turnOffHex(currentRange + 1);
-        
+
         currenAbility = currentWeppon.attackPossible[id];
         currentAttackId = id;
         Debug.Log(id);
@@ -322,4 +349,3 @@ public class ChampionScript : turnObject
 
 }
 
-    
