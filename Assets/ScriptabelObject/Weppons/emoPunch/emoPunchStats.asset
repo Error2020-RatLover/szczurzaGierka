@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2624b2ac294cd244fa59aec685f3ea71, type: 3}
   m_Name: emoPunchStats
   m_EditorClassIdentifier: Assembly-CSharp::championStats
-  maxHp: 0
-  hp: 0
+  maxHp: 300
+  hp: 300
   strenght: 2
   magic: 0
   armor: 0
   magicArmor: 0
-  stamina: 0
+  stamina: 12
   speed: 0

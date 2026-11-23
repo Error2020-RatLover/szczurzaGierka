@@ -151,6 +151,7 @@ public class enemyScript : turnObject
         pozycja = cords;
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
+        
 
     }
 
@@ -206,7 +207,7 @@ public class enemyScript : turnObject
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.takeDamage(dmg);
         }
-  
+        changeToNextWeppon();
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 
@@ -267,5 +268,46 @@ public class enemyScript : turnObject
         }
     }
 
+    public void changeWeppon(wepponInfoStats newWeapon)
+    {
+        stats.maxHp -= currentWeppon.statsModifier.maxHp;
+        stats.strenght -= currentWeppon.statsModifier.strenght;
+        stats.magic -= currentWeppon.statsModifier.magic;
+        stats.armor -= currentWeppon.statsModifier.armor;
+        stats.magicArmor -= currentWeppon.statsModifier.magicArmor;
+        stats.stamina -= currentWeppon.statsModifier.stamina;
+        stats.speed -= currentWeppon.statsModifier.speed;
+        foreach (attackStats ability in currentWeppon.attackPossible)
+        {
+            abilities.Remove(ability);
+        }
+        currentWeppon = newWeapon;
+        foreach (attackStats ability in currentWeppon.attackPossible)
+        {
+            abilities.Add(ability);
+        }
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
+
+    }
+
+    public void changeToNextWeppon()
+    {
+        int curIndex = weppons.IndexOf(currentWeppon);
+        curIndex++;
+        if (curIndex >= weppons.Count)
+        {
+            curIndex = 0;
+        }
+        Debug.Log(curIndex);
+        changeWeppon(weppons[curIndex]);
+    }
 
 }

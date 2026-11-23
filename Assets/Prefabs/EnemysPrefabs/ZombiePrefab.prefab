@@ -189,6 +189,7 @@ MonoBehaviour:
   pozycja: {x: 0, y: 0}
   weppons:
   - {fileID: 11400000, guid: 2bf707c2896f4dc4e88743dfcb4f5f44, type: 2}
+  - {fileID: 11400000, guid: 7767c4b619611e2429b783434e3a0ac5, type: 2}
   currentWeppon: {fileID: 0}
   abilities: []
   generator: {fileID: 0}

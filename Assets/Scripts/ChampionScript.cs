@@ -84,11 +84,15 @@ public class ChampionScript : turnObject
                     break;
                 case true when Keyboard.current.vKey.wasPressedThisFrame:
                     ClearChoicePanel();
-                    Debug.Log("Szybkiwybór");
+                    Debug.Log("Szybkiwybór - zmiana broni");
+                    //na razie dodam tu szybkie zmienianie broni w ramach tesowych
+                    currentRange = 0;
+                    changeWeppon();
                     break;
                 case true when Keyboard.current.eKey.wasPressedThisFrame:
                     ClearChoicePanel();
                     Debug.Log("eq");
+                    currentRange = 0;
                     break;
 
             }
@@ -113,6 +117,8 @@ public class ChampionScript : turnObject
         }
 
     }
+
+    
 
     public void actionToTake(Vector2Int toCordinates)
     {
@@ -348,6 +354,39 @@ public class ChampionScript : turnObject
         Debug.Log(id);
         wepponInfoShow();
         currentPole.setActiveHex(currentRange);
+    }
+
+    public void changeWeppon()
+    {
+        int curIndex = weppons.IndexOf(currentWeppon);
+        curIndex++;
+        if(curIndex >= weppons.Count) { 
+            curIndex = 0;
+        }
+
+        stats.maxHp -= currentWeppon.statsModifier.maxHp;
+        stats.strenght -= currentWeppon.statsModifier.strenght;
+        stats.magic -= currentWeppon.statsModifier.magic;
+        stats.armor -= currentWeppon.statsModifier.armor;
+        stats.magicArmor -= currentWeppon.statsModifier.magicArmor;
+        stats.stamina -= currentWeppon.statsModifier.stamina;
+        stats.speed -= currentWeppon.statsModifier.speed;
+       
+        
+        currentWeppon = weppons[curIndex];
+
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
+
+        currenAbility = currentWeppon.attackPossible[0];
+
     }
 
 }

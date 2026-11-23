@@ -227,12 +227,16 @@ PrefabInstance:
       objectReference: {fileID: 1723600070198033043, guid: 1704170b21ba7e84185af434b143ecce, type: 3}
     - target: {fileID: -2517662505462064807, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       propertyPath: weppons.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -2517662505462064807, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       propertyPath: 'weppons.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 7767c4b619611e2429b783434e3a0ac5, type: 2}
+    - target: {fileID: -2517662505462064807, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
+      propertyPath: 'weppons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bf707c2896f4dc4e88743dfcb4f5f44, type: 2}
     - target: {fileID: 3173366420231928730, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
