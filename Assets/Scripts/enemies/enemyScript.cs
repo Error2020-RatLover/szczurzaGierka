@@ -54,7 +54,7 @@ public class enemyScript : turnObject
             foreach(attackStats attack in abilities)
             {
                 //Debug.Log(attack.attackName);
-                SendMessage(attack.attackName,attack);
+                SendMessage(attack.functionToCall, attack);
                 currenAbility = attack;
                 if (abillityAproved)
                 {
@@ -247,6 +247,25 @@ public class enemyScript : turnObject
         generator.changeNextTurn();
     }
 
+
+    public void tryHitAttack(attackStats attack)
+    {
+        int range = attack.range;
+        generator.actionState = "Attack";
+        currentPath = Pathfinding.FindPath(
+            currentPole,
+            targetTile,
+            "Attack"
+        );
+        bool isInCleanLine = currentPole.HasClearLine(targetTile);
+        if (currentPath.Count <= range && isInCleanLine)
+        {
+            abillityAproved = true;
+
+
+
+        }
+    }
 
 
 }

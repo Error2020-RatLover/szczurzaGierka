@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: emoPunchLongHit
   m_EditorClassIdentifier: Assembly-CSharp::attackStats
   attackName: Emo Punch Long Hit
+  functionToCall: tryHitAttack
   attackType: 0
   damageType: 0
   damageMultipler: 0
