@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: stats
       value: 
       objectReference: {fileID: 11400000, guid: 07bfa3eaae004234cb720d5e999ab392, type: 2}
+    - target: {fileID: -2517662505462064807, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
+      propertyPath: weppons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2517662505462064807, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
+      propertyPath: 'weppons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7767c4b619611e2429b783434e3a0ac5, type: 2}
     - target: {fileID: 3173366420231928730, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -54,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3622237457588165500, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       propertyPath: m_Name
-      value: Emo
+      value: EmoPrefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

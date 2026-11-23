@@ -24,7 +24,17 @@ public class attackStats : ScriptableObject
 
     public DmgType damageType;
 
+    public enum DmgMultipler
+    {
+        phisical,
+        magical,
+        none
+    }
+
+    public DmgMultipler damageMultipler;
+
     public int dmg;
     public int range;
     public List<Vector2Int> area;
+    public List<string> additionalEffects;
 }

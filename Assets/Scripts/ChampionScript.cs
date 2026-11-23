@@ -20,8 +20,10 @@ public class ChampionScript : turnObject
     // action będzie przechowywał akcję jaką wykonuję champion.
     public string action = "Move";
 
-
+    public  int currentRange = 1;
   
+    private int currentAttackId = 0;
+
     /*siema tu bartek, mam takie info. Jeśli tu jesteś to pewnie szukasz jakiś zmiennych. Ogólnie niektóre zmienne są 
     zarówno dal przeciwników i graczy więc zrobiłem dla nich wspólną klasę, turnObject(bo oboje bazują na turach).
     Sprawdź tąk klasę jeśli nie jesteś w stanie znaleźć ważnej zmiennej. 
@@ -31,8 +33,25 @@ public class ChampionScript : turnObject
     {
         stats = Instantiate(stats);
         itemManager = FindFirstObjectByType<ItemManager>();
+        for(int i = 0; i < weppons.Count; i++)
+        {
+            weppons[i] = Instantiate(weppons[i]);
+        }
+        currentWeppon = weppons[0];
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
 
+        currenAbility = currentWeppon.attackPossible[0];
     }
+
+
 
     void Update()
     {   //na razie klikając z na klawiaturze zmieniamy stan. Potem trzeba by zrobić do tego przycisk    
@@ -41,6 +60,7 @@ public class ChampionScript : turnObject
             if (action == "Move")
             {
                 action = "Attack";
+                wepponInfoShow();
             }
             else if (action == "Attack")
             {
@@ -49,11 +69,12 @@ public class ChampionScript : turnObject
             else
             {
                 action = "Move";
+                currentRange = 1;
             }
             generator.actionState = action;
             //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
-            currentPole.turnOffHex(3);
-            currentPole.setActiveHex(3);
+            currentPole.turnOffHex(currentRange+1);
+            currentPole.setActiveHex(currentRange);
         }
         
     }
@@ -74,14 +95,16 @@ public class ChampionScript : turnObject
 
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
     public void Move(Vector2Int cords) {
-        generator.resetBoard();
+        //generator.resetBoard();
+        currentPole.turnOffHex(currentRange + 1);
         currentPole.dostepneAkcje["Occupated"] = false;
         currentPole.currentStanding.Remove(gameObject);
         przeniesNaPozycje(cords);
         pozycja = cords;
         //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        currentPole.setActiveHex(3);
+        //currentPole.setActiveHex(3);
+        currentPole.setActiveHex(currentRange);
         currentPole.currentStanding.Add(gameObject);
         currentPole.ZbierzItem();
         currentPole.dostepneAkcje["Occupated"] = true;
@@ -99,6 +122,8 @@ public class ChampionScript : turnObject
     {
         StartCoroutine(AttackCoroutine(cords));
     }
+
+
 
 
     private IEnumerator AttackCoroutine(Vector2Int cords)
@@ -127,22 +152,34 @@ public class ChampionScript : turnObject
             }
             yield break;
         }
-
+        int dmg = currenAbility.dmg;
+        if(currenAbility.damageMultipler == attackStats.DmgMultipler    .phisical)
+        {
+            dmg *= stats.strenght;
+        }
+        else if (currenAbility.damageMultipler == attackStats.DmgMultipler.magical)
+        {
+            dmg *= stats.magic;
+        }
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(8, attackStats.DmgType.phisical);
+            enemy.takeDamage(dmg, currenAbility.damageType);
+            foreach(string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, enemy);
+            }
             
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(8, attackStats.DmgType.phisical);
+            playerScript.takeDamage(dmg, currenAbility.damageType);
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
-            interactive.takeDamage(8);
+            interactive.takeDamage(dmg);
         }
 
         if (stamina <= 0)
@@ -210,6 +247,20 @@ public class ChampionScript : turnObject
         generator.changeNextTurn();
     }
     
+    public void wepponInfoShow()
+    {
+        Debug.Log("halo proba");
+        currentRange = currentWeppon.attackPossible[currentAttackId].range;
+        currenAbility = currentWeppon.attackPossible[currentAttackId];
+
+
+    }
+
+    public void printAttackName(enemyScript target)
+    {
+        Debug.Log(currenAbility.attackName);
+    }
 
 }
 
+    
