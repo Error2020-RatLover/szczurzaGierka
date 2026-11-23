@@ -55,10 +55,11 @@ public class enemyScript : turnObject
             {
                 //Debug.Log(attack.attackName);
                 SendMessage(attack.attackName,attack);
+                currenAbility = attack;
                 if (abillityAproved)
                 {
-                  
-                    abillityAproved=false;
+                    Attack(targetTile.coordinates);
+                    abillityAproved =false;
                     yield break;
                 }
             }
@@ -114,7 +115,7 @@ public class enemyScript : turnObject
             weppons[i] = Instantiate(weppons[i]);
             for (int j = 0; j < weppons[i].attackPossible.Count; j++)
             {
-                weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j])
+                weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j]);
             }
         }
         currentWeppon = weppons[0];
@@ -154,7 +155,7 @@ public class enemyScript : turnObject
     }
 
 
-    public void Attack(Vector2Int cords, int dmg, attackStats.DmgType dmgType)
+    public void Attack(Vector2Int cords)
     {
         stamina--;
         HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
@@ -173,15 +174,32 @@ public class enemyScript : turnObject
             }
             return;
         }
+        int dmg = currenAbility.dmg;
+        if (currenAbility.damageMultipler == attackStats.DmgMultipler.phisical)
+        {
+            dmg *= stats.strenght;
+        }
+        else if (currenAbility.damageMultipler == attackStats.DmgMultipler.magical)
+        {
+            dmg *= stats.magic;
+        }
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(dmg, dmgType);
+            enemy.takeDamage(dmg, currenAbility.damageType);
+            foreach (string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, enemy);
+            }
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(dmg, dmgType);
+            playerScript.takeDamage(dmg, currenAbility.damageType);
+            foreach (string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, playerScript);
+            }
         }
         else if (target.GetComponent<inreractiveObject>())
         {

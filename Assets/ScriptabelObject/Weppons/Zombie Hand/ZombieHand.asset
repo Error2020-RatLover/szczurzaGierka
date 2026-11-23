@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ZombieHand
   m_EditorClassIdentifier: Assembly-CSharp::wepponInfoStats
   wepponName: Zombie Hand
-  statsModifier: {fileID: 0}
+  statsModifier: {fileID: 11400000, guid: a4a2403c940d3da45874fdac50170384, type: 2}
   attackPossible:
   - {fileID: 11400000, guid: 71706bbcaeb681e4a881694423e979eb, type: 2}

@@ -180,6 +180,10 @@ public class ChampionScript : turnObject
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
             playerScript.takeDamage(dmg, currenAbility.damageType);
+            foreach (string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, playerScript);
+            }
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
@@ -264,7 +268,7 @@ public class ChampionScript : turnObject
 
     }
 
-    public void printAttackName(enemyScript target)
+    public void printAttackName(turnObject target)
     {
         Debug.Log(currenAbility.attackName);
     }
