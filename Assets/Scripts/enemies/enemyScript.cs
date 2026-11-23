@@ -105,6 +105,7 @@ public class enemyScript : turnObject
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         transform.position = generator.pola[cords].transform.position;
         currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.dostepneAkcje["atackThrough"] = false;
         currentPole.currentStanding.Add(gameObject);
         targetTile = generator.pola[new Vector2Int(0, 10)].GetComponent<HexPoleScript>();
         pozycja = cords;
@@ -117,10 +118,12 @@ public class enemyScript : turnObject
 
         currentPole.currentStanding.Remove(gameObject);
         currentPole.dostepneAkcje["Occupated"] = false;
+        currentPole.dostepneAkcje["atackThrough"] = true;
         transform.position = generator.pola[cords].transform.position;
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
         currentPole.currentStanding.Add(gameObject);
         currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.dostepneAkcje["atackThrough"] = false;
         currentPole.enable();
         pozycja = cords;
         StartCoroutine(FindPlayerPath());
@@ -170,21 +173,22 @@ public class enemyScript : turnObject
     }
     public void takeDamage(int damage, attackStats.DmgType dmgType)
     {
-        //if(dmgType == attackStats.DmgType.phisical)
-        //{
-        //    damage /= stats.armor;
-        //}
-        //else if (dmgType == attackStats.DmgType.magical)
-        //{
-        //    damage /= stats.magicArmor;
-        //}
-        
+        if (dmgType == attackStats.DmgType.phisical)
+        {
+            damage /= stats.armor;
+        }
+        else if (dmgType == attackStats.DmgType.magical)
+        {
+            damage /= stats.magicArmor;
+        }
+
         stats.hp -= damage;
         Debug.Log($"CO MNIE BIJESZ??   {stats.hp}");
         if (stats.hp <= 0)
         {
             currentPole.currentStanding.Remove(gameObject);
             currentPole.dostepneAkcje["Occupated"] = false;
+            currentPole.dostepneAkcje["atackThrough"] = true;
             generator.moveOrder.Remove(this);
             Destroy(gameObject);
         }
