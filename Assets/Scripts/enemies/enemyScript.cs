@@ -109,6 +109,28 @@ public class enemyScript : turnObject
         currentPole.currentStanding.Add(gameObject);
         targetTile = generator.pola[new Vector2Int(0, 10)].GetComponent<HexPoleScript>();
         pozycja = cords;
+        for (int i = 0; i < weppons.Count; i++)
+        {
+            weppons[i] = Instantiate(weppons[i]);
+            for (int j = 0; j < weppons[i].attackPossible.Count; j++)
+            {
+                weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j])
+            }
+        }
+        currentWeppon = weppons[0];
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
+        foreach(attackStats ability in currentWeppon.attackPossible)
+        {
+            abilities.Add(ability);
+        }
 
 
     }

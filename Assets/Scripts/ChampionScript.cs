@@ -36,6 +36,10 @@ public class ChampionScript : turnObject
         for(int i = 0; i < weppons.Count; i++)
         {
             weppons[i] = Instantiate(weppons[i]);
+            for(int j = 0; j < weppons[i].attackPossible.Count; j++)
+            {
+                weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j]);
+            }
         }
         currentWeppon = weppons[0];
         stats.maxHp += currentWeppon.statsModifier.maxHp;
