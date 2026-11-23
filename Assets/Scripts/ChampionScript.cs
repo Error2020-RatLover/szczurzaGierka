@@ -36,7 +36,7 @@ public class ChampionScript : turnObject
         for (int i = 0; i < weppons.Count; i++)
         {
             weppons[i] = Instantiate(weppons[i]);
-            for (int j = 0; j < weppons[i].attackPossible.Count; j++)
+            for(int j = 0; j < weppons[i].attackPossible.Count; j++)
             {
                 weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j]);
             }
@@ -209,6 +209,10 @@ public class ChampionScript : turnObject
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
             playerScript.takeDamage(dmg, currenAbility.damageType);
+            foreach (string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, playerScript);
+            }
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
@@ -291,7 +295,7 @@ public class ChampionScript : turnObject
 
     }
 
-    public void printAttackName(enemyScript target)
+    public void printAttackName(turnObject target)
     {
         Debug.Log(currenAbility.attackName);
     }

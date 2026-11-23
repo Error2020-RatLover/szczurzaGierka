@@ -54,11 +54,12 @@ public class enemyScript : turnObject
             foreach(attackStats attack in abilities)
             {
                 //Debug.Log(attack.attackName);
-                SendMessage(attack.attackName,attack);
+                SendMessage(attack.functionToCall, attack);
+                currenAbility = attack;
                 if (abillityAproved)
                 {
-                  
-                    abillityAproved=false;
+                    Attack(targetTile.coordinates);
+                    abillityAproved =false;
                     yield break;
                 }
             }
@@ -109,6 +110,28 @@ public class enemyScript : turnObject
         currentPole.currentStanding.Add(gameObject);
         targetTile = generator.pola[new Vector2Int(0, 10)].GetComponent<HexPoleScript>();
         pozycja = cords;
+        for (int i = 0; i < weppons.Count; i++)
+        {
+            weppons[i] = Instantiate(weppons[i]);
+            for (int j = 0; j < weppons[i].attackPossible.Count; j++)
+            {
+                weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j]);
+            }
+        }
+        currentWeppon = weppons[0];
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
+        foreach(attackStats ability in currentWeppon.attackPossible)
+        {
+            abilities.Add(ability);
+        }
 
 
     }
@@ -132,7 +155,7 @@ public class enemyScript : turnObject
     }
 
 
-    public void Attack(Vector2Int cords, int dmg, attackStats.DmgType dmgType)
+    public void Attack(Vector2Int cords)
     {
         stamina--;
         HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
@@ -151,15 +174,32 @@ public class enemyScript : turnObject
             }
             return;
         }
+        int dmg = currenAbility.dmg;
+        if (currenAbility.damageMultipler == attackStats.DmgMultipler.phisical)
+        {
+            dmg *= stats.strenght;
+        }
+        else if (currenAbility.damageMultipler == attackStats.DmgMultipler.magical)
+        {
+            dmg *= stats.magic;
+        }
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
-            enemy.takeDamage(dmg, dmgType);
+            enemy.takeDamage(dmg, currenAbility.damageType);
+            foreach (string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, enemy);
+            }
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
-            playerScript.takeDamage(dmg, dmgType);
+            playerScript.takeDamage(dmg, currenAbility.damageType);
+            foreach (string funcName in currenAbility.additionalEffects)
+            {
+                SendMessage(funcName, playerScript);
+            }
         }
         else if (target.GetComponent<inreractiveObject>())
         {
@@ -207,6 +247,25 @@ public class enemyScript : turnObject
         generator.changeNextTurn();
     }
 
+
+    public void tryHitAttack(attackStats attack)
+    {
+        int range = attack.range;
+        generator.actionState = "Attack";
+        currentPath = Pathfinding.FindPath(
+            currentPole,
+            targetTile,
+            "Attack"
+        );
+        bool isInCleanLine = currentPole.HasClearLine(targetTile);
+        if (currentPath.Count <= range && isInCleanLine)
+        {
+            abillityAproved = true;
+
+
+
+        }
+    }
 
 
 }

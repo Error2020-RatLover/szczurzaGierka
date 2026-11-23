@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: zombieScratch
   m_EditorClassIdentifier: Assembly-CSharp::attackStats
   attackName: ZombieScratch
+  functionToCall: tryHitAttack
   attackType: 0
   damageType: 0
+  damageMultipler: 0
   dmg: 8
   range: 1
   area:
   - {x: 0, y: 0}
+  additionalEffects: []
