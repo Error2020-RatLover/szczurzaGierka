@@ -187,9 +187,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
   stats: {fileID: 11400000, guid: 2d85fc60b52722948aa17e5a0fbd4e02, type: 2}
   pozycja: {x: 0, y: 0}
-  abilities:
-  - {fileID: 11400000, guid: 71706bbcaeb681e4a881694423e979eb, type: 2}
+  weppons:
+  - {fileID: 11400000, guid: 2bf707c2896f4dc4e88743dfcb4f5f44, type: 2}
+  currentWeppon: {fileID: 0}
+  abilities: []
   generator: {fileID: 0}
+  currenAbility: {fileID: 0}
   currentPole: {fileID: 0}
   targetTile: {fileID: 0}
   stamina: 0

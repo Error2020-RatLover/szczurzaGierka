@@ -6,6 +6,8 @@ public class attackStats : ScriptableObject
 {
     public string attackName;
 
+    public string functionToCall;
+
     public enum Type
     {
         hit,
