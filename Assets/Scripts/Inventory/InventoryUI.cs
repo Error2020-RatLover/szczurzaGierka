@@ -11,6 +11,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryPanel;
 
     public GameObject hotbar;
+    public GameObject actionbar;
 
     public Transform hotbarContainer;
     public Transform inventoryContainer;
@@ -50,6 +51,7 @@ public class InventoryUI : MonoBehaviour
           Keyboard.current.iKey.wasPressedThisFrame)
         {
             hotbar.SetActive(!hotbar.activeSelf);
+            actionbar.SetActive(!actionbar.activeSelf);
         }
     }
     // void CreateSlots()

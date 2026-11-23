@@ -1532,6 +1532,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 1283689034}
   inventoryPanel: {fileID: 1387336692}
   hotbar: {fileID: 163050702}
+  actionbar: {fileID: 1427419732}
   hotbarContainer: {fileID: 163050703}
   inventoryContainer: {fileID: 1387336693}
   slotPrefab: {fileID: 7240219801678999932, guid: 89f34f105daaeb3479fb44a886892479, type: 3}
