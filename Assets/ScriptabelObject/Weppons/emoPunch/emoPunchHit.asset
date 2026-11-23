@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0abff57de86fab41951ea783e7417ef, type: 3}
   m_Name: emoPunchHit
   m_EditorClassIdentifier: Assembly-CSharp::attackStats
-  attackName: WepponAttack
+  attackName: Emo Punch Hit
   attackType: 0
   damageType: 0
   damageMultipler: 0
   dmg: 2
-  range: 3
+  range: 1
   area:
   - {x: 0, y: 0}
   additionalEffects:

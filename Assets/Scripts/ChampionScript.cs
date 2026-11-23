@@ -57,6 +57,7 @@ public class ChampionScript : turnObject
     {   //na razie klikając z na klawiaturze zmieniamy stan. Potem trzeba by zrobić do tego przycisk    
         if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame && generator.moveOrder[generator.currentMoveId] == this)
         {
+            ClearChoicePanel();
             if (action == "Move")
             {
                 action = "Attack";
@@ -243,15 +244,18 @@ public class ChampionScript : turnObject
     //akcje na zakończenie tury
     public override void endYourTurn()
     {
-        currentPole.turnOffHex(3);
+        ClearChoicePanel();
+        currentPole.turnOffHex(currentRange + 2);
         generator.changeNextTurn();
     }
     
     public void wepponInfoShow()
     {
+        
         Debug.Log("halo proba");
-        currentRange = currentWeppon.attackPossible[currentAttackId].range;
-        currenAbility = currentWeppon.attackPossible[currentAttackId];
+        currentRange = currenAbility.range;
+        currenAbility = currenAbility;
+        askForId();
 
 
     }
@@ -259,6 +263,53 @@ public class ChampionScript : turnObject
     public void printAttackName(enemyScript target)
     {
         Debug.Log(currenAbility.attackName);
+    }
+
+    public GameObject buttonPrefab;
+    public Transform buttonParent;
+
+    public void askForId()
+    {
+        // Czyścimy poprzednie przyciski
+        ClearChoicePanel();
+
+        // Pokazujemy panel
+        buttonParent.gameObject.SetActive(true);
+
+        for (int i = 0; i < currentWeppon.attackPossible.Count; i++)
+        {
+            //Debug.Log(currentWeppon.attackPossible[i].attackName);  
+            int id = i;
+
+            GameObject newButton = Instantiate(buttonPrefab, buttonParent);
+
+            chooseButton button = newButton.GetComponent<chooseButton>();
+
+            button.Setup(id, currentWeppon.attackPossible[i].attackName, OnButtonClicked);
+        }
+    }
+
+    private void ClearChoicePanel()
+    {
+        //Debug.Log("czyścimy");
+        for (int i = buttonParent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(buttonParent.GetChild(i).gameObject);
+        }
+
+        buttonParent.gameObject.SetActive(false);
+    }
+
+
+    private void OnButtonClicked(int id)
+    {
+        currentPole.turnOffHex(currentRange + 1);
+        
+        currenAbility = currentWeppon.attackPossible[id];
+        currentAttackId = id;
+        Debug.Log(id);
+        wepponInfoShow();
+        currentPole.setActiveHex(currentRange);
     }
 
 }
