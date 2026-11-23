@@ -61,7 +61,7 @@ public class ChampionScript : turnObject
     {   //leciuteńka zmiana koleżko <3   
         if (Keyboard.current != null && generator.moveOrder[generator.currentMoveId] == this)
         {
-            ClearChoicePanel();
+            currentPole.turnOffHex(currentRange + 1);
             switch (true)
             {
                 case true when Keyboard.current.zKey.wasPressedThisFrame:
@@ -71,20 +71,23 @@ public class ChampionScript : turnObject
                     break;
 
                 case true when Keyboard.current.xKey.wasPressedThisFrame:
-
+                    ClearChoicePanel();
                     Debug.Log("ruh");
                     action = "Move";
                     currentRange = 1;
                     break;
 
                 case true when Keyboard.current.cKey.wasPressedThisFrame:
+                    ClearChoicePanel();
                     Debug.Log("interakcja");
                     action = "Interact";
                     break;
                 case true when Keyboard.current.vKey.wasPressedThisFrame:
+                    ClearChoicePanel();
                     Debug.Log("Szybkiwybór");
                     break;
                 case true when Keyboard.current.eKey.wasPressedThisFrame:
+                    ClearChoicePanel();
                     Debug.Log("eq");
                     break;
 
@@ -104,7 +107,7 @@ public class ChampionScript : turnObject
             // }
             generator.actionState = action;
             //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
-            currentPole.turnOffHex(currentRange + 1);
+            
             currentPole.setActiveHex(currentRange);
 
         }
