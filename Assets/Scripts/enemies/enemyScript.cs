@@ -41,7 +41,7 @@ public class enemyScript : turnObject
     public IEnumerator FindPlayerPath()
     {
         //argument w WaitForSeconds, może nie dasz wiary, ale to liczba sekund ile czeka przed kontunuowaniem pracy
-        yield return new WaitForSeconds(0.6f);
+        
         
         if (stamina <= 0)
             {
@@ -58,6 +58,7 @@ public class enemyScript : turnObject
                 currenAbility = attack;
                 if (abillityAproved)
                 {
+                    yield return new WaitForSeconds(0.6f);
                     Attack(targetTile.coordinates);
                     abillityAproved =false;
                     yield break;
@@ -135,28 +136,81 @@ public class enemyScript : turnObject
 
 
     }
-    //zmiana pozycji
-    public void changePosition(Vector2Int cords)
+
+
+
+    public IEnumerator MoveEnemyToPosition(Vector2Int cords)
     {
+        if (!generator.pola.ContainsKey(cords))
+            yield break;
 
-        currentPole.currentStanding.Remove(gameObject);
-        currentPole.dostepneAkcje["Occupated"] = false;
-        currentPole.dostepneAkcje["atackThrough"] = true;
-        transform.position = generator.pola[cords].transform.position;
-        currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        currentPole.currentStanding.Add(gameObject);
-        currentPole.dostepneAkcje["Occupated"] = true;
-        currentPole.dostepneAkcje["atackThrough"] = false;
-        currentPole.enable();
-        pozycja = cords;
-        StartCoroutine(FindPlayerPath());
-        targetTile = generator.player.currentPole;
-        
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = generator.pola[cords].transform.position;
 
+        float duration = 1.3f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                t
+            );
+
+            yield return null;
+        }
+
+        transform.position = targetPosition;
     }
 
 
-    public void Attack(Vector2Int cords)
+    //zmiana pozycji
+
+    public void changePosition(Vector2Int cords)
+    {
+        StartCoroutine(ChangePositionCoroutine(cords));
+    }
+
+    private IEnumerator ChangePositionCoroutine(Vector2Int cords)
+    {
+        if (!generator.pola.ContainsKey(cords))
+            yield break;
+
+        // Zwolnienie starego pola
+        currentPole.currentStanding.Remove(gameObject);
+        currentPole.dostepneAkcje["Occupated"] = false;
+        currentPole.dostepneAkcje["atackThrough"] = true;
+
+        // Płynne przemieszczanie przeciwnika
+        yield return MoveEnemyToPosition(cords);
+
+        // Aktualizacja nowego pola
+        currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
+
+        currentPole.currentStanding.Add(gameObject);
+        currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.dostepneAkcje["atackThrough"] = false;
+
+        currentPole.enable();
+
+        pozycja = cords;
+
+        // Aktualizacja celu
+        targetTile = generator.player.currentPole;
+
+        // Ponowne wyszukanie ścieżki
+        StartCoroutine(FindPlayerPath());
+    }
+
+
+
+
+public void Attack(Vector2Int cords)
     {
         stamina--;
         HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();

@@ -63,38 +63,53 @@ public class ChampionScript : turnObject
     {   //leciuteńka zmiana koleżko <3   
         if (Keyboard.current != null && generator.moveOrder[generator.currentMoveId] == this)
         {
-            currentPole.turnOffHex(currentRange + 1);
+            //currentPole.turnOffHex(currentRange + 1);
             switch (true)
             {
                 case true when Keyboard.current.zKey.wasPressedThisFrame:
+                    currentPole.turnOffHex(currentRange+1);
                     Debug.Log("atak");
                     action = "Attack";
                     wepponInfoShow();
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
 
                 case true when Keyboard.current.xKey.wasPressedThisFrame:
+                    currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
                     Debug.Log("ruh");
                     action = "Move";
                     currentRange = 1;
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
 
                 case true when Keyboard.current.cKey.wasPressedThisFrame:
+                    currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
                     Debug.Log("interakcja");
                     action = "Interact";
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
                 case true when Keyboard.current.vKey.wasPressedThisFrame:
+                    currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
                     Debug.Log("Szybkiwybór - zmiana broni");
                     //na razie dodam tu szybkie zmienianie broni w ramach tesowych
                     currentRange = 0;
                     changeWeppon();
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
                 case true when Keyboard.current.eKey.wasPressedThisFrame:
-                    ClearChoicePanel();
+                    currentPole.turnOffHex(currentRange + 1);
                     Debug.Log("eq");
                     currentRange = 0;
+                    ClearChoicePanel();
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
 
             }
@@ -111,16 +126,13 @@ public class ChampionScript : turnObject
             // {
             //     
             // }
-            generator.actionState = action;
-            //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
             
-            currentPole.setActiveHex(currentRange);
 
         }
 
     }
-
     
+
 
     public void actionToTake(Vector2Int toCordinates)
     {
@@ -128,47 +140,93 @@ public class ChampionScript : turnObject
         SendMessage(action, toCordinates);
     }
     //interpretacja kordunaktow na pozycje, mozna troche zmienic jesli chcecie ale ja nie widze bledow 
-    public void przeniesNaPozycje(Vector2Int pozycja)
+
+    public IEnumerator przeniesNaPozycje(Vector2Int pozycja)
     {
-        if (generator.pola.ContainsKey(pozycja))
+        if (!generator.pola.ContainsKey(pozycja))
+            yield break;
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = generator.pola[pozycja].transform.position;
+
+        float duration = 0.3f; // Czas przejścia
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
         {
-            transform.position = generator.pola[pozycja].transform.position;
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                t
+            );
+
+            yield return null;
         }
+
+        transform.position = targetPosition;
     }
+
 
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
+
     public void Move(Vector2Int cords)
     {
-        //generator.resetBoard();
-        currentPole.turnOffHex(currentRange + 1);
+        StartCoroutine(MoveCoroutine(cords));
+    }
+
+    private IEnumerator MoveCoroutine(Vector2Int cords)
+    {
+        Debug.Log("1. START MOVE");
+
+        if (!generator.pola.ContainsKey(cords))
+            yield break;
+
+        Debug.Log("2. PRZED RESET");
+
         currentPole.dostepneAkcje["Occupated"] = false;
         currentPole.currentStanding.Remove(gameObject);
-        przeniesNaPozycje(cords);
+
+        //generator.resetBoard();
+
+        Debug.Log("3. PO RESET");
+        Debug.Log(currentPole.coordinates);
+        currentPole.turnOffHex(currentRange + 1);
+
+        Debug.Log("4. PO TURNOFF");
+
+        yield return przeniesNaPozycje(cords);
+
+        Debug.Log("5. PO RUCHU");
+        currentPole.turnOffHex(currentRange + 1);
         pozycja = cords;
-        //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        //currentPole.setActiveHex(3);
+        Debug.Log(currentPole.coordinates);
         currentPole.setActiveHex(currentRange);
         currentPole.currentStanding.Add(gameObject);
-        currentPole.ZbierzItem();
-        currentPole.dostepneAkcje["Occupated"] = true;
-        //currentPole.enable();
-        //itemManager.SprawdzKolizje(cords);
-        currentPole.enable();
-        stamina--;
-        if (stamina <= 0)
-        {
-            endYourTurn();
-        }
 
+        currentPole.ZbierzItem();
+
+        currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.enable();
+
+        stamina--;
+
+        if (stamina <= 0)
+            endYourTurn();
     }
+
 
     public void Attack(Vector2Int cords)
     {
         StartCoroutine(AttackCoroutine(cords));
     }
 
-
+   
 
 
     private IEnumerator AttackCoroutine(Vector2Int cords)

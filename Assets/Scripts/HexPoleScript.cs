@@ -211,6 +211,7 @@ public class HexPoleScript : MonoBehaviour
     {
         signalStrength--;
 
+
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
@@ -220,7 +221,7 @@ public class HexPoleScript : MonoBehaviour
             {
                 pole.turnOffHex(signalStrength);
             }
-
+            //Debug.Log("WYŁĄCZAM");
         }
     }
 
