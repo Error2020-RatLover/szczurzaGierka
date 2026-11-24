@@ -323,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 8389999398423659425}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 495.8301, y: 110.67746, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -378,15 +378,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8843825089103475489, guid: 5fd2657bb154ef94898f2d4cbe1369dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.84, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1001 &2519127404506320584
@@ -487,13 +487,13 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3173366420231928730, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7203908498591313303}
+    - targetCorrespondingSourceObject: {fileID: 3173366420231928730, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8019632560486428214}
     - targetCorrespondingSourceObject: {fileID: 3173366420231928730, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8851356608772056502}
-    - targetCorrespondingSourceObject: {fileID: 3173366420231928730, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7203908498591313303}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f257bd9e1cf8a8e4dbb2f2fe03de7356, type: 3}
 --- !u!4 &1080779201560098130 stripped
