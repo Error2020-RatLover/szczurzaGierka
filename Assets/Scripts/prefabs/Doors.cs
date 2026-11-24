@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class Doors : inreractiveObject
 {
+
+    private Animator animator;
     public bool closed = true;
     protected override void OnPlaced()
     {
         //pole.dostepneAkcje["Move"] = false;
+        animator = GetComponent<Animator>();
         if (pole.item != null)
         {
             Destroy(pole.item);
@@ -24,6 +27,14 @@ public class Doors : inreractiveObject
             pole.dostepneAkcje["Move"] = !closed;
             pole.dostepneAkcje["Occupated"] = closed;
             pole.dostepneAkcje["atackThrough"] = !closed;
+            if (closed)
+            {
+                animator.Play("doorClose");
+            }
+            else
+            {
+                animator.Play("doorOpen");
+            }
         }
           
         else
