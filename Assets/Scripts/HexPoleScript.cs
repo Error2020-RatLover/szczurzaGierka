@@ -335,6 +335,7 @@ public class HexPoleScript : MonoBehaviour
         dostepneAkcje.Add("Attack", true);
         dostepneAkcje.Add("Interact", false);
         dostepneAkcje.Add("atackThrough", true);
+        ClearChoicePanel();
     }
 
 
