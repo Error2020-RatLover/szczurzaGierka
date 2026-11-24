@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.Collections;
-
+using UnityEngine.UI;
 
 public class ChampionScript : turnObject
 {
@@ -324,8 +324,11 @@ public class ChampionScript : turnObject
         {
             //Debug.Log(currentWeppon.attackPossible[i].attackName);  
             int id = i;
+            
+
 
             GameObject newButton = Instantiate(buttonPrefab, buttonParent);
+
 
             chooseButton button = newButton.GetComponent<chooseButton>();
 

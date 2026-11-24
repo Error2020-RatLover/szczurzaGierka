@@ -298,7 +298,7 @@ public class HexPoleScript : MonoBehaviour
             int id = i;
 
             GameObject newButton = Instantiate(buttonPrefab, buttonParent);
-
+           
             chooseButton button = newButton.GetComponent<chooseButton>();
 
             button.Setup(id, "Obiekt " + id, OnButtonClicked);
