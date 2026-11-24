@@ -53,6 +53,8 @@ public class ChampionScript : turnObject
         stats.speed += currentWeppon.statsModifier.speed;
 
         currenAbility = currentWeppon.attackPossible[0];
+
+        ClearChoicePanel();
     }
 
 

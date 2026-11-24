@@ -134,10 +134,18 @@ public static class Pathfinding
     }
 
     // Heurystyka dla siatki hexagonalnej axial
+
     private static int GetDistance(HexPoleScript a, HexPoleScript b)
     {
-        int dq = a.coordinates.x - b.coordinates.x;
-        int dr = a.coordinates.y - b.coordinates.y;
+        // Konwersja Twoich współrzędnych na axial
+        int aq = a.coordinates.x;
+        int ar = (a.coordinates.y - a.coordinates.x) / 2;
+
+        int bq = b.coordinates.x;
+        int br = (b.coordinates.y - b.coordinates.x) / 2;
+
+        int dq = aq - bq;
+        int dr = ar - br;
 
         return (
             Mathf.Abs(dq) +
@@ -145,4 +153,5 @@ public static class Pathfinding
             Mathf.Abs(dq + dr)
         ) / 2;
     }
+
 }
