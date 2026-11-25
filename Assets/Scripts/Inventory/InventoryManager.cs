@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 {
-    public int maxSlots = 5; //maksymalna liczba slotów
+    public int maxSlots = 15; //maksymalna liczba slotów
 
     public List<InventorySlot> inventory = new List<InventorySlot>();
 
@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
             inventory.Add(new InventorySlot(i));
 
         }
-            Debug.Log("Utworzono sloty ekwipunku: " + inventory.Count);
+        Debug.Log("Utworzono sloty ekwipunku: " + inventory.Count);
 
         // Ustawienie id slotów
         for (int i = 0; i < inventory.Count; i++)
@@ -163,7 +163,8 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log("=========================");
     }
-    void RefreshInventoryUI()
+
+    public void RefreshInventoryUI()
     {
         if (inventoryUI != null)
         {
@@ -171,9 +172,41 @@ public class InventoryManager : MonoBehaviour
         }
     }
     public void displaySlotID(int id)
-    {
-        Debug.Log(id);
-    }
+{
+    Debug.Log(id);
+}
+
+// PRZENOSZENIE PRZEDMIOTÓW
+public void MoveItem(int fromIndex, int toIndex)
+{
+    if (fromIndex < 0 || fromIndex >= inventory.Count)
+        return;
+
+    if (toIndex < 0 || toIndex >= inventory.Count)
+        return;
+
+    if (fromIndex == toIndex)
+        return;
+
+    InventorySlot from = inventory[fromIndex];
+    InventorySlot to = inventory[toIndex];
+
+    // Zapamiętanie przedmiotu źródłowego
+    string tempItemID = from.itemID;
+    int tempQuantity = from.quantity;
+
+    // Zamiana zawartości slotów
+    from.itemID = to.itemID;
+    from.quantity = to.quantity;
+
+    to.itemID = tempItemID;
+    to.quantity = tempQuantity;
+
+    Debug.Log("Przeniesiono przedmiot ze slotu " 
+        + fromIndex + " do slotu " + toIndex);
+
+    RefreshInventoryUI();
+}
 }
 
 [System.Serializable]
@@ -189,4 +222,6 @@ public class InventorySlot
         itemID = "";
         quantity = 0;
     }
+
+
 }
