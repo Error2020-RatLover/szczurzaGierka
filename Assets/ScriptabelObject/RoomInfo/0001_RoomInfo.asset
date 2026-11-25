@@ -51,26 +51,6 @@ MonoBehaviour:
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   - koordynaty: {x: 21, y: 13}
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 9, y: 1}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 8, y: 2}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 7, y: 3}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 6, y: 4}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 5, y: 5}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 4, y: 6}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 3, y: 7}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 2, y: 8}
-    prefab: {fileID: 5811363277622004461, guid: 1bf215f2c5f4e0942939c327bf92b5b9, type: 3}
-  - koordynaty: {x: 1, y: 9}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
-  - koordynaty: {x: 0, y: 10}
-    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   enemysPositions:
   - koordynaty: {x: 10, y: 10}
     prefab: {fileID: 6325809774463473387, guid: d4c31fd7d188190428f0923d150d5a17, type: 3}

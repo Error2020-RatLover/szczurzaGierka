@@ -202,7 +202,7 @@ public class enemyScript : turnObject
 
         // Płynne przemieszczanie przeciwnika
         yield return MoveEnemyToPosition(cords);
-
+        
         // Aktualizacja nowego pola
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
 
@@ -213,7 +213,7 @@ public class enemyScript : turnObject
         currentPole.enable();
 
         pozycja = cords;
-
+        TriggerMoveEffects();
         // Aktualizacja celu
         targetTile = generator.player.currentPole;
 
@@ -299,6 +299,7 @@ public void Attack(Vector2Int cords)
             interactive.takeDamage(dmg);
         }
         changeToNextWeppon();
+        TriggerAttackEffects();
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 
@@ -324,6 +325,7 @@ public void Attack(Vector2Int cords)
             generator.moveOrder.Remove(this);
             Destroy(gameObject);
         }
+        TriggerDmgTakenEffects();
     }
     //początek tury
     public override void startYourTurn()
@@ -331,11 +333,13 @@ public void Attack(Vector2Int cords)
         stamina = stats.stamina;
         targetTile = generator.player.currentPole;
         StartCoroutine(FindPlayerPath());
+        TriggerStartEffects();
     }
 
     //koniec tury
     public override void endYourTurn()
     {
+        TriggerEndEffects();
         generator.changeNextTurn();
     }
 

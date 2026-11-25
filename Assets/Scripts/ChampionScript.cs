@@ -201,11 +201,12 @@ public class ChampionScript : turnObject
 
         yield return przeniesNaPozycje(cords);
 
+        
 
         currentPole.turnOffHex(currentRange + 1);
         pozycja = cords;
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-
+        
         currentPole.setActiveHex(currentRange);
         currentPole.currentStanding.Add(gameObject);
 
@@ -213,6 +214,7 @@ public class ChampionScript : turnObject
 
         currentPole.dostepneAkcje["Occupated"] = true;
         currentPole.enable();
+        TriggerMoveEffects();
 
         stamina--;
 
@@ -318,7 +320,7 @@ public class ChampionScript : turnObject
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.takeDamage(dmg);
         }
-
+        TriggerAttackEffects();
         if (stamina <= 0)
         {
             endYourTurn();
@@ -344,12 +346,14 @@ public class ChampionScript : turnObject
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.Interact();
         }
+        TriggerInteractEffects();
     }
 
     //akcje na zaczęciu tury
     public override void startYourTurn()
     {
         stamina = stats.stamina;
+        TriggerStartEffects();
         //currentPole.setActiveHex(3);
 
     }
@@ -375,6 +379,7 @@ public class ChampionScript : turnObject
         //    generator.moveOrder.Remove(this);
         //    Destroy(gameObject);
         //}
+        TriggerDmgTakenEffects();
     }
 
     //akcje na zakończenie tury
@@ -382,6 +387,7 @@ public class ChampionScript : turnObject
     {
         ClearChoicePanel();
         currentPole.turnOffHex(currentRange + 2);
+        TriggerEndEffects();    
         generator.changeNextTurn();
     }
 

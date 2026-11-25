@@ -19,7 +19,7 @@ MonoBehaviour:
   effectsOnHit: []
   effects:
   - effectName: 0
-    effectChance: 0.3
+    effectChance: 0.4
     effectTime: 3
     effectOnSelf: 0
-    activationType: 00000000i
+    activationType: 02000000i
