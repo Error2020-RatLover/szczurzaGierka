@@ -90,7 +90,7 @@ public class roomGenerator : MonoBehaviour
                 Vector3 startPosition = new Vector3(0, 0, 0);
                 if (position != startPosition)
                 {
-                    if (DrawAtRandom(0.0f))
+                    if (DrawAtRandom(0.1f))
                     {
                         ItemManager itemManager = FindFirstObjectByType<ItemManager>();
                         GameObject itemID = itemManager.returnGameObject();//otrzymanie losowego itemu z itemmanager

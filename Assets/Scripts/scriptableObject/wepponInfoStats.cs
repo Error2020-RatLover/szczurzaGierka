@@ -8,4 +8,6 @@ public class wepponInfoStats : ScriptableObject
     public string wepponName;
     public championStats statsModifier;
     public List<attackStats> attackPossible;
+    public List<string> effectsOnHit;
+    public List<effectData> effects;
 }

@@ -13,4 +13,22 @@ public abstract class turnObject : MonoBehaviour
     public abstract void endYourTurn();
     public roomGenerator generator;
     public attackStats currenAbility;
+
+    public List<effectData> onStartEffects = new();
+    public List<effectData> onEndEffects = new();
+    public List<effectData> onMoveEffects = new();
+    public List<effectData> onAttackEffects = new();
+    public List<effectData> onInteractEffects = new();
+    public List<effectData> onDmgTakentEffects = new();
+
+
+
+    public void giveEffect(effectData efekt)
+    {
+        effectData newEffect = new(efekt);
+        if(newEffect.activationType == effecData.activationTypes.Start)
+        {
+            onStartEffects.Add(newEffect);
+        }
+    }
 }

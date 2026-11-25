@@ -264,24 +264,54 @@ public class ChampionScript : turnObject
         {
             dmg *= stats.magic;
         }
+
+
         if (target.GetComponent<enemyScript>() != null)
         {
+
+
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(dmg, currenAbility.damageType);
-            foreach (string funcName in currenAbility.additionalEffects)
+
+            List<string> onHit = new List<string>(currenAbility.effectsOnHit);
+            onHit.AddRange(currentWeppon.effectsOnHit);
+
+            foreach (string funcName in onHit)
             {
                 SendMessage(funcName, enemy);
             }
+
+            List<effectData> effects = new List<effectData>(currenAbility.effects);
+            effects.AddRange(currentWeppon.effects);
+            //efekty jak poison itp.
+            foreach (effectData effect in effects)
+            {
+                enemy.giveEffect(effect);
+            }
+            
 
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
             playerScript.takeDamage(dmg, currenAbility.damageType);
-            foreach (string funcName in currenAbility.additionalEffects)
+
+            List<string> onHit = new List<string>(currenAbility.effectsOnHit);
+            onHit.AddRange(currentWeppon.effectsOnHit);
+
+            foreach (string funcName in onHit)
             {
                 SendMessage(funcName, playerScript);
             }
+
+            List<effectData> effects = new List<effectData>(currenAbility.effects);
+            effects.AddRange(currentWeppon.effects);
+            //efekty jak poison itp.
+            foreach (effectData effect in effects)
+            {
+                playerScript.giveEffect(effect);
+            }
+
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
