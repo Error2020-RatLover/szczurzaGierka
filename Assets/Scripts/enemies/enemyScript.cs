@@ -311,7 +311,7 @@ public void Attack(Vector2Int cords)
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.takeDamage(dmg);
         }
-        changeToNextWeppon();
+        //changeToNextWeppon();
         TriggerAttackEffects();
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;

@@ -68,7 +68,7 @@ public class ChampionScript : turnObject
             {
                 case true when Keyboard.current.zKey.wasPressedThisFrame:
                     currentPole.turnOffHex(currentRange+1);
-                    Debug.Log("atak");
+                    //Debug.Log("atak");
                     action = "Attack";
                     wepponInfoShow();
                     generator.actionState = action;
@@ -78,7 +78,7 @@ public class ChampionScript : turnObject
                 case true when Keyboard.current.xKey.wasPressedThisFrame:
                     currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
-                    Debug.Log("ruh");
+                    //Debug.Log("ruh");
                     action = "Move";
                     currentRange = 1;
                     generator.actionState = action;
@@ -88,7 +88,7 @@ public class ChampionScript : turnObject
                 case true when Keyboard.current.cKey.wasPressedThisFrame:
                     currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
-                    Debug.Log("interakcja");
+                    //Debug.Log("interakcja");
                     currentRange = 1;
                     action = "Interact";
                     generator.actionState = action;
@@ -97,7 +97,7 @@ public class ChampionScript : turnObject
                 case true when Keyboard.current.vKey.wasPressedThisFrame:
                     currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
-                    Debug.Log("Szybkiwybór - zmiana broni");
+                    //Debug.Log("Szybkiwybór - zmiana broni");
                     //na razie dodam tu szybkie zmienianie broni w ramach tesowych
                     currentRange = 0;
                     changeWeppon();
@@ -106,7 +106,7 @@ public class ChampionScript : turnObject
                     break;
                 case true when Keyboard.current.eKey.wasPressedThisFrame:
                     currentPole.turnOffHex(currentRange + 1);
-                    Debug.Log("eq");
+                    //Debug.Log("eq");
                     currentRange = 0;
                     ClearChoicePanel();
                     generator.actionState = action;
