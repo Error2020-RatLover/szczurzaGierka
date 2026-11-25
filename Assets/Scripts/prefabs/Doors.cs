@@ -24,15 +24,16 @@ public class Doors : inreractiveObject
             //Debug.Log(closed);
             stats.Move = !closed;
             stats.Occupated = closed;
-            pole.dostepneAkcje["Move"] = !closed;
-            pole.dostepneAkcje["Occupated"] = closed;
             pole.dostepneAkcje["atackThrough"] = !closed;
+            pole.dostepneAkcje["Blocked"] = closed;
             if (closed)
             {
+                pole.movementCost += travelCost;
                 animator.Play("doorClose");
             }
             else
             {
+                pole.movementCost -= travelCost;
                 animator.Play("doorOpen");
             }
         }

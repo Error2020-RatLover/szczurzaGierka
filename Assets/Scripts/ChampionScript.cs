@@ -181,31 +181,30 @@ public class ChampionScript : turnObject
 
     private IEnumerator MoveCoroutine(Vector2Int cords)
     {
-        Debug.Log("1. START MOVE");
+  
 
         if (!generator.pola.ContainsKey(cords))
             yield break;
 
-        Debug.Log("2. PRZED RESET");
+
 
         currentPole.dostepneAkcje["Occupated"] = false;
         currentPole.currentStanding.Remove(gameObject);
 
         //generator.resetBoard();
 
-        Debug.Log("3. PO RESET");
-        Debug.Log(currentPole.coordinates);
+
         currentPole.turnOffHex(currentRange + 1);
 
-        Debug.Log("4. PO TURNOFF");
+
 
         yield return przeniesNaPozycje(cords);
 
-        Debug.Log("5. PO RUCHU");
+
         currentPole.turnOffHex(currentRange + 1);
         pozycja = cords;
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        Debug.Log(currentPole.coordinates);
+
         currentPole.setActiveHex(currentRange);
         currentPole.currentStanding.Add(gameObject);
 

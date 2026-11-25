@@ -73,7 +73,18 @@ public class enemyScript : turnObject
                     "Move"
                 );
                 stamina -= 1;
-                changePosition(currentPath[0].coordinates);
+                if (currentPath[0].dostepneAkcje["Blocked"])
+                {
+                    Debug.Log("WALE ŚCIANĘ AAAAAAA");
+                    currenAbility = abilities[0];
+                    Attack(currentPath[0].coordinates);
+
+                }
+                else
+                {
+                    changePosition(currentPath[0].coordinates);
+                }
+                
                 yield break;
 
             }

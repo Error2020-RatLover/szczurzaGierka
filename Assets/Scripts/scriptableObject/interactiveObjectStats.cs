@@ -9,4 +9,5 @@ public class interactiveObjectStats : ScriptableObject
     public bool Attack = true;
     public bool Interact = false;
     public bool atackThrough = false;
+    public bool Blocked = true;
 }

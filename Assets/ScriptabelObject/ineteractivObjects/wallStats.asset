@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64be42ec35be8fc49a3eab076b80be75, type: 3}
   m_Name: wallStats
   m_EditorClassIdentifier: Assembly-CSharp::interactiveObjectStats
-  hp: 400
-  Move: 0
-  Occupated: 1
+  hp: 30000
+  Move: 1
+  Occupated: 0
   Attack: 1
   Interact: 0
+  atackThrough: 0
+  Blocked: 1
