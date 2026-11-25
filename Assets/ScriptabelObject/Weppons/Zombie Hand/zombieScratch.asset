@@ -17,8 +17,14 @@ MonoBehaviour:
   attackType: 0
   damageType: 0
   damageMultipler: 0
-  dmg: 8
+  dmg: 1
   range: 1
   area:
   - {x: 0, y: 0}
-  additionalEffects: []
+  effectsOnHit: []
+  effects:
+  - effectName: 0
+    effectChance: 0.5
+    effectTime: 4
+    effectOnSelf: 0
+    activationType: 02000000i

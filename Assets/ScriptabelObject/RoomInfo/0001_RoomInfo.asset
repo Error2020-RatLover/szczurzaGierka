@@ -24,7 +24,7 @@ MonoBehaviour:
   - koordynaty: {x: 7, y: 9}
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   - koordynaty: {x: 8, y: 10}
-    prefab: {fileID: 5811363277622004461, guid: 1bf215f2c5f4e0942939c327bf92b5b9, type: 3}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   - koordynaty: {x: 9, y: 11}
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   - koordynaty: {x: 10, y: 12}
@@ -36,6 +36,20 @@ MonoBehaviour:
   - koordynaty: {x: 13, y: 15}
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   - koordynaty: {x: 14, y: 16}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 15, y: 17}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 16, y: 18}
+    prefab: {fileID: 5811363277622004461, guid: 1bf215f2c5f4e0942939c327bf92b5b9, type: 3}
+  - koordynaty: {x: 17, y: 17}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 18, y: 16}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 19, y: 15}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 20, y: 14}
+    prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
+  - koordynaty: {x: 21, y: 13}
     prefab: {fileID: 4101971305504030385, guid: a2bb6ea6c5a5b6342a3dbd03c60367be, type: 3}
   enemysPositions:
   - koordynaty: {x: 10, y: 10}

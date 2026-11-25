@@ -11,6 +11,8 @@ public class AstarPathNode
 
     public AstarPathNode parent;
 
+    public int direction = -1;
+
     public AstarPathNode(HexPoleScript tile)
     {
         this.tile = tile;

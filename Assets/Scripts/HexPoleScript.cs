@@ -196,7 +196,7 @@ public class HexPoleScript : MonoBehaviour
         }
             
 
-        if (generator.actionState == "Move" && pole.dostepneAkcje["Occupated"])
+        if (generator.actionState == "Move" && (pole.dostepneAkcje["Occupated"]|| pole.dostepneAkcje["Blocked"]))
         {
             
             return false;
@@ -211,6 +211,7 @@ public class HexPoleScript : MonoBehaviour
     {
         signalStrength--;
 
+
         foreach (GameObject x in neighbors)
         {
             HexPoleScript pole = x.GetComponent<HexPoleScript>();
@@ -220,7 +221,7 @@ public class HexPoleScript : MonoBehaviour
             {
                 pole.turnOffHex(signalStrength);
             }
-
+            //Debug.Log("WYŁĄCZAM");
         }
     }
 
@@ -298,7 +299,7 @@ public class HexPoleScript : MonoBehaviour
             int id = i;
 
             GameObject newButton = Instantiate(buttonPrefab, buttonParent);
-
+           
             chooseButton button = newButton.GetComponent<chooseButton>();
 
             button.Setup(id, "Obiekt " + id, OnButtonClicked);
@@ -330,11 +331,13 @@ public class HexPoleScript : MonoBehaviour
 
     public void askForRewriteAllowance()
     {
-        dostepneAkcje.Add("Move", true);
-        dostepneAkcje.Add("Occupated", false);
-        dostepneAkcje.Add("Attack", true);
-        dostepneAkcje.Add("Interact", false);
-        dostepneAkcje.Add("atackThrough", true);
+        dostepneAkcje.Add("Move", true); //definiuje ostateczną możliwość ruchu lub jej brak. Jeśli move jest na false to nie da się chodzić na polu w żaden sposób
+        dostepneAkcje.Add("Occupated", false); // definiuje czy jakiś gracz lub przeciwnik stoii na polu. Pomaga w astarze
+        dostepneAkcje.Add("Attack", true); //Czy pole jest możlie do zaatakowania
+        dostepneAkcje.Add("Interact", false); //czy z polem można wejść w interakcje
+        dostepneAkcje.Add("atackThrough", true); //czy można atakować przez to pole. Nie wyklucza atakowania samego pola.
+        dostepneAkcje.Add("Blocked", false); //pole jest zablokowane, ale można przez nie przejść jeśli zniszczy się przeszkode. Pomoc dla AI przeciwnika.
+        ClearChoicePanel();
     }
 
 

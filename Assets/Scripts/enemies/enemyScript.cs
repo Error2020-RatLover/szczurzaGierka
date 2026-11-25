@@ -41,7 +41,7 @@ public class enemyScript : turnObject
     public IEnumerator FindPlayerPath()
     {
         //argument w WaitForSeconds, może nie dasz wiary, ale to liczba sekund ile czeka przed kontunuowaniem pracy
-        yield return new WaitForSeconds(0.6f);
+        
         
         if (stamina <= 0)
             {
@@ -58,6 +58,7 @@ public class enemyScript : turnObject
                 currenAbility = attack;
                 if (abillityAproved)
                 {
+                    yield return new WaitForSeconds(0.6f);
                     Attack(targetTile.coordinates);
                     abillityAproved =false;
                     yield break;
@@ -71,8 +72,21 @@ public class enemyScript : turnObject
                     targetTile,
                     "Move"
                 );
-                stamina -= 1;
-                changePosition(currentPath[0].coordinates);
+                
+                if (currentPath[0].dostepneAkcje["Blocked"])
+                {
+                    yield return new WaitForSeconds(0.6f);
+                    Debug.Log("WALE ŚCIANĘ AAAAAAA");
+                    currenAbility = abilities[0];
+                    Attack(currentPath[0].coordinates);
+
+                }
+                else
+                {
+                    stamina -= 1;
+                    changePosition(currentPath[0].coordinates);
+                }
+                
                 yield break;
 
             }
@@ -118,6 +132,7 @@ public class enemyScript : turnObject
                 weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j]);
             }
         }
+        stats = Instantiate(stats);
         currentWeppon = weppons[0];
         stats.maxHp += currentWeppon.statsModifier.maxHp;
         stats.hp += currentWeppon.statsModifier.hp;
@@ -135,27 +150,81 @@ public class enemyScript : turnObject
 
 
     }
-    //zmiana pozycji
-    public void changePosition(Vector2Int cords)
+
+
+
+    public IEnumerator MoveEnemyToPosition(Vector2Int cords)
     {
+        if (!generator.pola.ContainsKey(cords))
+            yield break;
 
-        currentPole.currentStanding.Remove(gameObject);
-        currentPole.dostepneAkcje["Occupated"] = false;
-        currentPole.dostepneAkcje["atackThrough"] = true;
-        transform.position = generator.pola[cords].transform.position;
-        currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        currentPole.currentStanding.Add(gameObject);
-        currentPole.dostepneAkcje["Occupated"] = true;
-        currentPole.dostepneAkcje["atackThrough"] = false;
-        currentPole.enable();
-        pozycja = cords;
-        StartCoroutine(FindPlayerPath());
-        targetTile = generator.player.currentPole;
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = generator.pola[cords].transform.position;
 
+        float duration = 1.3f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                t
+            );
+
+            yield return null;
+        }
+
+        transform.position = targetPosition;
     }
 
 
-    public void Attack(Vector2Int cords)
+    //zmiana pozycji
+
+    public void changePosition(Vector2Int cords)
+    {
+        StartCoroutine(ChangePositionCoroutine(cords));
+    }
+
+    private IEnumerator ChangePositionCoroutine(Vector2Int cords)
+    {
+        if (!generator.pola.ContainsKey(cords))
+            yield break;
+
+        // Zwolnienie starego pola
+        currentPole.currentStanding.Remove(gameObject);
+        currentPole.dostepneAkcje["Occupated"] = false;
+        currentPole.dostepneAkcje["atackThrough"] = true;
+
+        // Płynne przemieszczanie przeciwnika
+        yield return MoveEnemyToPosition(cords);
+        
+        // Aktualizacja nowego pola
+        currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
+
+        currentPole.currentStanding.Add(gameObject);
+        currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.dostepneAkcje["atackThrough"] = false;
+
+        currentPole.enable();
+
+        pozycja = cords;
+        TriggerMoveEffects();
+        // Aktualizacja celu
+        targetTile = generator.player.currentPole;
+
+        // Ponowne wyszukanie ścieżki
+        StartCoroutine(FindPlayerPath());
+    }
+
+
+
+
+public void Attack(Vector2Int cords)
     {
         stamina--;
         HexPoleScript skrypt = generator.pola[cords].GetComponent<HexPoleScript>();
@@ -183,22 +252,58 @@ public class enemyScript : turnObject
         {
             dmg *= stats.magic;
         }
+        //Debug.Log(dmg);
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(dmg, currenAbility.damageType);
-            foreach (string funcName in currenAbility.additionalEffects)
+            List<string> onHit = new List<string>(currenAbility.effectsOnHit);
+            onHit.AddRange(currentWeppon.effectsOnHit);
+
+            foreach (string funcName in onHit)
             {
-                SendMessage(funcName, enemy);
+                
+                
+              SendMessage(funcName, enemy);
+                
+                    
+            }
+
+            List<effectData> effects = new List<effectData>(currenAbility.effects);
+            effects.AddRange(currentWeppon.effects);
+            //efekty jak poison itp.
+            foreach (effectData effect in effects)
+            {
+                if (UnityEngine.Random.value <= effect.effectChance)
+                {
+                    if (UnityEngine.Random.value <= effect.effectChance)
+                    {
+                        enemy.giveEffect(effect);
+
+                    }
+                        
+                }
+                    
             }
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
             playerScript.takeDamage(dmg, currenAbility.damageType);
-            foreach (string funcName in currenAbility.additionalEffects)
+
+            List<string> onHit = new List<string>(currenAbility.effectsOnHit);
+            onHit.AddRange(currentWeppon.effectsOnHit);
+
+            foreach (string funcName in onHit)
             {
                 SendMessage(funcName, playerScript);
+            }
+            List<effectData> effects = new List<effectData>(currenAbility.effects);
+            effects.AddRange(currentWeppon.effects);
+            //efekty jak poison itp.
+            foreach (effectData effect in effects)
+            {
+                playerScript.giveEffect(effect);
             }
         }
         else if (target.GetComponent<inreractiveObject>())
@@ -206,12 +311,13 @@ public class enemyScript : turnObject
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.takeDamage(dmg);
         }
-  
+        //changeToNextWeppon();
+        TriggerAttackEffects();
         StartCoroutine(FindPlayerPath());
         targetTile = generator.player.currentPole;
 
     }
-    public void takeDamage(int damage, attackStats.DmgType dmgType)
+    public override void takeDamage(int damage, attackStats.DmgType dmgType)
     {
         if (dmgType == attackStats.DmgType.phisical)
         {
@@ -232,6 +338,7 @@ public class enemyScript : turnObject
             generator.moveOrder.Remove(this);
             Destroy(gameObject);
         }
+        TriggerDmgTakenEffects();
     }
     //początek tury
     public override void startYourTurn()
@@ -239,11 +346,13 @@ public class enemyScript : turnObject
         stamina = stats.stamina;
         targetTile = generator.player.currentPole;
         StartCoroutine(FindPlayerPath());
+        TriggerStartEffects();
     }
 
     //koniec tury
     public override void endYourTurn()
     {
+        TriggerEndEffects();
         generator.changeNextTurn();
     }
 
@@ -267,5 +376,46 @@ public class enemyScript : turnObject
         }
     }
 
+    public void changeWeppon(wepponInfoStats newWeapon)
+    {
+        stats.maxHp -= currentWeppon.statsModifier.maxHp;
+        stats.strenght -= currentWeppon.statsModifier.strenght;
+        stats.magic -= currentWeppon.statsModifier.magic;
+        stats.armor -= currentWeppon.statsModifier.armor;
+        stats.magicArmor -= currentWeppon.statsModifier.magicArmor;
+        stats.stamina -= currentWeppon.statsModifier.stamina;
+        stats.speed -= currentWeppon.statsModifier.speed;
+        foreach (attackStats ability in currentWeppon.attackPossible)
+        {
+            abilities.Remove(ability);
+        }
+        currentWeppon = newWeapon;
+        foreach (attackStats ability in currentWeppon.attackPossible)
+        {
+            abilities.Add(ability);
+        }
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
+
+    }
+
+    public void changeToNextWeppon()
+    {
+        int curIndex = weppons.IndexOf(currentWeppon);
+        curIndex++;
+        if (curIndex >= weppons.Count)
+        {
+            curIndex = 0;
+        }
+        Debug.Log(curIndex);
+        changeWeppon(weppons[curIndex]);
+    }
 
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.Collections;
-
+using UnityEngine.UI;
 
 public class ChampionScript : turnObject
 {
@@ -53,6 +53,8 @@ public class ChampionScript : turnObject
         stats.speed += currentWeppon.statsModifier.speed;
 
         currenAbility = currentWeppon.attackPossible[0];
+
+        ClearChoicePanel();
     }
 
 
@@ -61,31 +63,54 @@ public class ChampionScript : turnObject
     {   //leciuteńka zmiana koleżko <3   
         if (Keyboard.current != null && generator.moveOrder[generator.currentMoveId] == this)
         {
-            ClearChoicePanel();
+            //currentPole.turnOffHex(currentRange + 1);
             switch (true)
             {
                 case true when Keyboard.current.zKey.wasPressedThisFrame:
-                    Debug.Log("atak");
+                    currentPole.turnOffHex(currentRange+1);
+                    //Debug.Log("atak");
                     action = "Attack";
                     wepponInfoShow();
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
 
                 case true when Keyboard.current.xKey.wasPressedThisFrame:
-
-                    Debug.Log("ruh");
+                    currentPole.turnOffHex(currentRange + 1);
+                    ClearChoicePanel();
+                    //Debug.Log("ruh");
                     action = "Move";
                     currentRange = 1;
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
 
                 case true when Keyboard.current.cKey.wasPressedThisFrame:
-                    Debug.Log("interakcja");
+                    currentPole.turnOffHex(currentRange + 1);
+                    ClearChoicePanel();
+                    //Debug.Log("interakcja");
+                    currentRange = 1;
                     action = "Interact";
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
                 case true when Keyboard.current.vKey.wasPressedThisFrame:
-                    Debug.Log("Szybkiwybór");
+                    currentPole.turnOffHex(currentRange + 1);
+                    ClearChoicePanel();
+                    //Debug.Log("Szybkiwybór - zmiana broni");
+                    //na razie dodam tu szybkie zmienianie broni w ramach tesowych
+                    currentRange = 0;
+                    changeWeppon();
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
                 case true when Keyboard.current.eKey.wasPressedThisFrame:
-                    Debug.Log("eq");
+                    currentPole.turnOffHex(currentRange + 1);
+                    //Debug.Log("eq");
+                    currentRange = 0;
+                    ClearChoicePanel();
+                    generator.actionState = action;
+                    currentPole.setActiveHex(currentRange);
                     break;
 
             }
@@ -102,14 +127,13 @@ public class ChampionScript : turnObject
             // {
             //     
             // }
-            generator.actionState = action;
-            //potem zautomatycujemy aby było łatwiej ale na razie tutaj ręcznie 
-            currentPole.turnOffHex(currentRange + 1);
-            currentPole.setActiveHex(currentRange);
+            
 
         }
 
     }
+    
+
 
     public void actionToTake(Vector2Int toCordinates)
     {
@@ -117,47 +141,94 @@ public class ChampionScript : turnObject
         SendMessage(action, toCordinates);
     }
     //interpretacja kordunaktow na pozycje, mozna troche zmienic jesli chcecie ale ja nie widze bledow 
-    public void przeniesNaPozycje(Vector2Int pozycja)
+
+    public IEnumerator przeniesNaPozycje(Vector2Int pozycja)
     {
-        if (generator.pola.ContainsKey(pozycja))
+        if (!generator.pola.ContainsKey(pozycja))
+            yield break;
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = generator.pola[pozycja].transform.position;
+
+        float duration = 0.3f; // Czas przejścia
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
         {
-            transform.position = generator.pola[pozycja].transform.position;
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            transform.position = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                t
+            );
+
+            yield return null;
         }
+
+        transform.position = targetPosition;
     }
+
 
     //no i tutaj wykonuje sie akcja wyslana SendMessage, zmieniajac parametr action bedzie mozna zmienic logike zachowania pamietajac jakie pole zostalo wybrane
+
     public void Move(Vector2Int cords)
     {
-        //generator.resetBoard();
-        currentPole.turnOffHex(currentRange + 1);
+        StartCoroutine(MoveCoroutine(cords));
+    }
+
+    private IEnumerator MoveCoroutine(Vector2Int cords)
+    {
+  
+
+        if (!generator.pola.ContainsKey(cords))
+            yield break;
+
+
+
         currentPole.dostepneAkcje["Occupated"] = false;
         currentPole.currentStanding.Remove(gameObject);
-        przeniesNaPozycje(cords);
+
+        //generator.resetBoard();
+
+
+        currentPole.turnOffHex(currentRange + 1);
+
+
+
+        yield return przeniesNaPozycje(cords);
+
+        
+
+        currentPole.turnOffHex(currentRange + 1);
         pozycja = cords;
-        //po poruszeniu się gracza wykonują się funkcje na polu
         currentPole = generator.pola[cords].GetComponent<HexPoleScript>();
-        //currentPole.setActiveHex(3);
+        
         currentPole.setActiveHex(currentRange);
         currentPole.currentStanding.Add(gameObject);
-        currentPole.ZbierzItem();
-        currentPole.dostepneAkcje["Occupated"] = true;
-        //currentPole.enable();
-        //itemManager.SprawdzKolizje(cords);
-        currentPole.enable();
-        stamina--;
-        if (stamina <= 0)
-        {
-            endYourTurn();
-        }
 
+        currentPole.ZbierzItem();
+
+        currentPole.dostepneAkcje["Occupated"] = true;
+        currentPole.enable();
+        TriggerMoveEffects();
+
+        stamina--;
+
+        if (stamina <= 0)
+            endYourTurn();
     }
+
 
     public void Attack(Vector2Int cords)
     {
         StartCoroutine(AttackCoroutine(cords));
     }
 
-
+   
 
 
     private IEnumerator AttackCoroutine(Vector2Int cords)
@@ -195,31 +266,71 @@ public class ChampionScript : turnObject
         {
             dmg *= stats.magic;
         }
+
+
         if (target.GetComponent<enemyScript>() != null)
         {
+
+
             enemyScript enemy = target.GetComponent<enemyScript>();
             enemy.takeDamage(dmg, currenAbility.damageType);
-            foreach (string funcName in currenAbility.additionalEffects)
+
+            List<string> onHit = new List<string>(currenAbility.effectsOnHit);
+            onHit.AddRange(currentWeppon.effectsOnHit);
+
+            foreach (string funcName in onHit)
             {
                 SendMessage(funcName, enemy);
             }
+
+            List<effectData> effects = new List<effectData>(currenAbility.effects);
+            effects.AddRange(currentWeppon.effects);
+            //efekty jak poison itp.
+            foreach (effectData effect in effects)
+            {
+           
+                if(UnityEngine.Random.value <= effect.effectChance)
+                {
+                    enemy.giveEffect(effect);
+                }
+                
+            }
+            
 
         }
         else if (target.GetComponent<ChampionScript>() != null)
         {
             ChampionScript playerScript = target.GetComponent<ChampionScript>();
             playerScript.takeDamage(dmg, currenAbility.damageType);
-            foreach (string funcName in currenAbility.additionalEffects)
+
+            List<string> onHit = new List<string>(currenAbility.effectsOnHit);
+            onHit.AddRange(currentWeppon.effectsOnHit);
+
+            foreach (string funcName in onHit)
             {
+                
                 SendMessage(funcName, playerScript);
             }
+
+            List<effectData> effects = new List<effectData>(currenAbility.effects);
+            effects.AddRange(currentWeppon.effects);
+            //efekty jak poison itp.
+            foreach (effectData effect in effects)
+            {
+                if (UnityEngine.Random.value <= effect.effectChance)
+                {
+                    playerScript.giveEffect(effect);
+                }
+                    
+            }
+
         }
         else if (target.GetComponent<inreractiveObject>() != null)
         {
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.takeDamage(dmg);
         }
-
+        TriggerAttackEffects();
         if (stamina <= 0)
         {
             endYourTurn();
@@ -245,17 +356,19 @@ public class ChampionScript : turnObject
             inreractiveObject interactive = target.GetComponent<inreractiveObject>();
             interactive.Interact();
         }
+        TriggerInteractEffects();
     }
 
     //akcje na zaczęciu tury
     public override void startYourTurn()
     {
         stamina = stats.stamina;
+        TriggerStartEffects();
         //currentPole.setActiveHex(3);
 
     }
 
-    public void takeDamage(int damage, attackStats.DmgType dmgType)
+    public override void takeDamage(int damage, attackStats.DmgType dmgType)
     {
         if (dmgType == attackStats.DmgType.phisical)
         {
@@ -276,6 +389,7 @@ public class ChampionScript : turnObject
         //    generator.moveOrder.Remove(this);
         //    Destroy(gameObject);
         //}
+        TriggerDmgTakenEffects();
     }
 
     //akcje na zakończenie tury
@@ -283,6 +397,7 @@ public class ChampionScript : turnObject
     {
         ClearChoicePanel();
         currentPole.turnOffHex(currentRange + 2);
+        TriggerEndEffects();    
         generator.changeNextTurn();
     }
 
@@ -315,8 +430,11 @@ public class ChampionScript : turnObject
         {
             //Debug.Log(currentWeppon.attackPossible[i].attackName);  
             int id = i;
+            
+
 
             GameObject newButton = Instantiate(buttonPrefab, buttonParent);
+
 
             chooseButton button = newButton.GetComponent<chooseButton>();
 
@@ -345,6 +463,39 @@ public class ChampionScript : turnObject
         Debug.Log(id);
         wepponInfoShow();
         currentPole.setActiveHex(currentRange);
+    }
+
+    public void changeWeppon()
+    {
+        int curIndex = weppons.IndexOf(currentWeppon);
+        curIndex++;
+        if(curIndex >= weppons.Count) { 
+            curIndex = 0;
+        }
+
+        stats.maxHp -= currentWeppon.statsModifier.maxHp;
+        stats.strenght -= currentWeppon.statsModifier.strenght;
+        stats.magic -= currentWeppon.statsModifier.magic;
+        stats.armor -= currentWeppon.statsModifier.armor;
+        stats.magicArmor -= currentWeppon.statsModifier.magicArmor;
+        stats.stamina -= currentWeppon.statsModifier.stamina;
+        stats.speed -= currentWeppon.statsModifier.speed;
+       
+        
+        currentWeppon = weppons[curIndex];
+
+        stats.maxHp += currentWeppon.statsModifier.maxHp;
+        stats.hp += currentWeppon.statsModifier.hp;
+        currentWeppon.statsModifier.hp = 0;
+        stats.strenght += currentWeppon.statsModifier.strenght;
+        stats.magic += currentWeppon.statsModifier.magic;
+        stats.armor += currentWeppon.statsModifier.armor;
+        stats.magicArmor += currentWeppon.statsModifier.magicArmor;
+        stats.stamina += currentWeppon.statsModifier.stamina;
+        stats.speed += currentWeppon.statsModifier.speed;
+
+        currenAbility = currentWeppon.attackPossible[0];
+
     }
 
 }

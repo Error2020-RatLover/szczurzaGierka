@@ -16,3 +16,5 @@ MonoBehaviour:
   statsModifier: {fileID: 11400000, guid: a4a2403c940d3da45874fdac50170384, type: 2}
   attackPossible:
   - {fileID: 11400000, guid: 71706bbcaeb681e4a881694423e979eb, type: 2}
+  effectsOnHit: []
+  effects: []

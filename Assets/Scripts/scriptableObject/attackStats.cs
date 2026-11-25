@@ -38,5 +38,6 @@ public class attackStats : ScriptableObject
     public int dmg;
     public int range;
     public List<Vector2Int> area;
-    public List<string> additionalEffects;
+    public List<string> effectsOnHit;
+    public List<effectData> effects;
 }
