@@ -11,6 +11,7 @@ public abstract class turnObject : MonoBehaviour
     public List<attackStats> abilities = new List<attackStats>();
     public abstract void startYourTurn();
     public abstract void endYourTurn();
+    public abstract void takeDamage(int damage, attackStats.DmgType dmgType);
     public roomGenerator generator;
     public attackStats currenAbility;
 
@@ -99,7 +100,7 @@ public abstract class turnObject : MonoBehaviour
     public void Poison()
     {
         Debug.Log("TRUCIZNA EEEEEE");
-        stats.hp -= 1;
+        takeDamage(1, attackStats.DmgType.prue);
 
 
     }

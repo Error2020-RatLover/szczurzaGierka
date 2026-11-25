@@ -262,7 +262,11 @@ public void Attack(Vector2Int cords)
 
             foreach (string funcName in onHit)
             {
-                SendMessage(funcName, enemy);
+                
+                
+              SendMessage(funcName, enemy);
+                
+                    
             }
 
             List<effectData> effects = new List<effectData>(currenAbility.effects);
@@ -270,7 +274,16 @@ public void Attack(Vector2Int cords)
             //efekty jak poison itp.
             foreach (effectData effect in effects)
             {
-                enemy.giveEffect(effect);
+                if (UnityEngine.Random.value <= effect.effectChance)
+                {
+                    if (UnityEngine.Random.value <= effect.effectChance)
+                    {
+                        enemy.giveEffect(effect);
+
+                    }
+                        
+                }
+                    
             }
         }
         else if (target.GetComponent<ChampionScript>() != null)
@@ -304,7 +317,7 @@ public void Attack(Vector2Int cords)
         targetTile = generator.player.currentPole;
 
     }
-    public void takeDamage(int damage, attackStats.DmgType dmgType)
+    public override void takeDamage(int damage, attackStats.DmgType dmgType)
     {
         if (dmgType == attackStats.DmgType.phisical)
         {

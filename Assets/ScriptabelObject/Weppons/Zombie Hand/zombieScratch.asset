@@ -21,4 +21,10 @@ MonoBehaviour:
   range: 1
   area:
   - {x: 0, y: 0}
-  additionalEffects: []
+  effectsOnHit: []
+  effects:
+  - effectName: 0
+    effectChance: 0.5
+    effectTime: 4
+    effectOnSelf: 0
+    activationType: 02000000i

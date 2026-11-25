@@ -288,7 +288,12 @@ public class ChampionScript : turnObject
             //efekty jak poison itp.
             foreach (effectData effect in effects)
             {
-                enemy.giveEffect(effect);
+           
+                if(UnityEngine.Random.value <= effect.effectChance)
+                {
+                    enemy.giveEffect(effect);
+                }
+                
             }
             
 
@@ -303,6 +308,7 @@ public class ChampionScript : turnObject
 
             foreach (string funcName in onHit)
             {
+                
                 SendMessage(funcName, playerScript);
             }
 
@@ -311,7 +317,11 @@ public class ChampionScript : turnObject
             //efekty jak poison itp.
             foreach (effectData effect in effects)
             {
-                playerScript.giveEffect(effect);
+                if (UnityEngine.Random.value <= effect.effectChance)
+                {
+                    playerScript.giveEffect(effect);
+                }
+                    
             }
 
         }
@@ -358,7 +368,7 @@ public class ChampionScript : turnObject
 
     }
 
-    public void takeDamage(int damage, attackStats.DmgType dmgType)
+    public override void takeDamage(int damage, attackStats.DmgType dmgType)
     {
         if (dmgType == attackStats.DmgType.phisical)
         {
