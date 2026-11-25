@@ -252,6 +252,7 @@ public void Attack(Vector2Int cords)
         {
             dmg *= stats.magic;
         }
+        //Debug.Log(dmg);
         if (target.GetComponent<enemyScript>() != null)
         {
             enemyScript enemy = target.GetComponent<enemyScript>();

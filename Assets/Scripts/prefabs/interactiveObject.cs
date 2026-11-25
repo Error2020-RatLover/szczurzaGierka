@@ -35,7 +35,7 @@ public abstract class inreractiveObject : MonoBehaviour
         //pole.dostepneAkcje["Atack"] = stats.Attack;
         if (stats.Blocked)
         {
-            travelCost = stats.hp / 50 + 1;
+            travelCost = stats.hp / 100 + 1;
             pole.movementCost += travelCost;
         }
 
@@ -46,6 +46,10 @@ public abstract class inreractiveObject : MonoBehaviour
     {
         
         stats.hp -= damage;
+
+        pole.movementCost -= travelCost;
+        travelCost = stats.hp / 100 + 1;
+        pole.movementCost += travelCost;
         if (stats.hp < 0)
         {
             pole.currentStanding.Remove(gameObject);
