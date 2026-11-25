@@ -72,9 +72,10 @@ public class enemyScript : turnObject
                     targetTile,
                     "Move"
                 );
-                stamina -= 1;
+                
                 if (currentPath[0].dostepneAkcje["Blocked"])
                 {
+                    yield return new WaitForSeconds(0.6f);
                     Debug.Log("WALE ŚCIANĘ AAAAAAA");
                     currenAbility = abilities[0];
                     Attack(currentPath[0].coordinates);
@@ -82,6 +83,7 @@ public class enemyScript : turnObject
                 }
                 else
                 {
+                    stamina -= 1;
                     changePosition(currentPath[0].coordinates);
                 }
                 
@@ -130,6 +132,7 @@ public class enemyScript : turnObject
                 weppons[i].attackPossible[j] = Instantiate(weppons[i].attackPossible[j]);
             }
         }
+        stats = Instantiate(stats);
         currentWeppon = weppons[0];
         stats.maxHp += currentWeppon.statsModifier.maxHp;
         stats.hp += currentWeppon.statsModifier.hp;

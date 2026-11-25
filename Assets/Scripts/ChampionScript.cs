@@ -89,6 +89,7 @@ public class ChampionScript : turnObject
                     currentPole.turnOffHex(currentRange + 1);
                     ClearChoicePanel();
                     Debug.Log("interakcja");
+                    currentRange = 1;
                     action = "Interact";
                     generator.actionState = action;
                     currentPole.setActiveHex(currentRange);
