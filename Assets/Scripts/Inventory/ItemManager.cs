@@ -7,7 +7,7 @@ public class ItemManager : MonoBehaviour
 {
 
     // itemy przeniesione z room generator
-    public GameObject hat;
+    public GameObject coin;
     public GameObject yPotion;
     public List<ItemScript> items = new List<ItemScript>(); //Lista spawnowanych itemów
 
@@ -17,7 +17,7 @@ public class ItemManager : MonoBehaviour
 
         if (random == 0)
         {
-            return hat;
+            return coin;
         }
         else
         {
