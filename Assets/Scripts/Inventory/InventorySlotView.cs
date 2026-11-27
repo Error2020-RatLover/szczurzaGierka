@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,6 +9,8 @@ public class InventorySlotView : MonoBehaviour, IPointerClickHandler
     public int id { get; private set; }
 
     public Image background;
+    public Image itemIcon;
+
     public TMP_Text slotNumber;
     public TMP_Text itemName;
     public TMP_Text quantityText;
@@ -18,7 +21,6 @@ public class InventorySlotView : MonoBehaviour, IPointerClickHandler
 
     private InventoryUI inventoryUI;
     private bool canRightClick;
-
     public void Initialize(int slotId, InventoryUI ui, bool allowRightClick)
     {
         id = slotId;
@@ -54,19 +56,30 @@ public class InventorySlotView : MonoBehaviour, IPointerClickHandler
 
     //     background.color = selected ? selectedColor : normalColor;
     // }
-    public void UpdateSlot(InventorySlot slot, bool selected, int displayNumber, bool moveSelected = false)
+    public void UpdateSlot(
+        InventorySlot slot,
+        bool selected,
+        int displayNumber,
+        Sprite icon,
+        bool moveSelected = false)
     {
         slotNumber.text = displayNumber.ToString();
 
-        if (slot.quantity > 0)
+        if (slot.quantity > 0 && !string.IsNullOrEmpty(slot.itemID))
         {
             itemName.text = slot.itemID;
             quantityText.text = slot.quantity.ToString();
+
+            itemIcon.sprite = icon;
+            itemIcon.enabled = icon != null;
         }
         else
         {
             itemName.text = "";
             quantityText.text = "";
+
+            itemIcon.sprite = null;
+            itemIcon.enabled = false;
         }
 
         if (moveSelected)

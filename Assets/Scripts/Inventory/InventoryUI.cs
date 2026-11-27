@@ -15,6 +15,7 @@ public class InventoryUI : MonoBehaviour
 
     public Transform hotbarContainer;
     public Transform inventoryContainer;
+    public ItemIconDatabase iconDatabase;
 
     //    prefab slotow
     public GameObject slotPrefab;
@@ -145,20 +146,34 @@ public class InventoryUI : MonoBehaviour
         // HOTBAR
         for (int i = 0; i < hotbarSlots.Count; i++)
         {
+            InventorySlot slot = inventoryManager.inventory[i];
+
+            Sprite icon = iconDatabase != null
+                ? iconDatabase.GetIcon(slot.itemID)
+                : null;
+
             hotbarSlots[i].UpdateSlot(
-                inventoryManager.inventory[i],
+                slot,
                 inventoryManager.selectedSlot == i,
-                i + 1
+                i + 1,
+                icon
             );
         }
 
         // INVENTORY
         for (int i = 0; i < inventorySlots.Count; i++)
         {
+            InventorySlot slot = inventoryManager.inventory[i];
+
+            Sprite icon = iconDatabase != null
+                ? iconDatabase.GetIcon(slot.itemID)
+                : null;
+
             inventorySlots[i].UpdateSlot(
-                inventoryManager.inventory[i],
+                slot,
                 inventoryManager.selectedSlot == i,
                 i + 6,
+                icon,
                 selectedMoveSlot == i
             );
         }
