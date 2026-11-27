@@ -1584,7 +1584,7 @@ MonoBehaviour:
   actionbar: {fileID: 1427419732}
   hotbarContainer: {fileID: 163050703}
   inventoryContainer: {fileID: 1387336693}
-  iconDatabase: {fileID: 0}
+  iconDatabase: {fileID: 777689499}
   slotPrefab: {fileID: 7240219801678999932, guid: 89f34f105daaeb3479fb44a886892479, type: 3}
 --- !u!1 &1427419732
 GameObject:
