@@ -99,7 +99,7 @@ public class roomGenerator : MonoBehaviour
                         //dodaje do hexpola item
                         pole.item = item;
                         ItemScript itemScript = item.GetComponent<ItemScript>();
-                        itemScript.itemCords = pole.coordinates;//przekazanie koordynatów polu
+                        itemScript.itemCords = pole.coordinates;// przekazanie koordynatów polu
                         itemScript.itemID = itemID.name;// przypisanie nazwy obiektu jako id
 
                     }
@@ -206,10 +206,7 @@ public class roomGenerator : MonoBehaviour
         //selectMoveOrder();
         resetBoard();
         changeNextTurn();
-       
-
-
-
+        
     }
 
     // Losowanie szansa = 0.9f -> 90%, szansa = 0.02 -> 2%

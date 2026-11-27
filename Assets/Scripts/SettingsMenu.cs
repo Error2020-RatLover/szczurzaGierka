@@ -63,7 +63,7 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        
+
         // Pobranie języka systemowego komputera
         int defaultLanguage = Application.systemLanguage == SystemLanguage.Polish ? 0 : 1;
 
